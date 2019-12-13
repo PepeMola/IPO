@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
+import javax.swing.JLayeredPane;
 
 public class CircuitosRurales {
 
@@ -45,6 +46,17 @@ public class CircuitosRurales {
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPanel.setBorder(new TitledBorder(null, "Circuitos IPO Rurales S.L.", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(tabbedPanel, BorderLayout.CENTER);
+		
+		JLayeredPane layeredUsuario = new JLayeredPane();
+		layeredUsuario.setToolTipText("Informacion Usuario actual");
+		tabbedPanel.addTab("Usuario", null, layeredUsuario, null);
+		
+		JLayeredPane layeredHistorial = new JLayeredPane();
+		layeredHistorial.setToolTipText("Historial de Circuitos");
+		tabbedPanel.addTab("Historial", null, layeredHistorial, null);
+		
+		JLayeredPane layeredCircuitos = new JLayeredPane();
+		layeredCircuitos.setToolTipText("Circuitos Disponibles");
+		tabbedPanel.addTab("Circuitos", null, layeredCircuitos, null);
 	}
-
 }
