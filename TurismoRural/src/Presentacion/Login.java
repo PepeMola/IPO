@@ -12,6 +12,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
+import Persistencia.Usuario;
 
 public class Login {
 
