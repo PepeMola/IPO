@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import Persistencia.Usuario;
+import javax.swing.ImageIcon;
 
 public class Login {
 
@@ -22,6 +23,7 @@ public class Login {
 	private JLabel lblContrasea;
 	private JButton btnAcceder;
 	private JButton btnLimpiar;
+	private JLabel labelImagen;
 
 	/**
 	 * Launch the application.
@@ -80,6 +82,16 @@ public class Login {
 		gbc_textUsuario.gridy = 2;
 		pnlinicio.add(textUsuario, gbc_textUsuario);
 		textUsuario.setColumns(10);
+		
+		labelImagen = new JLabel("");
+		labelImagen.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Icono (1).jpg")));
+		GridBagConstraints gbc_labelImagen = new GridBagConstraints();
+		gbc_labelImagen.gridwidth = 2;
+		gbc_labelImagen.gridheight = 3;
+		gbc_labelImagen.insets = new Insets(0, 0, 5, 5);
+		gbc_labelImagen.gridx = 1;
+		gbc_labelImagen.gridy = 2;
+		pnlinicio.add(labelImagen, gbc_labelImagen);
 		
 		lblContrasea = new JLabel("Contrase\u00F1a");
 		GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
