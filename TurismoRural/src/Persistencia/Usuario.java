@@ -2,11 +2,11 @@ package Persistencia;
 
 public class Usuario {
 	private String usuario;
-	private String contraseña;
+	private String password;
 	private int identificador;
-	public void Usuario(String usuario, String contraseña) {
+	public void Usuario(String usuario, String password) {
 		this.usuario=usuario;
-		this.contraseña=contraseña;
+		this.password=password;
 		this.identificador=this.identificador+1;
 	}
 	
@@ -28,13 +28,13 @@ public class Usuario {
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 

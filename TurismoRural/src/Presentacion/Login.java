@@ -14,13 +14,15 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import Persistencia.Usuario;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import javax.swing.SwingConstants;
 
 public class Login {
 
 	private JFrame frame;
 	private JTextField textUsuario;
-	private JTextField textContraseña;
-	private JLabel lblContrasea;
+	private JTextField textPassword;
+	private JLabel lblPassword;
 	private JButton btnAcceder;
 	private JButton btnLimpiar;
 	private JLabel labelImagen;
@@ -53,6 +55,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Presentacion/Icono (1).jpg")));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -93,22 +96,22 @@ public class Login {
 		gbc_labelImagen.gridy = 2;
 		pnlinicio.add(labelImagen, gbc_labelImagen);
 		
-		lblContrasea = new JLabel("Contrase\u00F1a");
+		lblPassword = new JLabel("Contrase\u00F1a");
 		GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
 		gbc_lblContrasea.insets = new Insets(0, 0, 5, 5);
 		gbc_lblContrasea.anchor = GridBagConstraints.EAST;
 		gbc_lblContrasea.gridx = 6;
 		gbc_lblContrasea.gridy = 3;
-		pnlinicio.add(lblContrasea, gbc_lblContrasea);
+		pnlinicio.add(lblPassword, gbc_lblContrasea);
 		
-		textContraseña = new JTextField();
-		GridBagConstraints gbc_textContraseña = new GridBagConstraints();
-		gbc_textContraseña.insets = new Insets(0, 0, 5, 5);
-		gbc_textContraseña.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textContraseña.gridx = 7;
-		gbc_textContraseña.gridy = 3;
-		pnlinicio.add(textContraseña, gbc_textContraseña);
-		textContraseña.setColumns(10);
+		textPassword = new JTextField();
+		GridBagConstraints gbc_textPassword = new GridBagConstraints();
+		gbc_textPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_textPassword.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textPassword.gridx = 7;
+		gbc_textPassword.gridy = 3;
+		pnlinicio.add(textPassword, gbc_textPassword);
+		textPassword.setColumns(10);
 		
 		btnLimpiar = new JButton("Limpiar");
 		GridBagConstraints gbc_btnLimpiar = new GridBagConstraints();

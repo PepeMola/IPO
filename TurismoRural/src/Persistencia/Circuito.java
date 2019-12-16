@@ -7,6 +7,7 @@ public class Circuito {
 	private String[] monumentos;
 	private String[] restaurantes;
 	private String[] tiendas;
+	
 	public Circuito(int id, String[] ciudades, String[] monumentos, String[] restaurantes, String[] tiendas) {
 		super();
 		this.id = id;
