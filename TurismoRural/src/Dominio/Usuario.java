@@ -5,16 +5,16 @@ public class Usuario {
 	private String nombre;
 	private String apellidos;
 	private String nif;
-	private int telefono;
 	private String password;
+	private String foto;
 	
-
-	public Usuario (String nombre, String apellidos, String nif, int telefono, String password) {
+	
+	public Usuario (String nombre, String apellidos, String nif, String password, String foto) {
 		nombre = this.nombre;
 		apellidos = this.apellidos;
 		nif = this.nif;
-		telefono = this.telefono;
 		password = this.password;
+		this.foto = foto;
 	}
 	
 	public Usuario() {
@@ -42,14 +42,6 @@ public class Usuario {
 
 	public void setNif(String nif) {
 		this.nif = nif;
-	}
-
-	public int getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
 	}
 
 	public String getPassword() {

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.SystemColor;
 
 public class Ayuda {
 
@@ -40,6 +41,7 @@ public class Ayuda {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setBackground(SystemColor.controlShadow);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Presentacion/help.png")));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

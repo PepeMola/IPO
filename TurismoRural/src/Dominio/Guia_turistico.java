@@ -5,15 +5,16 @@ public class Guia_turistico {
 	private String apellidos;
 	private String nif;
 	private String email;
-	private int telf;
+	private String telf;
 	private String idiomas;
 	private String disponibilidad;
-	private int historial_rutas;
+	private String historial_rutas;
 	private double precio;
 	private double puntuacion;
+	private String foto;
 	
-	public Guia_turistico(String nombre, String apellidos, String nif, String email, int telf, String idiomas, String disponibilidad,
-			int historial_rutas, double precio, double puntuacion) {
+	public Guia_turistico(String nombre, String apellidos, String nif, String email, String telf, String idiomas, String disponibilidad,
+			String historial_rutas, double precio, double puntuacion, String foto) {
 		nombre = this.nombre;
 		apellidos=this.apellidos;
 		nif=this.nif;
@@ -24,6 +25,7 @@ public class Guia_turistico {
 		historial_rutas=this.historial_rutas;
 		precio=this.precio;
 		puntuacion=this.puntuacion;
+		this.foto=foto;
 	}
 
 	public String getNombre() {
@@ -58,11 +60,11 @@ public class Guia_turistico {
 		this.email = email;
 	}
 
-	public int getTelf() {
+	public String getTelf() {
 		return telf;
 	}
 
-	public void setTelf(int telf) {
+	public void setTelf(String telf) {
 		this.telf = telf;
 	}
 
@@ -82,11 +84,11 @@ public class Guia_turistico {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public int getHistorial_rutas() {
+	public String getHistorial_rutas() {
 		return historial_rutas;
 	}
 
-	public void setHistorial_rutas(int historial_rutas) {
+	public void setHistorial_rutas(String historial_rutas) {
 		this.historial_rutas = historial_rutas;
 	}
 
