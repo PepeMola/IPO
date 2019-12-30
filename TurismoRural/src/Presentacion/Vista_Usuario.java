@@ -20,6 +20,9 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JDesktopPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Vista_Usuario extends JFrame {
 
@@ -44,6 +47,11 @@ public class Vista_Usuario extends JFrame {
 	private String nombreUsuario;
 	private String apellidoUsuario;
 	private String dniUsuario;
+	private JTable table_Circuitos;
+	private JTable table;
+	private JButton btnInsertarGuia;
+	private JButton btnModificarTabla;
+	private JButton btnDarDeBaja;
 
 	/**
 	 * Launch the application.
@@ -156,16 +164,118 @@ public class Vista_Usuario extends JFrame {
 			{
 				pnlGuias = new JPanel();
 				tabbedPane.addTab("Guias Turísticos", null, pnlGuias, null);
+				GridBagLayout gbl_pnlGuias = new GridBagLayout();
+				gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+				gbl_pnlGuias.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+				gbl_pnlGuias.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_pnlGuias.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				pnlGuias.setLayout(gbl_pnlGuias);
+				{
+					table = new JTable();
+					table.setModel(new DefaultTableModel(
+						new Object[][] {
+							{"David", "Utrilla", "Ingles-Castellano", "Solo tardes", "123456789", "davidu@hotmail.com", "1-2", "13", "6.5"},
+							{"Jose Antonio", "Arias", "Ingles-Castellano", "Total", "132456789", "pepea@hotmail.com", "1", "34", "8"},
+							{"Valentin ", "Stoyanov", "Ruso", "Ma\u00F1anas", "142356789", "VS@hotmail.com", "2", "3", "4"},
+							{"Custodio", "Gamero", "Italiano", "Total", "152346789", "CG@hotmail.com", "1-2", "13", null},
+							{null, null, null, null, null, null, null, null, null},
+						},
+						new String[] {
+							"Nombre", "Apellidos", "Idioma", "Disponibilidad", "Tlf. contacto", "e-mail", "Historial de rutas", "Precio/Hora", "Puntuacion"
+						}
+					));
+					table.getColumnModel().getColumn(0).setPreferredWidth(66);
+					table.getColumnModel().getColumn(0).setMinWidth(66);
+					table.getColumnModel().getColumn(1).setPreferredWidth(64);
+					table.getColumnModel().getColumn(1).setMinWidth(64);
+					table.getColumnModel().getColumn(2).setMinWidth(75);
+					table.getColumnModel().getColumn(3).setMinWidth(75);
+					table.getColumnModel().getColumn(4).setMinWidth(75);
+					table.getColumnModel().getColumn(5).setMinWidth(75);
+					table.getColumnModel().getColumn(6).setMinWidth(75);
+					table.getColumnModel().getColumn(7).setPreferredWidth(65);
+					table.getColumnModel().getColumn(7).setMinWidth(65);
+					table.getColumnModel().getColumn(8).setPreferredWidth(63);
+					table.getColumnModel().getColumn(8).setMinWidth(60);
+					GridBagConstraints gbc_table = new GridBagConstraints();
+					gbc_table.gridwidth = 6;
+					gbc_table.insets = new Insets(0, 0, 5, 5);
+					gbc_table.fill = GridBagConstraints.BOTH;
+					gbc_table.gridx = 0;
+					gbc_table.gridy = 1;
+					pnlGuias.add(table, gbc_table);
+				}
+				{
+					btnInsertarGuia = new JButton("Insertar Guia");
+					GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
+					gbc_btnInsertarGuia.insets = new Insets(0, 0, 5, 5);
+					gbc_btnInsertarGuia.gridx = 3;
+					gbc_btnInsertarGuia.gridy = 2;
+					pnlGuias.add(btnInsertarGuia, gbc_btnInsertarGuia);
+				}
+				{
+					btnModificarTabla = new JButton("Modificar Tabla");
+					GridBagConstraints gbc_btnModificarTabla = new GridBagConstraints();
+					gbc_btnModificarTabla.insets = new Insets(0, 0, 5, 5);
+					gbc_btnModificarTabla.gridx = 4;
+					gbc_btnModificarTabla.gridy = 2;
+					pnlGuias.add(btnModificarTabla, gbc_btnModificarTabla);
+				}
+				{
+					btnDarDeBaja = new JButton("Dar de Baja");
+					GridBagConstraints gbc_btnDarDeBaja = new GridBagConstraints();
+					gbc_btnDarDeBaja.insets = new Insets(0, 0, 5, 5);
+					gbc_btnDarDeBaja.gridx = 5;
+					gbc_btnDarDeBaja.gridy = 2;
+					pnlGuias.add(btnDarDeBaja, gbc_btnDarDeBaja);
+				}
 			}
 			{
 				pnlCircuitos = new JPanel();
 				tabbedPane.addTab("Circuitos Turísticos", null, pnlCircuitos, null);
+				GridBagLayout gbl_pnlCircuitos = new GridBagLayout();
+				gbl_pnlCircuitos.columnWidths = new int[]{0, 0, 0, 0, 25, 27, 0, 0, 0};
+				gbl_pnlCircuitos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+				gbl_pnlCircuitos.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_pnlCircuitos.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				pnlCircuitos.setLayout(gbl_pnlCircuitos);
+				{
+					{
+						table_Circuitos = new JTable();
+						table_Circuitos.setRowSelectionAllowed(false);
+						table_Circuitos.setFillsViewportHeight(true);
+						table_Circuitos.setModel(new DefaultTableModel(
+							new Object[][] {
+								{"1", "Ciudad-Real", "Puerta de Toledo", "Bar el Estudiante", "H&M,Mango,Pull&Bear", "-"},
+								{"2", "Puertollano", "Fuente Agria", "El Bomba", "Sprinfield", null},
+							},
+							new String[] {
+								"ID", "Localidades", "Monumentos", "Restaurantes", "Tiendas", "Puntos de inter\u00E9s"
+							}
+						));
+						table_Circuitos.getColumnModel().getColumn(0).setPreferredWidth(24);
+						table_Circuitos.getColumnModel().getColumn(0).setMinWidth(11);
+						table_Circuitos.getColumnModel().getColumn(1).setPreferredWidth(65);
+						table_Circuitos.getColumnModel().getColumn(1).setMinWidth(65);
+						table_Circuitos.getColumnModel().getColumn(2).setMinWidth(75);
+						table_Circuitos.getColumnModel().getColumn(3).setMinWidth(75);
+						table_Circuitos.getColumnModel().getColumn(4).setMinWidth(70);
+						table_Circuitos.getColumnModel().getColumn(5).setPreferredWidth(94);
+						table_Circuitos.getColumnModel().getColumn(5).setMinWidth(94);
+						GridBagConstraints gbc_table_Circuitos = new GridBagConstraints();
+						gbc_table_Circuitos.gridwidth = 3;
+						gbc_table_Circuitos.insets = new Insets(0, 0, 5, 5);
+						gbc_table_Circuitos.fill = GridBagConstraints.BOTH;
+						gbc_table_Circuitos.gridx = 1;
+						gbc_table_Circuitos.gridy = 1;
+						pnlCircuitos.add(table_Circuitos, gbc_table_Circuitos);
+					}
+				}
 			}
 			{
 				pnlPromociones = new JPanel();
 				tabbedPane.addTab("Promociones", null, pnlPromociones, null);
 			}
 		}
-	}
-	
+	}	
 }
