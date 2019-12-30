@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
 
 import Dominio.Guia_turistico;
+import Dominio.Usuario;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,7 @@ import java.awt.Cursor;
 
 public class Login {
 
-	private JFrame frmLogin;
+	JFrame frmLogin;
 	private JTextField txtUsuario;
 	private JLabel lblPassword;
 	private JButton btnAcceder;
@@ -126,7 +127,7 @@ public class Login {
 			String clave = new String(pfPassword.getPassword());
 
 			if(txtUsuario.getText().equals("Pepe") && clave.equals("1234")) {
-				crearVariables();
+				
 				Vista_Usuario pepe = new Vista_Usuario(txtUsuario.getText(), clave, "hola");
 				pepe.setVisible(true);
 				lblMensaje.setText(clave);
@@ -149,6 +150,7 @@ public class Login {
 	}
 	//Aquí creo los objetos, para la base de datos, Añadir en cada clase diferente este metodo
 	public void crearVariables() {
+		Usuario utrilla=new Usuario("David","Utrilla","05936385Q","1234","");
 		Guia_turistico david=new Guia_turistico("David", "Utrilla","05936385Q", "davidu@hotmail.com" ,"123456789","Ingles-Castellano", "Solo tardes",  "1-2", 13.00, 6.5,"");
 		Guia_turistico pepe=new Guia_turistico("Pepe", "Arias","1234567K", "pepea@hotmail.com" ,"132456789","Ingles-Castellano", "Total",  "2", 34.00, 8.5,"");
 		Guia_turistico custodio=new Guia_turistico("Custodio", "Gamero","05936385E", "CG@hotmail.com" ,"143256789","Italiano", "Total",  "1-2", 13.00, 6.49,"");
