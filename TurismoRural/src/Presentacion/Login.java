@@ -23,7 +23,7 @@ import javax.swing.border.TitledBorder;
 
 public class Login {
 
-	private JFrame frmLogin;
+	JFrame frmLogin;
 	private JTextField txtUsuario;
 	private JLabel lblPassword;
 	private JButton btnAcceder;
@@ -142,25 +142,6 @@ public class Login {
 
 		}
 	}
-	private class BtnAccederActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-			String clave = new String(pfPassword.getPassword());
-
-			if(txtUsuario.getText().equals("Pepe") && clave.equals("1234")) {
-				Vista_Usuario pepe = new Vista_Usuario(txtUsuario.getText(), clave, "hola");
-				pepe.setVisible(true);
-				lblMensaje.setText(clave);
-			}else {
-				txtUsuario.setText("");
-				pfPassword.setText("");
-				txtUsuario.getFocusListeners();
-				lblMensaje.setText("Usuario o Clave incorrecta.");
-			}
-
-		}
-	}
-
 	private class TxtUsuarioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if(txtUsuario.getText().equals(user)) {
@@ -211,5 +192,4 @@ public class Login {
 			pfPassword.setEnabled(false);
 		}
 	}
-
 }

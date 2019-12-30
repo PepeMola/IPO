@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JDesktopPane;
@@ -28,6 +29,8 @@ import java.awt.Window.Type;
 
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Vista_Usuario extends JFrame {
 
@@ -60,6 +63,7 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnModificarTabla_1;
 	private JButton btnDarDeBaja_1;
 	private JTable table_1;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -149,6 +153,11 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnBaja = new JButton("BAJA");
+				btnBaja.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+
+					}
+				});
 				btnBaja.setBounds(416, 293, 134, 51);
 				pnlUsuario.add(btnBaja);
 			}
@@ -172,7 +181,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				pnlGuias = new JPanel();
-				tabbedPane.addTab("Guias Turísticos", null, pnlGuias, null);
+				tabbedPane.addTab("Guias Turisticos", null, pnlGuias, null);
 				GridBagLayout gbl_pnlGuias = new GridBagLayout();
 				gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 				gbl_pnlGuias.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -181,9 +190,14 @@ public class Vista_Usuario extends JFrame {
 				pnlGuias.setLayout(gbl_pnlGuias);
 				{
 					table = new JTable();
+					table.addMouseListener(new MouseAdapter() {
+
+
+					});
 					table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 					table.setModel(new DefaultTableModel(
 							new Object[][] {
+								{"Nombre", "Apellidos", "Idioma", "Disponibilidad", "Tlf. contacto", "e-mail", "Historial de rutas", "Precio/Hora", "Puntuacion"},
 								{"David", "Utrilla", "Ingles-Castellano", "Solo tardes", "123456789", "davidu@hotmail.com", "1-2", "13", "6.5"},
 								{"Jose Antonio", "Arias", "Ingles-Castellano", "Total", "132456789", "pepea@hotmail.com", "1", "34", "8"},
 								{"Valentin ", "Stoyanov", "Ruso", "Ma\u00F1anas", "142356789", "VS@hotmail.com", "2", "3", "4"},
@@ -242,7 +256,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				pnlCircuitos = new JPanel();
-				tabbedPane.addTab("Circuitos Turísticos", null, pnlCircuitos, null);
+				tabbedPane.addTab("Circuitos Turisticos", null, pnlCircuitos, null);
 				GridBagLayout gbl_pnlCircuitos = new GridBagLayout();
 				gbl_pnlCircuitos.columnWidths = new int[]{0, 0, 0, 0, 25, 27, 0, 0, 0};
 				gbl_pnlCircuitos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -330,6 +344,7 @@ public class Vista_Usuario extends JFrame {
 				{
 					table_1 = new JTable();
 					table_1.setModel(new DefaultTableModel(
+
 							new Object[][] {
 								{"1", "-50%", "Ciudad Real"},
 								{"2", "2x1", "Puertollano"},
@@ -339,6 +354,7 @@ public class Vista_Usuario extends JFrame {
 									"ID", "Promocion", "Localidad"
 							}
 							));
+
 					table_1.getColumnModel().getColumn(0).setPreferredWidth(21);
 					table_1.getColumnModel().getColumn(0).setMinWidth(21);
 					table_1.getColumnModel().getColumn(1).setPreferredWidth(59);
@@ -353,6 +369,10 @@ public class Vista_Usuario extends JFrame {
 					gbc_table_1.gridy = 1;
 					pnlPromociones.add(table_1, gbc_table_1);
 				}
+			}
+			{
+				panel = new JPanel();
+				tabbedPane.addTab("Historial", null, panel, null);
 			}
 		}
 	}	
