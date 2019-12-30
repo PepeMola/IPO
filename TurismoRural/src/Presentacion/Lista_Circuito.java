@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import java.awt.Insets;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
 
 public class Lista_Circuito extends JInternalFrame {
 	private JTable mitabla;
@@ -41,10 +42,13 @@ public class Lista_Circuito extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Lista_Circuito() {
+		setTitle("CIRCUITOS");
+		setFrameIcon(new ImageIcon(Lista_Circuito.class.getResource("/Presentacion/grupo_usuarios.png")));
+		setClosable(true);
 		setResizable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 350);
 		
 		JToolBar toolBar = new JToolBar();
 		getContentPane().add(toolBar, BorderLayout.SOUTH);
@@ -52,8 +56,8 @@ public class Lista_Circuito extends JInternalFrame {
 		JButton btnEliminarCircuito = new JButton("Eliminar Circuito");
 		toolBar.add(btnEliminarCircuito);
 		
-		JButton btnAnadirCircuitp = new JButton("A\u00F1adir CIrcuitp");
-		toolBar.add(btnAnadirCircuitp);
+		JButton btnAnadirCircuito = new JButton("Añadir Circuito");
+		toolBar.add(btnAnadirCircuito);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.NORTH);

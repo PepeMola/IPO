@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Window.Type;
 
 public class Vista_Usuario extends JFrame {
 
@@ -54,31 +55,14 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnDarDeBaja;
 
 	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Vista_Usuario frame = new Vista_Usuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-
-	/**
 	 * Create the frame.
 	 */
 	public Vista_Usuario(String nombre, String apellido, String dni) {
+		setFont(new Font("Dialog", Font.BOLD, 12));
 		this.nombreUsuario = nombre;
 		this.apellidoUsuario = apellido;
 		this.dniUsuario = dni;
-		setTitle("Usuario");
+		setTitle("USUARIO");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista_Usuario.class.getResource("/Presentacion/usuario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 434);

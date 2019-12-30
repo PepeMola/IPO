@@ -1,7 +1,6 @@
 package Presentacion;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -16,6 +15,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.border.TitledBorder;
 
 public class Login {
 
@@ -28,6 +30,12 @@ public class Login {
 	private JLabel lblIcono;
 	private JLabel lblMensaje;
 	private JPasswordField pfPassword;
+
+	/*A partir de aqui crearemos las variables globales que necesitemos.*/
+	private final String user = "Profesora";
+	private final String pass = "ipo1";
+	private int i; 
+	private JLabel lblEncabezado;/*Variable auxiliar para bucles*/
 
 	/**
 	 * Launch the application.
@@ -57,89 +65,133 @@ public class Login {
 	 */
 	private void initialize() {
 		frmLogin = new JFrame();
-		frmLogin.setBackground(new Color(135, 206, 250));
+		frmLogin.setForeground(new Color(255, 255, 255));
 		frmLogin.setResizable(false);
-		frmLogin.setTitle("LOGIN\r\n");
+		frmLogin.setBackground(new Color(255, 255, 255));
+		frmLogin.setTitle("LOGIN");
 		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Presentacion/key.png")));
-		frmLogin.setBounds(100, 100, 450, 300);
+		frmLogin.setBounds(100, 100, 550, 347);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JPanel pnlinicio = new JPanel();
-		pnlinicio.setBackground(new Color(175, 238, 238));
+		pnlinicio.setBackground(new Color(153, 204, 153));
 		pnlinicio.setForeground(new Color(255, 255, 255));
 		pnlinicio.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		frmLogin.getContentPane().add(pnlinicio, BorderLayout.CENTER);
 		pnlinicio.setLayout(null);
 
 		lblIcono = new JLabel("");
-		lblIcono.setBounds(36, 47, 32, 35);
+		lblIcono.setBounds(36, 77, 32, 35);
 		lblIcono.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/grupo_usuarios.png")));
 		pnlinicio.add(lblIcono);
 
 		txtUsuario = new JTextField();
-		txtUsuario.setBackground(new Color(211, 211, 211));
-		txtUsuario.setBounds(78, 47, 325, 35);
+		txtUsuario.addActionListener(new TxtUsuarioActionListener());
+		txtUsuario.setDisabledTextColor(Color.WHITE);
+		txtUsuario.setSelectionColor(Color.LIGHT_GRAY);
+		txtUsuario.setBackground(new Color(255, 255, 255));
+		txtUsuario.setBounds(96, 77, 370, 35);
 		pnlinicio.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
 		lblPassword = new JLabel("");
+		lblPassword.setEnabled(false);
 		lblPassword.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/candado.png")));
-		lblPassword.setBounds(36, 99, 32, 32);
+		lblPassword.setBounds(36, 126, 32, 32);
 		pnlinicio.add(lblPassword);
 
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		btnLimpiar.setBorderPainted(false);
 		btnLimpiar.setBorder(null);
-		btnLimpiar.setBackground(new Color(30, 144, 255));
+		btnLimpiar.setBackground(new Color(102, 255, 153));
 		btnLimpiar.addActionListener(new BtnLimpiarActionListener());
-		btnLimpiar.setBounds(78, 147, 158, 51);
+		btnLimpiar.setBounds(96, 182, 176, 51);
 		pnlinicio.add(btnLimpiar);
 
 		btnAcceder = new JButton("Acceder");
-		btnAcceder.addActionListener(new BtnAccederActionListener());
-		btnAcceder.setBounds(246, 147, 157, 51);
+		btnAcceder.setEnabled(false);
+		btnAcceder.setBackground(new Color(102, 255, 153));
+		btnAcceder.setBounds(282, 182, 184, 51);
 		pnlinicio.add(btnAcceder);
 
 		btnAyuda = new JButton("");
-		btnAyuda.setBounds(10, 209, 53, 51);
+		btnAyuda.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		btnAyuda.setBorder(null);
+		btnAyuda.setBounds(10, 244, 53, 51);
 		btnAyuda.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/help.png")));
 		pnlinicio.add(btnAyuda);
 		{
 			lblMensaje = new JLabel("");
-			lblMensaje.setBounds(78, 209, 325, 51);
+			lblMensaje.setBounds(78, 244, 456, 51);
 			pnlinicio.add(lblMensaje);
 		}
 		{
 			pfPassword = new JPasswordField();
-			pfPassword.setBackground(new Color(211, 211, 211));
-			pfPassword.setBounds(78, 93, 325, 38);
+			pfPassword.addActionListener(new PfPasswordActionListener());
+			pfPassword.setEnabled(false);
+			pfPassword.setEchoChar('*');
+			pfPassword.setBackground(new Color(255, 255, 255));
+			pfPassword.setBounds(96, 123, 369, 35);
 			pnlinicio.add(pfPassword);
 		}
-	}
-	private class BtnAccederActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-			String clave = new String(pfPassword.getPassword());
-
-			if(txtUsuario.getText().equals("Pepe") && clave.equals("1234")) {
-				Vista_Usuario pepe = new Vista_Usuario(txtUsuario.getText(), clave, "hola");
-				pepe.setVisible(true);
-				lblMensaje.setText(clave);
-			}else {
-				txtUsuario.setText("");
-				pfPassword.setText("");
-				txtUsuario.getFocusListeners();
-				lblMensaje.setText("Usuario o Clave incorrecta.");
-			}
-
+		{
+			lblEncabezado = new JLabel("Interacción Persona-Ordenador I");
+			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 20));
+			lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
+			lblEncabezado.setBounds(96, 11, 370, 47);
+			pnlinicio.add(lblEncabezado);
 		}
 	}
+
+	private class TxtUsuarioActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			if(txtUsuario.getText().equals(user)) {
+				lblPassword.setEnabled(true);
+				pfPassword.setEnabled(true);
+				pfPassword.requestFocus();
+				lblMensaje.setBackground(Color.GREEN);
+				lblMensaje.setText("Por favor, introduzca su contraseña.");
+			}else{
+				lblPassword.setEnabled(false);
+				pfPassword.setEnabled(false);
+				txtUsuario.requestFocus();
+				lblMensaje.setBackground(Color.RED);
+				lblMensaje.setText("Este usuario no pertenece al sistema.");
+				txtUsuario.setText("");
+			}
+		}
+	}
+
+	private class PfPasswordActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			/*Realizar una cuenta atras de 3 intentos para entrar*/
+			if(String.copyValueOf(pfPassword.getPassword()).equals(pass)) {
+				lblMensaje.setBackground(Color.GREEN);
+				lblMensaje.setText("Contraseña correcta. Pulse Acceder para entrar en el sistema.");
+				lblMensaje.setVisible(true);
+				btnAcceder.setEnabled(true);
+				lblPassword.setEnabled(false);
+				pfPassword.setEnabled(false);
+				btnAcceder.requestFocus();
+			}else {
+				lblMensaje.setBackground(Color.RED);
+				lblMensaje.setText("Contraseña incorrecta. Quendan "+ --i +" intentos.");
+				lblMensaje.setVisible(true);
+				btnAcceder.setEnabled(false);
+				pfPassword.requestFocus();
+			}
+		}
+	}
+
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			txtUsuario.setText("");
 			pfPassword.setText("");
 			txtUsuario.getFocusListeners();
+			btnAcceder.setEnabled(false);
+			lblPassword.setEnabled(false);
+			pfPassword.setEnabled(false);
 		}
 	}
 }
