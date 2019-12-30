@@ -20,6 +20,7 @@ import java.awt.Cursor;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.EmptyBorder;
 
 public class Login {
 
@@ -38,7 +39,7 @@ public class Login {
 	private final String user = "Profesora";
 	private final String pass = "ipo1";
 	private int i; /*Variable auxiliar para bucles*/
-	
+
 
 
 	public Login() {
@@ -49,6 +50,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frmLogin = new JFrame();
+		frmLogin.setVisible(true);
 		frmLogin.setForeground(new Color(255, 255, 255));
 		frmLogin.setResizable(false);
 		frmLogin.setBackground(new Color(255, 255, 255));
@@ -104,8 +106,9 @@ public class Login {
 		pnlinicio.add(btnAcceder);
 
 		btnAyuda = new JButton("");
+		btnAyuda.addActionListener(new BtnAyudaActionListener());
 		btnAyuda.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		btnAyuda.setBorder(null);
+		btnAyuda.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnAyuda.setBounds(10, 293, 53, 51);
 		btnAyuda.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/help.png")));
 		pnlinicio.add(btnAyuda);
@@ -136,21 +139,21 @@ public class Login {
 			pnlinicio.add(lblEncabezado);
 
 		}
-		
+
 	}
 	/*Con este metodo centraremos la pantalla.
 	 * Nota: Podemos reutilizarlo para cualquier frame.*/
 	private void centrarPantalla() {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
-		
+
 		Dimension sizePantalla = pantalla.getScreenSize();
-		
+
 		int alturaPantalla = sizePantalla.height;
 		int anchoPantalla = sizePantalla.width;
-		
+
 		frmLogin.setBounds(anchoPantalla/4, alturaPantalla/4, anchoPantalla/2, alturaPantalla/2);
 	}
-	
+
 	private class TxtUsuarioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if(txtUsuario.getText().equals(user)) {
@@ -199,6 +202,21 @@ public class Login {
 			btnAcceder.setEnabled(false);
 			lblPassword.setEnabled(false);
 			pfPassword.setEnabled(false);
+		}
+	}
+	private class BtnAyudaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Ayuda frame = new Ayuda();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		}
 	}
 }
