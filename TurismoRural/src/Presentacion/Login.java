@@ -36,7 +36,7 @@ public class Login {
 	private final String pass = "ipo1";
 	private int i; 
 	private JLabel lblEncabezado;/*Variable auxiliar para bucles*/
-
+	/*No me deja commitear*/
 	/**
 	 * Launch the application.
 	 */
