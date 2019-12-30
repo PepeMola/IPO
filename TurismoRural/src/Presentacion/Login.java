@@ -1,5 +1,6 @@
 package Presentacion;
 
+import java.awt.*;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
+import Dominio.Guia_turistico;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -36,7 +38,7 @@ public class Login {
 	private final String pass = "ipo1";
 	private int i; 
 	private JLabel lblEncabezado;/*Variable auxiliar para bucles*/
-	/*No me deja commitear*/
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,14 +54,9 @@ public class Login {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
 	public Login() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -135,12 +132,32 @@ public class Login {
 			pfPassword.setBounds(96, 123, 369, 35);
 			pnlinicio.add(pfPassword);
 		}
+
 		{
 			lblEncabezado = new JLabel("Interacción Persona-Ordenador I");
 			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
 			lblEncabezado.setBounds(96, 11, 370, 47);
 			pnlinicio.add(lblEncabezado);
+
+		}
+	}
+	private class BtnAccederActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+
+			String clave = new String(pfPassword.getPassword());
+
+			if(txtUsuario.getText().equals("Pepe") && clave.equals("1234")) {
+				Vista_Usuario pepe = new Vista_Usuario(txtUsuario.getText(), clave, "hola");
+				pepe.setVisible(true);
+				lblMensaje.setText(clave);
+			}else {
+				txtUsuario.setText("");
+				pfPassword.setText("");
+				txtUsuario.getFocusListeners();
+				lblMensaje.setText("Usuario o Clave incorrecta.");
+			}
+
 		}
 	}
 
@@ -194,4 +211,5 @@ public class Login {
 			pfPassword.setEnabled(false);
 		}
 	}
+
 }

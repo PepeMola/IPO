@@ -23,7 +23,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JDesktopPane;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.Window.Type;
+
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class Vista_Usuario extends JFrame {
 
@@ -44,15 +48,36 @@ public class Vista_Usuario extends JFrame {
 	private JLabel lblNombre2;
 	private JLabel lblApellido2;
 	private JLabel lblDni2;
-	
+
 	private String nombreUsuario;
 	private String apellidoUsuario;
 	private String dniUsuario;
-	private JTable table_Circuitos;
 	private JTable table;
 	private JButton btnInsertarGuia;
 	private JButton btnModificarTabla;
 	private JButton btnDarDeBaja;
+	private JButton btnDarDeAlta;
+	private JButton btnModificarTabla_1;
+	private JButton btnDarDeBaja_1;
+	private JTable table_1;
+
+	/**
+	 * Launch the application.
+	 */
+	/*
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vista_Usuario frame = new Vista_Usuario();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	 */
 
 	/**
 	 * Create the frame.
@@ -95,7 +120,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnAyuda = new JButton("");
-				
+
 				btnAyuda.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/help.png")));
 				btnAyuda.setBounds(10, 293, 53, 51);
 				pnlUsuario.add(btnAyuda);
@@ -156,18 +181,19 @@ public class Vista_Usuario extends JFrame {
 				pnlGuias.setLayout(gbl_pnlGuias);
 				{
 					table = new JTable();
+					table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 					table.setModel(new DefaultTableModel(
-						new Object[][] {
-							{"David", "Utrilla", "Ingles-Castellano", "Solo tardes", "123456789", "davidu@hotmail.com", "1-2", "13", "6.5"},
-							{"Jose Antonio", "Arias", "Ingles-Castellano", "Total", "132456789", "pepea@hotmail.com", "1", "34", "8"},
-							{"Valentin ", "Stoyanov", "Ruso", "Ma\u00F1anas", "142356789", "VS@hotmail.com", "2", "3", "4"},
-							{"Custodio", "Gamero", "Italiano", "Total", "152346789", "CG@hotmail.com", "1-2", "13", null},
-							{null, null, null, null, null, null, null, null, null},
-						},
-						new String[] {
-							"Nombre", "Apellidos", "Idioma", "Disponibilidad", "Tlf. contacto", "e-mail", "Historial de rutas", "Precio/Hora", "Puntuacion"
-						}
-					));
+							new Object[][] {
+								{"David", "Utrilla", "Ingles-Castellano", "Solo tardes", "123456789", "davidu@hotmail.com", "1-2", "13", "6.5"},
+								{"Jose Antonio", "Arias", "Ingles-Castellano", "Total", "132456789", "pepea@hotmail.com", "1", "34", "8"},
+								{"Valentin ", "Stoyanov", "Ruso", "Ma\u00F1anas", "142356789", "VS@hotmail.com", "2", "3", "4"},
+								{"Custodio", "Gamero", "Italiano", "Total", "152346789", "CG@hotmail.com", "1-2", "13", null},
+								{null, null, null, null, null, null, null, null, null},
+							},
+							new String[] {
+									"Nombre", "Apellidos", "Idioma", "Disponibilidad", "Tlf. contacto", "e-mail", "Historial de rutas", "Precio/Hora", "Puntuacion"
+							}
+							));
 					table.getColumnModel().getColumn(0).setPreferredWidth(66);
 					table.getColumnModel().getColumn(0).setMinWidth(66);
 					table.getColumnModel().getColumn(1).setPreferredWidth(64);
@@ -225,18 +251,30 @@ public class Vista_Usuario extends JFrame {
 				pnlCircuitos.setLayout(gbl_pnlCircuitos);
 				{
 					{
-						table_Circuitos = new JTable();
+						JTable table_Circuitos = new JTable();
+						table_Circuitos.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 						table_Circuitos.setRowSelectionAllowed(false);
 						table_Circuitos.setFillsViewportHeight(true);
 						table_Circuitos.setModel(new DefaultTableModel(
-							new Object[][] {
-								{"1", "Ciudad-Real", "Puerta de Toledo", "Bar el Estudiante", "H&M,Mango,Pull&Bear", "-"},
-								{"2", "Puertollano", "Fuente Agria", "El Bomba", "Sprinfield", null},
-							},
-							new String[] {
-								"ID", "Localidades", "Monumentos", "Restaurantes", "Tiendas", "Puntos de inter\u00E9s"
+								new Object[][] {
+									{"ID", "Localidades", "Monumentos", "Restaurantes", "Tiendas", "Puntos de inter\u00E9s"},
+									{"1", "Ciudad-Real", "Puerta de Toledo", "Bar el Estudiante", "H&M,Mango,Pull&Bear", "Plaza del Ayuntamiento"},
+									{"2", "Puertollano", "Fuente Agria", "El Bomba", "Sprinfield", "Paseo San Gregrio"},
+								},
+								new String[] {
+										"ID", "Localidades", "Monumentos", "Restaurantes", "Tiendas", "Puntos de inter\u00E9s"
+								}
+								) {
+							Class[] columnTypes=new Class[]{
+									String.class,String.class,String.class,String.class,String.class,String.class,
+							};
+
+							public Class getColumnClass(int columnIndex) {
+								return columnTypes[columnIndex];
 							}
-						));
+						});
+
+
 						table_Circuitos.getColumnModel().getColumn(0).setPreferredWidth(24);
 						table_Circuitos.getColumnModel().getColumn(0).setMinWidth(11);
 						table_Circuitos.getColumnModel().getColumn(1).setPreferredWidth(65);
@@ -247,7 +285,7 @@ public class Vista_Usuario extends JFrame {
 						table_Circuitos.getColumnModel().getColumn(5).setPreferredWidth(94);
 						table_Circuitos.getColumnModel().getColumn(5).setMinWidth(94);
 						GridBagConstraints gbc_table_Circuitos = new GridBagConstraints();
-						gbc_table_Circuitos.gridwidth = 3;
+						gbc_table_Circuitos.gridwidth = 6;
 						gbc_table_Circuitos.insets = new Insets(0, 0, 5, 5);
 						gbc_table_Circuitos.fill = GridBagConstraints.BOTH;
 						gbc_table_Circuitos.gridx = 1;
@@ -255,10 +293,66 @@ public class Vista_Usuario extends JFrame {
 						pnlCircuitos.add(table_Circuitos, gbc_table_Circuitos);
 					}
 				}
+				{
+					btnDarDeAlta = new JButton("Dar de alta");
+					GridBagConstraints gbc_btnDarDeAlta = new GridBagConstraints();
+					gbc_btnDarDeAlta.insets = new Insets(0, 0, 5, 5);
+					gbc_btnDarDeAlta.gridx = 3;
+					gbc_btnDarDeAlta.gridy = 2;
+					pnlCircuitos.add(btnDarDeAlta, gbc_btnDarDeAlta);
+				}
+				{
+					btnModificarTabla_1 = new JButton("Modificar Tabla");
+					GridBagConstraints gbc_btnModificarTabla_1 = new GridBagConstraints();
+					gbc_btnModificarTabla_1.insets = new Insets(0, 0, 5, 5);
+					gbc_btnModificarTabla_1.gridx = 4;
+					gbc_btnModificarTabla_1.gridy = 2;
+					pnlCircuitos.add(btnModificarTabla_1, gbc_btnModificarTabla_1);
+				}
+				{
+					btnDarDeBaja_1 = new JButton("Dar de baja");
+					GridBagConstraints gbc_btnDarDeBaja_1 = new GridBagConstraints();
+					gbc_btnDarDeBaja_1.insets = new Insets(0, 0, 5, 5);
+					gbc_btnDarDeBaja_1.gridx = 5;
+					gbc_btnDarDeBaja_1.gridy = 2;
+					pnlCircuitos.add(btnDarDeBaja_1, gbc_btnDarDeBaja_1);
+				}
 			}
 			{
 				pnlPromociones = new JPanel();
 				tabbedPane.addTab("Promociones", null, pnlPromociones, null);
+				GridBagLayout gbl_pnlPromociones = new GridBagLayout();
+				gbl_pnlPromociones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+				gbl_pnlPromociones.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+				gbl_pnlPromociones.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_pnlPromociones.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				pnlPromociones.setLayout(gbl_pnlPromociones);
+				{
+					table_1 = new JTable();
+					table_1.setModel(new DefaultTableModel(
+							new Object[][] {
+								{"1", "-50%", "Ciudad Real"},
+								{"2", "2x1", "Puertollano"},
+								{"3", "-20%", "Puertollano"},
+							},
+							new String[] {
+									"ID", "Promocion", "Localidad"
+							}
+							));
+					table_1.getColumnModel().getColumn(0).setPreferredWidth(21);
+					table_1.getColumnModel().getColumn(0).setMinWidth(21);
+					table_1.getColumnModel().getColumn(1).setPreferredWidth(59);
+					table_1.getColumnModel().getColumn(1).setMinWidth(59);
+					table_1.getColumnModel().getColumn(2).setPreferredWidth(66);
+					table_1.getColumnModel().getColumn(2).setMinWidth(65);
+					GridBagConstraints gbc_table_1 = new GridBagConstraints();
+					gbc_table_1.gridheight = 3;
+					gbc_table_1.insets = new Insets(0, 0, 5, 5);
+					gbc_table_1.fill = GridBagConstraints.BOTH;
+					gbc_table_1.gridx = 1;
+					gbc_table_1.gridy = 1;
+					pnlPromociones.add(table_1, gbc_table_1);
+				}
 			}
 		}
 	}	
