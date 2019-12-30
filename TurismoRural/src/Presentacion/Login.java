@@ -24,6 +24,7 @@ import javax.swing.border.TitledBorder;
 public class Login {
 
 	JFrame frmLogin;
+	private JLabel lblEncabezado;
 	private JTextField txtUsuario;
 	private JLabel lblPassword;
 	private JButton btnAcceder;
@@ -36,24 +37,10 @@ public class Login {
 	/*A partir de aqui crearemos las variables globales que necesitemos.*/
 	private final String user = "Profesora";
 	private final String pass = "ipo1";
-	private int i; 
-	private JLabel lblEncabezado;/*Variable auxiliar para bucles*/
+	private int i; /*Variable auxiliar para bucles*/
+	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frmLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	public Login() {
 		initialize();
 	}
@@ -67,7 +54,7 @@ public class Login {
 		frmLogin.setBackground(new Color(255, 255, 255));
 		frmLogin.setTitle("LOGIN");
 		frmLogin.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Presentacion/key.png")));
-		frmLogin.setBounds(100, 100, 550, 347);
+		centrarPantalla();/*Metodo para adaptar la ventana en la pantalla en la que se ejecute*/
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel pnlinicio = new JPanel();
@@ -83,11 +70,13 @@ public class Login {
 		pnlinicio.add(lblIcono);
 
 		txtUsuario = new JTextField();
+		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		txtUsuario.addActionListener(new TxtUsuarioActionListener());
 		txtUsuario.setDisabledTextColor(Color.WHITE);
 		txtUsuario.setSelectionColor(Color.LIGHT_GRAY);
 		txtUsuario.setBackground(new Color(255, 255, 255));
-		txtUsuario.setBounds(96, 77, 370, 35);
+		txtUsuario.setBounds(96, 77, 553, 35);
 		pnlinicio.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
@@ -98,63 +87,83 @@ public class Login {
 		pnlinicio.add(lblPassword);
 
 		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		btnLimpiar.setBorderPainted(false);
 		btnLimpiar.setBorder(null);
 		btnLimpiar.setBackground(new Color(102, 255, 153));
 		btnLimpiar.addActionListener(new BtnLimpiarActionListener());
-		btnLimpiar.setBounds(96, 182, 176, 51);
+		btnLimpiar.setBounds(96, 182, 252, 51);
 		pnlinicio.add(btnLimpiar);
 
 		btnAcceder = new JButton("Acceder");
+		btnAcceder.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btnAcceder.setEnabled(false);
 		btnAcceder.setBackground(new Color(102, 255, 153));
-		btnAcceder.setBounds(282, 182, 184, 51);
+		btnAcceder.setBounds(397, 182, 252, 51);
 		pnlinicio.add(btnAcceder);
 
 		btnAyuda = new JButton("");
 		btnAyuda.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		btnAyuda.setBorder(null);
-		btnAyuda.setBounds(10, 244, 53, 51);
+		btnAyuda.setBounds(10, 293, 53, 51);
 		btnAyuda.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/help.png")));
 		pnlinicio.add(btnAyuda);
 		{
 			lblMensaje = new JLabel("");
-			lblMensaje.setBounds(78, 244, 456, 51);
+			lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
+			lblMensaje.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+			lblMensaje.setBounds(73, 244, 571, 100);
 			pnlinicio.add(lblMensaje);
 		}
 		{
 			pfPassword = new JPasswordField();
+			pfPassword.setHorizontalAlignment(SwingConstants.CENTER);
+			pfPassword.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 			pfPassword.addActionListener(new PfPasswordActionListener());
 			pfPassword.setEnabled(false);
 			pfPassword.setEchoChar('*');
 			pfPassword.setBackground(new Color(255, 255, 255));
-			pfPassword.setBounds(96, 123, 369, 35);
+			pfPassword.setBounds(96, 123, 553, 35);
 			pnlinicio.add(pfPassword);
 		}
 
 		{
 			lblEncabezado = new JLabel("Interacción Persona-Ordenador I");
-			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 20));
+			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 30));
 			lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
-			lblEncabezado.setBounds(96, 11, 370, 47);
+			lblEncabezado.setBounds(96, 11, 553, 47);
 			pnlinicio.add(lblEncabezado);
 
 		}
+		
 	}
+	/*Con este metodo centraremos la pantalla.
+	 * Nota: Podemos reutilizarlo para cualquier frame.*/
+	private void centrarPantalla() {
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+		
+		Dimension sizePantalla = pantalla.getScreenSize();
+		
+		int alturaPantalla = sizePantalla.height;
+		int anchoPantalla = sizePantalla.width;
+		
+		frmLogin.setBounds(anchoPantalla/4, alturaPantalla/4, anchoPantalla/2, alturaPantalla/2);
+	}
+	
 	private class TxtUsuarioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if(txtUsuario.getText().equals(user)) {
 				lblPassword.setEnabled(true);
 				pfPassword.setEnabled(true);
 				pfPassword.requestFocus();
-				lblMensaje.setBackground(Color.GREEN);
+				lblMensaje.setForeground(Color.BLACK);
 				lblMensaje.setText("Por favor, introduzca su contraseña.");
 			}else{
 				lblPassword.setEnabled(false);
 				pfPassword.setEnabled(false);
 				txtUsuario.requestFocus();
-				lblMensaje.setBackground(Color.RED);
+				lblMensaje.setForeground(Color.RED);
 				lblMensaje.setText("Este usuario no pertenece al sistema.");
 				txtUsuario.setText("");
 			}
