@@ -2,7 +2,6 @@ package Presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Ayuda extends JFrame {
 
