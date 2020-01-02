@@ -32,6 +32,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class Vista_Usuario extends JFrame {
 
@@ -92,7 +93,8 @@ public class Vista_Usuario extends JFrame {
 		setTitle("USUARIO");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista_Usuario.class.getResource("/Presentacion/usuario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 613, 434);
+		centrarPantalla();
+		//setBounds(100, 100, 613, 434);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -101,7 +103,7 @@ public class Vista_Usuario extends JFrame {
 			tbpVistaUsuario = new JTabbedPane(JTabbedPane.TOP);
 			tbpVistaUsuario.setSelectedIndex(-1);
 			tbpVistaUsuario.setToolTipText("");
-			tbpVistaUsuario.setBounds(0, 0, 600, 400);
+			tbpVistaUsuario.setBounds(0, 0, 667, 345);
 			contentPane.add(tbpVistaUsuario);
 			{
 			}
@@ -112,7 +114,7 @@ public class Vista_Usuario extends JFrame {
 			{
 				lblNombre = new JLabel("Nombre:");
 				lblNombre.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblNombre.setBounds(194, 47, 105, 51);
+				lblNombre.setBounds(194, 24, 105, 51);
 				pnlUsuario.add(lblNombre);
 			}
 			{
@@ -125,19 +127,19 @@ public class Vista_Usuario extends JFrame {
 				btnAyuda.addActionListener(new BtnAyudaActionListener());
 
 				btnAyuda.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/help.png")));
-				btnAyuda.setBounds(10, 293, 53, 51);
+				btnAyuda.setBounds(10, 265, 40, 40);
 				pnlUsuario.add(btnAyuda);
 			}
 			{
 				lblApellido = new JLabel("Apellido:");
 				lblApellido.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblApellido.setBounds(194, 109, 105, 51);
+				lblApellido.setBounds(194, 73, 105, 51);
 				pnlUsuario.add(lblApellido);
 			}
 			{
 				lblDni = new JLabel("DNI:");
 				lblDni.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblDni.setBounds(194, 171, 105, 51);
+				lblDni.setBounds(194, 135, 105, 51);
 				pnlUsuario.add(lblDni);
 			}
 			{
@@ -358,6 +360,17 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 	}	
+	private void centrarPantalla() {
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+
+		Dimension sizePantalla = pantalla.getScreenSize();
+
+		int alturaPantalla = sizePantalla.height;
+		int anchoPantalla = sizePantalla.width;
+
+		setBounds(anchoPantalla/4, alturaPantalla/4, anchoPantalla/2, alturaPantalla/2);
+	}
+	
 	private class BtnAyudaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Ayuda frame = new Ayuda();

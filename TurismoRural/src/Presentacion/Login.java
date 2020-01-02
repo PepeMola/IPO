@@ -8,11 +8,16 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+
 import Dominio.Guia_turistico;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Color;
@@ -21,6 +26,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login {
 
@@ -39,6 +46,11 @@ public class Login {
 	private final String user = "Profesora";
 	private final String pass = "ipo1";
 	private int i; /*Variable auxiliar para bucles*/
+
+	/*Variables para los bordes de user y pass*/
+	private Border bordeRojo = BorderFactory.createLineBorder(Color.RED);
+	private Border bordeVerde = BorderFactory.createLineBorder(Color.GREEN);
+
 
 	public Login() {
 		initialize();
@@ -70,6 +82,7 @@ public class Login {
 		pnlinicio.add(lblIcono);
 
 		txtUsuario = new JTextField();
+		txtUsuario.addKeyListener(new TxtUsuarioKeyListener());
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		txtUsuario.addActionListener(new TxtUsuarioActionListener());
@@ -138,6 +151,9 @@ public class Login {
 			pnlinicio.add(lblEncabezado);
 
 		}
+		
+		txtUsuario.addFocusListener(new MiFocusListener());
+		pfPassword.addFocusListener(new MiFocusListener());
 
 	}
 	/*Con este metodo centraremos la pantalla.
@@ -161,6 +177,7 @@ public class Login {
 				pfPassword.requestFocus();
 				lblMensaje.setForeground(Color.BLACK);
 				lblMensaje.setText("Por favor, introduzca su contraseña.");
+				txtUsuario.setBorder(bordeVerde);
 			}else{
 				lblPassword.setEnabled(false);
 				pfPassword.setEnabled(false);
@@ -168,6 +185,7 @@ public class Login {
 				lblMensaje.setForeground(Color.RED);
 				lblMensaje.setText("Este usuario no pertenece al sistema.");
 				txtUsuario.setText("");
+				txtUsuario.setBorder(bordeRojo);
 			}
 		}
 	}
@@ -182,13 +200,17 @@ public class Login {
 				btnAcceder.setEnabled(true);
 				lblPassword.setEnabled(false);
 				pfPassword.setEnabled(false);
-				btnAcceder.requestFocus();
+				//btnAcceder.requestFocus();
+				pfPassword.setBorder(bordeVerde);
+				txtUsuario.setEditable(false);
 			}else {
 				lblMensaje.setBackground(Color.RED);
 				lblMensaje.setText("Contraseña incorrecta. Quendan "+ --i +" intentos.");
 				lblMensaje.setVisible(true);
 				btnAcceder.setEnabled(false);
 				pfPassword.requestFocus();
+				pfPassword.setText("");
+				pfPassword.setBorder(bordeRojo);
 			}
 		}
 	}
@@ -201,6 +223,7 @@ public class Login {
 			btnAcceder.setEnabled(false);
 			lblPassword.setEnabled(false);
 			pfPassword.setEnabled(false);
+			txtUsuario.setEditable(true);
 		}
 	}
 	private class BtnAyudaActionListener implements ActionListener {
@@ -211,7 +234,7 @@ public class Login {
 					try {
 						Ayuda frame = new Ayuda();
 						frame.setVisible(true);
-						
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -219,6 +242,7 @@ public class Login {
 			});*/
 			Ayuda ayuda = new Ayuda();
 			ayuda.setVisible(true);
+			frmLogin.dispose();
 		}
 	}
 	private class BtnAccederActionListener implements ActionListener {
@@ -235,10 +259,26 @@ public class Login {
 			});*/
 			Vista_Usuario user = new Vista_Usuario("Alumno","Informatica","0000001A");
 			user.setVisible(true);
-			frmLogin.setVisible(false);
-			
+			frmLogin.dispose();
+
 		}
 	}
-	
-	
+	private class TxtUsuarioKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+		}
+	}
+
+	private class MiFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			e.getComponent().setBackground(new Color(250,250,210));
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			e.getComponent().setBackground(new Color(250,250,250));
+		}
+	}
+
+
 }
