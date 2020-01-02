@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Ayuda extends JFrame {
 
@@ -23,6 +25,7 @@ public class Ayuda extends JFrame {
 	 * Create the frame.
 	 */
 	public Ayuda() {
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Presentacion/help.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

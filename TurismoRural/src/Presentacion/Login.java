@@ -212,6 +212,7 @@ public class Login {
 					try {
 						Ayuda frame = new Ayuda();
 						frame.setVisible(true);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
