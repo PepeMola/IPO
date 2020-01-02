@@ -31,11 +31,12 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class Vista_Usuario extends JFrame {
 
 	private JPanel contentPane;
-	private JTabbedPane tabbedPane;
+	private JTabbedPane tbpVistaUsuario;
 	private JPanel pnlUsuario;
 	private JPanel pnlGuias;
 	private JPanel pnlCircuitos;
@@ -45,9 +46,6 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnAyuda;
 	private JLabel lblApellido;
 	private JLabel lblDni;
-	private JButton btnAlta;
-	private JButton btnModificacion;
-	private JButton btnBaja;
 	private JLabel lblNombre2;
 	private JLabel lblApellido2;
 	private JLabel lblDni2;
@@ -100,16 +98,16 @@ public class Vista_Usuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		{
-			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setSelectedIndex(-1);
-			tabbedPane.setToolTipText("");
-			tabbedPane.setBounds(0, 0, 600, 400);
-			contentPane.add(tabbedPane);
+			tbpVistaUsuario = new JTabbedPane(JTabbedPane.TOP);
+			tbpVistaUsuario.setSelectedIndex(-1);
+			tbpVistaUsuario.setToolTipText("");
+			tbpVistaUsuario.setBounds(0, 0, 600, 400);
+			contentPane.add(tbpVistaUsuario);
 			{
 			}
 			pnlUsuario = new JPanel();
-			tabbedPane.addTab("Usuario", null, pnlUsuario, null);
-			tabbedPane.setEnabledAt(0, true);
+			tbpVistaUsuario.addTab("Usuario", null, pnlUsuario, null);
+			tbpVistaUsuario.setEnabledAt(0, true);
 			pnlUsuario.setLayout(null);
 			{
 				lblNombre = new JLabel("Nombre:");
@@ -119,11 +117,12 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				lblFoto = new JLabel("Foto");
-				lblFoto.setBounds(31, 47, 77, 91);
+				lblFoto.setBounds(31, 47, 105, 113);
 				pnlUsuario.add(lblFoto);
 			}
 			{
 				btnAyuda = new JButton("");
+				btnAyuda.addActionListener(new BtnAyudaActionListener());
 
 				btnAyuda.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/help.png")));
 				btnAyuda.setBounds(10, 293, 53, 51);
@@ -142,46 +141,29 @@ public class Vista_Usuario extends JFrame {
 				pnlUsuario.add(lblDni);
 			}
 			{
-				btnAlta = new JButton("ALTA");
-				btnAlta.setBounds(128, 293, 134, 51);
-				pnlUsuario.add(btnAlta);
-			}
-			{
-				btnModificacion = new JButton("MODIFICACION");
-				btnModificacion.setBounds(272, 293, 134, 51);
-				pnlUsuario.add(btnModificacion);
-			}
-			{
-				btnBaja = new JButton("BAJA");
-				btnBaja.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-
-					}
-				});
-				btnBaja.setBounds(416, 293, 134, 51);
-				pnlUsuario.add(btnBaja);
-			}
-			{
 				lblNombre2 = new JLabel(this.nombreUsuario);
+				lblNombre2.setBackground(Color.WHITE);
 				lblNombre2.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblNombre2.setBounds(309, 47, 105, 51);
+				lblNombre2.setBounds(309, 47, 276, 51);
 				pnlUsuario.add(lblNombre2);
 			}
 			{
 				lblApellido2 = new JLabel(this.apellidoUsuario);
+				lblApellido2.setBackground(Color.WHITE);
 				lblApellido2.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblApellido2.setBounds(309, 109, 105, 51);
+				lblApellido2.setBounds(309, 109, 276, 51);
 				pnlUsuario.add(lblApellido2);
 			}
 			{
 				lblDni2 = new JLabel(this.dniUsuario);
+				lblDni2.setBackground(Color.WHITE);
 				lblDni2.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-				lblDni2.setBounds(272, 171, 142, 51);
+				lblDni2.setBounds(309, 171, 276, 51);
 				pnlUsuario.add(lblDni2);
 			}
 			{
 				pnlGuias = new JPanel();
-				tabbedPane.addTab("Guias Turisticos", null, pnlGuias, null);
+				tbpVistaUsuario.addTab("Guias Turisticos", null, pnlGuias, null);
 				GridBagLayout gbl_pnlGuias = new GridBagLayout();
 				gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 				gbl_pnlGuias.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -256,7 +238,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				pnlCircuitos = new JPanel();
-				tabbedPane.addTab("Circuitos Turisticos", null, pnlCircuitos, null);
+				tbpVistaUsuario.addTab("Circuitos Turisticos", null, pnlCircuitos, null);
 				GridBagLayout gbl_pnlCircuitos = new GridBagLayout();
 				gbl_pnlCircuitos.columnWidths = new int[]{0, 0, 0, 0, 25, 27, 0, 0, 0};
 				gbl_pnlCircuitos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -334,7 +316,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				pnlPromociones = new JPanel();
-				tabbedPane.addTab("Promociones", null, pnlPromociones, null);
+				tbpVistaUsuario.addTab("Promociones", null, pnlPromociones, null);
 				GridBagLayout gbl_pnlPromociones = new GridBagLayout();
 				gbl_pnlPromociones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 				gbl_pnlPromociones.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -372,8 +354,15 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				panel = new JPanel();
-				tabbedPane.addTab("Historial", null, panel, null);
+				tbpVistaUsuario.addTab("Historial", null, panel, null);
 			}
 		}
 	}	
+	private class BtnAyudaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Ayuda frame = new Ayuda();
+			frame.setVisible(true);
+			
+		}
+	}
 }

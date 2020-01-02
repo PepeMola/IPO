@@ -40,8 +40,6 @@ public class Login {
 	private final String pass = "ipo1";
 	private int i; /*Variable auxiliar para bucles*/
 
-
-
 	public Login() {
 		initialize();
 	}
@@ -99,6 +97,7 @@ public class Login {
 		pnlinicio.add(btnLimpiar);
 
 		btnAcceder = new JButton("Acceder");
+		btnAcceder.addActionListener(new BtnAccederActionListener());
 		btnAcceder.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btnAcceder.setEnabled(false);
 		btnAcceder.setBackground(new Color(102, 255, 153));
@@ -206,7 +205,7 @@ public class Login {
 	}
 	private class BtnAyudaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			/*frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
@@ -216,7 +215,29 @@ public class Login {
 						e.printStackTrace();
 					}
 				}
-			});
+			});*/
+			Ayuda ayuda = new Ayuda();
+			ayuda.setVisible(true);
 		}
 	}
+	private class BtnAccederActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			/*EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Vista_Usuario frame = new Vista_Usuario("Alumno","Informatica","0000001A");
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});*/
+			Vista_Usuario user = new Vista_Usuario("Alumno","Informatica","0000001A");
+			user.setVisible(true);
+			frmLogin.setVisible(false);
+			
+		}
+	}
+	
+	
 }

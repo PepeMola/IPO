@@ -10,41 +10,59 @@ import java.awt.Toolkit;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import javax.swing.JTabbedPane;
+import javax.swing.ImageIcon;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
+import javax.swing.JTextArea;
 
 public class Ayuda extends JFrame {
 
 	private JPanel contentPane;
-	private JToolBar tbAyuda;
-	private JButton btnInfo;
-	private JButton btnAutores;
+	private JTabbedPane tabbedPane;
+	private JPanel pnlInfo;
+	private JPanel pnlAutores;
 
 	
 	/**
 	 * Create the frame.
 	 */
 	public Ayuda() {
+		setTitle("Ayuda");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ayuda.class.getResource("/Presentacion/help.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		centrarPantalla();/*Contiene el setBounds del frame*/
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		{
-			tbAyuda = new JToolBar();
-			tbAyuda.setToolTipText("");
-			contentPane.add(tbAyuda, BorderLayout.NORTH);
+			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			contentPane.add(tabbedPane, BorderLayout.CENTER);
 			{
-				btnInfo = new JButton("Información");
-				btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				tbAyuda.add(btnInfo);
+				pnlInfo = new JPanel();
+				tabbedPane.addTab("Informacion", new ImageIcon(Ayuda.class.getResource("/Presentacion/usuario.png")), pnlInfo, null);
+				tabbedPane.setEnabledAt(0, true);
 			}
 			{
-				btnAutores = new JButton("Autores");
-				tbAyuda.add(btnAutores);
+				pnlAutores = new JPanel();
+				pnlAutores.setToolTipText("");
+				tabbedPane.addTab("Autores", new ImageIcon(Ayuda.class.getResource("/Presentacion/libro.png")), pnlAutores, null);
 			}
 		}
 	}
 
+	private void centrarPantalla() {
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+
+		Dimension sizePantalla = pantalla.getScreenSize();
+
+		int alturaPantalla = sizePantalla.height;
+		int anchoPantalla = sizePantalla.width;
+
+		setBounds(anchoPantalla/3, alturaPantalla/3, anchoPantalla/4, alturaPantalla/3);
+	}
+	
 }
