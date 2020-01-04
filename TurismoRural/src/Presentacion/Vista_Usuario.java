@@ -62,7 +62,7 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnModificarTabla_1;
 	private JButton btnDarDeBaja_1;
 	private JTable table_1;
-	private JPanel panel;
+	private JPanel pnlHistorial;
 
 	/**
 	 * Launch the application.
@@ -242,10 +242,10 @@ public class Vista_Usuario extends JFrame {
 				pnlCircuitos = new JPanel();
 				tbpVistaUsuario.addTab("Circuitos Turisticos", null, pnlCircuitos, null);
 				GridBagLayout gbl_pnlCircuitos = new GridBagLayout();
-				gbl_pnlCircuitos.columnWidths = new int[]{0, 0, 0, 0, 25, 27, 0, 0, 0};
+				gbl_pnlCircuitos.columnWidths = new int[]{0, 0, 0, 0, 0, 25, 27, 0, 0, 0};
 				gbl_pnlCircuitos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-				gbl_pnlCircuitos.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gbl_pnlCircuitos.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_pnlCircuitos.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_pnlCircuitos.rowWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				pnlCircuitos.setLayout(gbl_pnlCircuitos);
 				{
 					{
@@ -283,7 +283,7 @@ public class Vista_Usuario extends JFrame {
 						table_Circuitos.getColumnModel().getColumn(5).setPreferredWidth(94);
 						table_Circuitos.getColumnModel().getColumn(5).setMinWidth(94);
 						GridBagConstraints gbc_table_Circuitos = new GridBagConstraints();
-						gbc_table_Circuitos.gridwidth = 6;
+						gbc_table_Circuitos.gridwidth = 7;
 						gbc_table_Circuitos.insets = new Insets(0, 0, 5, 5);
 						gbc_table_Circuitos.fill = GridBagConstraints.BOTH;
 						gbc_table_Circuitos.gridx = 1;
@@ -295,24 +295,24 @@ public class Vista_Usuario extends JFrame {
 					btnDarDeAlta = new JButton("Dar de alta");
 					GridBagConstraints gbc_btnDarDeAlta = new GridBagConstraints();
 					gbc_btnDarDeAlta.insets = new Insets(0, 0, 5, 5);
-					gbc_btnDarDeAlta.gridx = 3;
-					gbc_btnDarDeAlta.gridy = 2;
+					gbc_btnDarDeAlta.gridx = 4;
+					gbc_btnDarDeAlta.gridy = 3;
 					pnlCircuitos.add(btnDarDeAlta, gbc_btnDarDeAlta);
 				}
 				{
 					btnModificarTabla_1 = new JButton("Modificar Tabla");
 					GridBagConstraints gbc_btnModificarTabla_1 = new GridBagConstraints();
 					gbc_btnModificarTabla_1.insets = new Insets(0, 0, 5, 5);
-					gbc_btnModificarTabla_1.gridx = 4;
-					gbc_btnModificarTabla_1.gridy = 2;
+					gbc_btnModificarTabla_1.gridx = 5;
+					gbc_btnModificarTabla_1.gridy = 3;
 					pnlCircuitos.add(btnModificarTabla_1, gbc_btnModificarTabla_1);
 				}
 				{
 					btnDarDeBaja_1 = new JButton("Dar de baja");
 					GridBagConstraints gbc_btnDarDeBaja_1 = new GridBagConstraints();
 					gbc_btnDarDeBaja_1.insets = new Insets(0, 0, 5, 5);
-					gbc_btnDarDeBaja_1.gridx = 5;
-					gbc_btnDarDeBaja_1.gridy = 2;
+					gbc_btnDarDeBaja_1.gridx = 6;
+					gbc_btnDarDeBaja_1.gridy = 3;
 					pnlCircuitos.add(btnDarDeBaja_1, gbc_btnDarDeBaja_1);
 				}
 			}
@@ -355,9 +355,12 @@ public class Vista_Usuario extends JFrame {
 				}
 			}
 			{
-				panel = new JPanel();
-				tbpVistaUsuario.addTab("Historial", null, panel, null);
+				pnlHistorial = new JPanel();
+				tbpVistaUsuario.addTab("Historial", null, pnlHistorial, null);
 			}
+			
+			JPanel pnlTuristas = new JPanel();
+			tbpVistaUsuario.addTab("Grupo de Turistas", null, pnlTuristas, null);
 		}
 	}	
 	private void centrarPantalla() {

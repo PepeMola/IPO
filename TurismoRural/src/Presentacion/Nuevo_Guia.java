@@ -260,7 +260,8 @@ public class Nuevo_Guia extends JFrame {
 						12.00,//modificar
 						5.00,//modificar
 						"");//la foto
-			}
+				//hc.listaturistas.add(guia);
+				}
 		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
