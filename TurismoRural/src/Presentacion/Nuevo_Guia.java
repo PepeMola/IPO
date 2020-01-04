@@ -254,7 +254,7 @@ public class Nuevo_Guia extends JFrame {
 		contentPane.add(btnLimpiar, gbc_btnLimpiar);
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {//revisar este metodo, y preguntar a pepe por problema de numeros y puntos
+		/*btnGuardar.addActionListener(new ActionListener() {//revisar este metodo, y preguntar a pepe por problema de numeros y puntos
 			public void actionPerformed(ActionEvent e) {
 				Hardcoded hc=new Hardcoded(null, null, null, null, null, null, null);
 				double precio=0.00;
@@ -276,7 +276,8 @@ public class Nuevo_Guia extends JFrame {
 				hc.setGuia(guia);
 				dispose();
 				}
-		});
+		});*/
+			
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardar.gridx = 4;

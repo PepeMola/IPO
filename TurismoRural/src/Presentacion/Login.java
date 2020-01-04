@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,6 +16,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
 import Dominio.Guia_turistico;
+import Dominio.Hardcoded;
+import Dominio.Usuario;
+
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -23,11 +27,15 @@ import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Login {
 
@@ -41,11 +49,17 @@ public class Login {
 	private JLabel lblIcono;
 	private JLabel lblMensaje;
 	private JPasswordField pfPassword;
+	
+	/*Creacion objeto hardcoded para utilizar varios usuarios*/
+	
+	Hardcoded hardcoded = new Hardcoded();
+	
+	ArrayList<Usuario> listaUsuario = hardcoded.getUsuario();
 
 	/*A partir de aqui crearemos las variables globales que necesitemos.*/
-	private final String user = "Profesora";
-	private final String pass = "ipo1";
-	private int i; /*Variable auxiliar para bucles*/
+	//private final String user = "Profesora";
+	//private final String pass = "ipo1";
+	private int i = 3; /*Variable auxiliar para bucles*/
 
 	/*Variables para los bordes de user y pass*/
 	private Border bordeRojo = BorderFactory.createLineBorder(Color.RED);
@@ -150,10 +164,30 @@ public class Login {
 			pnlinicio.add(lblEncabezado);
 
 		}
-		
+
 		txtUsuario.addFocusListener(new MiFocusListener());
 		pfPassword.addFocusListener(new MiFocusListener());
 
+	}
+	
+	public boolean comprobarUser(String usuario) {
+		for (int j = 0; j < listaUsuario.size(); j++) {
+			if(usuario.equals(listaUsuario.get(j).getNombre())) {		
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean comprobarPass(String usuario, String password) {
+		for (int j = 0; j < listaUsuario.size(); j++) {
+			if(listaUsuario.get(j).getNombre().equals(usuario)) {
+				if(listaUsuario.get(j).getPassword().equals(password)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	/*Con este metodo centraremos la pantalla.
 	 * Nota: Podemos reutilizarlo para cualquier frame.*/
@@ -170,7 +204,7 @@ public class Login {
 
 	private class TxtUsuarioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(txtUsuario.getText().equals(user)) {
+			if(comprobarUser(String.valueOf(txtUsuario.getText()))) {
 				lblPassword.setEnabled(true);
 				pfPassword.setEnabled(true);
 				pfPassword.requestFocus();
@@ -188,18 +222,21 @@ public class Login {
 			}
 		}
 	}
-
+	
 	private class PfPasswordActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			/*Realizar una cuenta atras de 3 intentos para entrar*/
-			if(String.copyValueOf(pfPassword.getPassword()).equals(pass)) {
+			if(i == 0) {
+				JOptionPane.showMessageDialog(frmLogin, "Lo siento, has agotado todos tus intentos.");
+				frmLogin.dispose();
+			}
+			if(comprobarPass(txtUsuario.getText(),String.copyValueOf(pfPassword.getPassword()))) {
 				lblMensaje.setBackground(Color.GREEN);
 				lblMensaje.setText("Contraseña correcta. Pulse Acceder para entrar en el sistema.");
 				lblMensaje.setVisible(true);
 				btnAcceder.setEnabled(true);
 				lblPassword.setEnabled(false);
 				pfPassword.setEnabled(false);
-				//btnAcceder.requestFocus();
 				pfPassword.setBorder(bordeVerde);
 				txtUsuario.setEditable(false);
 			}else {
@@ -225,9 +262,9 @@ public class Login {
 			txtUsuario.setEditable(true);
 		}
 	}
+
 	private class BtnAyudaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
@@ -239,10 +276,10 @@ public class Login {
 					}
 				}
 			});
-		
 			frmLogin.dispose();
 		}
 	}
+
 	private class BtnAccederActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			EventQueue.invokeLater(new Runnable() {
@@ -255,12 +292,11 @@ public class Login {
 					}
 				}
 			});
-
 			frmLogin.dispose();
 
 		}
 	}
-	
+
 	private class MiFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {
@@ -271,6 +307,4 @@ public class Login {
 			e.getComponent().setBackground(new Color(250,250,250));
 		}
 	}
-
-
 }

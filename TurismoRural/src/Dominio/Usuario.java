@@ -9,14 +9,16 @@ public class Usuario {
 	private String foto;
 	
 	
-	public Usuario (String nombre, String apellidos, String nif, String password, String foto) {
-		nombre = this.nombre;
-		apellidos = this.apellidos;
-		nif = this.nif;
-		password = this.password;
+
+	public Usuario(String nombre, String apellidos, String nif, String password, String foto) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nif = nif;
+		this.password = password;
 		this.foto = foto;
 	}
-	
+
 	public Usuario() {
 	}
 
@@ -51,7 +53,13 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Usuario [nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", password=" + password
+				+ ", foto=" + foto + "]";
+	}
+	
+	
+	
 }

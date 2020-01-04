@@ -8,12 +8,15 @@ public class Historial_circuitos {
 	private String opiniones;
 	private String sugerencias;
 	
-	public Historial_circuitos(int num_personas, double coste, String incidencias, String opiniones, String sugerencias) {
-		num_personas=this.num_personas;
-		coste = this.coste;
-		incidencias=this.incidencias;
-		opiniones = this.opiniones;
-		sugerencias=this.sugerencias;
+
+	public Historial_circuitos(int num_personas, double coste, String incidencias, String opiniones,
+			String sugerencias) {
+		super();
+		this.num_personas = num_personas;
+		this.coste = coste;
+		this.incidencias = incidencias;
+		this.opiniones = opiniones;
+		this.sugerencias = sugerencias;
 	}
 
 	public int getNum_personas() {

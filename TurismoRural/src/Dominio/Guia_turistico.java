@@ -8,25 +8,26 @@ public class Guia_turistico {
 	private String email;
 	private String telf;
 	private String idiomas;
-	private String disponibilidad;
+	private boolean disponibilidad;
 	private String historial_rutas;
 	private double precio;
 	private double puntuacion;
 	private String foto;
-	
-	public Guia_turistico(String nombre, String apellidos, String nif, String email, String telf, String idiomas, String disponibilidad,
-			String historial_rutas, double precio, double puntuacion, String foto) {
-		nombre = this.nombre;
-		apellidos=this.apellidos;
-		nif=this.nif;
-		email=this.email;
-		telf=this.telf;
-		idiomas=this.idiomas;
-		disponibilidad=this.disponibilidad;
-		historial_rutas=this.historial_rutas;
-		precio=this.precio;
-		puntuacion=this.puntuacion;
-		this.foto=foto;
+
+	public Guia_turistico(String nombre, String apellidos, String nif, String email, String telf, String idiomas,
+			boolean disponibilidad, String historial_rutas, double precio, double puntuacion, String foto) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nif = nif;
+		this.email = email;
+		this.telf = telf;
+		this.idiomas = idiomas;
+		this.disponibilidad = disponibilidad;
+		this.historial_rutas = historial_rutas;
+		this.precio = precio;
+		this.puntuacion = puntuacion;
+		this.foto = foto;
 	}
 
 	public String getNombre() {
@@ -77,11 +78,11 @@ public class Guia_turistico {
 		this.idiomas = idiomas;
 	}
 
-	public String getDisponibilidad() {
+	public boolean getDisponibilidad() {
 		return disponibilidad;
 	}
 
-	public void setDisponibilidad(String disponibilidad) {
+	public void setDisponibilidad(boolean disponibilidad) {
 		this.disponibilidad = disponibilidad;
 	}
 
