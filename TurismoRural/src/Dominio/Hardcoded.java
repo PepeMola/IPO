@@ -3,16 +3,16 @@ package Dominio;
 import java.util.ArrayList;
 
 public class Hardcoded {
-	
-	ArrayList<Grupo_turistas> grupoTuristas = new ArrayList();
-	ArrayList<Guia_turistico> guia = new ArrayList();
-	ArrayList<Historial_circuitos> historial = new ArrayList();
-	ArrayList<Monumento> monumento = new ArrayList();
-	ArrayList<Rutas_turisticas> ruta = new ArrayList();
-	ArrayList<Turista> turistas = new ArrayList();
-	ArrayList<Usuario> usuario = new ArrayList();
 
-	
+	ArrayList<Grupo_turistas> grupoTuristas = new ArrayList<Grupo_turistas>();
+	ArrayList<Guia_turistico> guia = new ArrayList<Guia_turistico>();
+	ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
+	ArrayList<Monumento> monumento = new ArrayList<Monumento>();
+	ArrayList<Rutas_turisticas> ruta = new ArrayList<Rutas_turisticas>();
+	ArrayList<Turista> turistas = new ArrayList<Turista>();
+	ArrayList<Usuario> usuario = new ArrayList<Usuario>();
+
+
 	public Hardcoded(ArrayList<Grupo_turistas> grupoTuristas, ArrayList<Guia_turistico> guia,
 			ArrayList<Historial_circuitos> historial, ArrayList<Monumento> monumento, ArrayList<Rutas_turisticas> ruta,
 			ArrayList<Turista> turistas, ArrayList<Usuario> usuario) {
@@ -24,7 +24,7 @@ public class Hardcoded {
 		this.turistas = turistas;
 		this.usuario = usuario;
 	}
-	
+
 	public ArrayList<Grupo_turistas> getGrupoTuristas() {
 		return grupoTuristas;
 	}
@@ -37,9 +37,9 @@ public class Hardcoded {
 	public void setGuia(Guia_turistico guia) {
 		this.guia.add(guia);
 		/*try {
-		
+
 		}catch(Exception a) {
-			
+
 		}*/
 	}
 	public ArrayList<Historial_circuitos> getHistorial() {
@@ -65,7 +65,7 @@ public class Hardcoded {
 	}
 	public void setTuristas(Turista turistas) {
 		this.turistas.add(turistas);
-		
+
 	}
 	public ArrayList<Usuario> getUsuario() {
 		return usuario;
@@ -73,5 +73,5 @@ public class Hardcoded {
 	public void setUsuario(Usuario usuario) {
 		this.usuario.add(usuario);
 	}
-	
+
 }

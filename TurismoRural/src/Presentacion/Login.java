@@ -82,7 +82,6 @@ public class Login {
 		pnlinicio.add(lblIcono);
 
 		txtUsuario = new JTextField();
-		txtUsuario.addKeyListener(new TxtUsuarioKeyListener());
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		txtUsuario.addActionListener(new TxtUsuarioActionListener());
@@ -228,47 +227,40 @@ public class Login {
 	}
 	private class BtnAyudaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			/*frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			frmLogin.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Ayuda frame = new Ayuda();
-						frame.setVisible(true);
+						Ayuda ayuda = new Ayuda();
+						ayuda.setVisible(true);
 
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-			});*/
-			Ayuda ayuda = new Ayuda();
-			ayuda.setVisible(true);
+			});
+		
 			frmLogin.dispose();
 		}
 	}
 	private class BtnAccederActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			/*EventQueue.invokeLater(new Runnable() {
+			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Vista_Usuario frame = new Vista_Usuario("Alumno","Informatica","0000001A");
-						frame.setVisible(true);
+						Vista_Usuario usuario = new Vista_Usuario("Alumno","Informatica","0000001A");
+						usuario.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-			});*/
-			Vista_Usuario user = new Vista_Usuario("Alumno","Informatica","0000001A");
-			user.setVisible(true);
+			});
+
 			frmLogin.dispose();
 
 		}
 	}
-	private class TxtUsuarioKeyListener extends KeyAdapter {
-		@Override
-		public void keyReleased(KeyEvent e) {
-		}
-	}
-
+	
 	private class MiFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {
