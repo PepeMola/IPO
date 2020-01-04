@@ -54,6 +54,13 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnDarDeBaja_1;
 	private JTable table_1;
 	private JPanel pnlHistorial;
+	private JPanel pnlUsuario;
+	private JLabel lblFoto;
+	private JButton btnActualizarUsuario;
+	private JLabel lblNombre;
+	private JLabel lblApellidos;
+	private JLabel lblUltimoAcceso;
+	private JLabel lblIdentificador;
 
 
 	public Vista_Usuario(String nombre, String apellido, String dni) {
@@ -71,8 +78,8 @@ public class Vista_Usuario extends JFrame {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{667, 0};
 		gbl_contentPane.rowHeights = new int[]{345, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		{
 			{
@@ -90,6 +97,75 @@ public class Vista_Usuario extends JFrame {
 		gbc_tbpVistaUsuario.gridx = 0;
 		gbc_tbpVistaUsuario.gridy = 0;
 		contentPane.add(tbpVistaUsuario, gbc_tbpVistaUsuario);
+		{
+			pnlUsuario = new JPanel();
+			tbpVistaUsuario.addTab("Usuario", null, pnlUsuario, null);
+			GridBagLayout gbl_pnlUsuario = new GridBagLayout();
+			gbl_pnlUsuario.columnWidths = new int[]{0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlUsuario.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlUsuario.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_pnlUsuario.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+			pnlUsuario.setLayout(gbl_pnlUsuario);
+			{
+				lblNombre = new JLabel("Nombre:");
+				lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
+				GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+				gbc_lblNombre.anchor = GridBagConstraints.EAST;
+				gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNombre.gridx = 5;
+				gbc_lblNombre.gridy = 1;
+				pnlUsuario.add(lblNombre, gbc_lblNombre);
+			}
+			{
+				lblApellidos = new JLabel("Apellidos:");
+				lblApellidos.setFont(new Font("Tahoma", Font.BOLD, 16));
+				GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
+				gbc_lblApellidos.anchor = GridBagConstraints.EAST;
+				gbc_lblApellidos.insets = new Insets(0, 0, 5, 5);
+				gbc_lblApellidos.gridx = 5;
+				gbc_lblApellidos.gridy = 2;
+				pnlUsuario.add(lblApellidos, gbc_lblApellidos);
+			}
+			{
+				lblFoto = new JLabel("");
+				lblFoto.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/grupo_usuarios.png")));
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.gridheight = 5;
+				gbc_lblFoto.gridwidth = 3;
+				gbc_lblFoto.insets = new Insets(0, 0, 5, 5);
+				gbc_lblFoto.gridx = 1;
+				gbc_lblFoto.gridy = 1;
+				pnlUsuario.add(lblFoto, gbc_lblFoto);
+			}
+			{
+				lblUltimoAcceso = new JLabel("Ultimo Acceso:");
+				lblUltimoAcceso.setFont(new Font("Tahoma", Font.BOLD, 16));
+				GridBagConstraints gbc_lblUltimoAcceso = new GridBagConstraints();
+				gbc_lblUltimoAcceso.anchor = GridBagConstraints.EAST;
+				gbc_lblUltimoAcceso.insets = new Insets(0, 0, 5, 5);
+				gbc_lblUltimoAcceso.gridx = 5;
+				gbc_lblUltimoAcceso.gridy = 3;
+				pnlUsuario.add(lblUltimoAcceso, gbc_lblUltimoAcceso);
+			}
+			{
+				lblIdentificador = new JLabel("Identificador:");
+				lblIdentificador.setFont(new Font("Tahoma", Font.BOLD, 16));
+				GridBagConstraints gbc_lblIdentificador = new GridBagConstraints();
+				gbc_lblIdentificador.anchor = GridBagConstraints.EAST;
+				gbc_lblIdentificador.insets = new Insets(0, 0, 5, 5);
+				gbc_lblIdentificador.gridx = 5;
+				gbc_lblIdentificador.gridy = 4;
+				pnlUsuario.add(lblIdentificador, gbc_lblIdentificador);
+			}
+			{
+				btnActualizarUsuario = new JButton("Actualizar Usuario");
+				GridBagConstraints gbc_btnActualizarUsuario = new GridBagConstraints();
+				gbc_btnActualizarUsuario.insets = new Insets(0, 0, 5, 5);
+				gbc_btnActualizarUsuario.gridx = 8;
+				gbc_btnActualizarUsuario.gridy = 7;
+				pnlUsuario.add(btnActualizarUsuario, gbc_btnActualizarUsuario);
+			}
+		}
 		{
 			pnlGuias = new JPanel();
 			tbpVistaUsuario.addTab("Guias Turisticos", null, pnlGuias, null);

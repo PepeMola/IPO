@@ -157,7 +157,7 @@ public class Login {
 		}
 
 		{
-			lblEncabezado = new JLabel("InteracciÃ³n Persona-Ordenador I");
+			lblEncabezado = new JLabel("Interacción Persona-Ordenador I");
 			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 30));
 			lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
 			lblEncabezado.setBounds(96, 11, 553, 47);
@@ -209,7 +209,7 @@ public class Login {
 				pfPassword.setEnabled(true);
 				pfPassword.requestFocus();
 				lblMensaje.setForeground(Color.BLACK);
-				lblMensaje.setText("Por favor, introduzca su contraseÃ±a.");
+				lblMensaje.setText("Por favor, introduzca su contraseña.");
 				txtUsuario.setBorder(bordeVerde);
 			}else{
 				lblPassword.setEnabled(false);
