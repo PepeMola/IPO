@@ -215,6 +215,20 @@ public class Vista_Usuario extends JFrame {
 				}
 				{
 					btnInsertarGuia = new JButton("Insertar Guia");
+					btnInsertarGuia.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										Nuevo_Guia frame = new Nuevo_Guia();
+										frame.setVisible(true);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+					});
 					GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
 					gbc_btnInsertarGuia.insets = new Insets(0, 0, 5, 5);
 					gbc_btnInsertarGuia.gridx = 3;
@@ -293,6 +307,20 @@ public class Vista_Usuario extends JFrame {
 				}
 				{
 					btnDarDeAlta = new JButton("Dar de alta");
+					btnDarDeAlta.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										Nuevo_Circuito frame = new Nuevo_Circuito();
+										frame.setVisible(true);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+					});
 					GridBagConstraints gbc_btnDarDeAlta = new GridBagConstraints();
 					gbc_btnDarDeAlta.insets = new Insets(0, 0, 5, 5);
 					gbc_btnDarDeAlta.gridx = 4;

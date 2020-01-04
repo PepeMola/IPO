@@ -1,6 +1,7 @@
 package Dominio;
 
 public class Guia_turistico {
+
 	private String nombre;
 	private String apellidos;
 	private String nif;
@@ -106,5 +107,11 @@ public class Guia_turistico {
 
 	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
+	}
+	public String toString() {
+		return "Guia_turistico [nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", email=" + email
+				+ ", telf=" + telf + ", idiomas=" + idiomas + ", disponibilidad=" + disponibilidad
+				+ ", historial_rutas=" + historial_rutas + ", precio=" + precio + ", puntuacion=" + puntuacion
+				+ ", foto=" + foto + "]";
 	}
 }

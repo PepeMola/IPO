@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Dominio.Guia_turistico;
+import Dominio.Hardcoded;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -30,22 +31,9 @@ public class Nuevo_Guia extends JFrame {
 	private JTextField textHistorial;
 	private JTextField textPrecio;
 	private JTextField textNif;
+	private JTextField textPuntuacion;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Nuevo_Guia frame = new Nuevo_Guia();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -58,9 +46,9 @@ public class Nuevo_Guia extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{20, 70, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -189,12 +177,30 @@ public class Nuevo_Guia extends JFrame {
 		contentPane.add(textHistorial, gbc_textHistorial);
 		textHistorial.setColumns(10);
 		
+		JLabel lblPuntuacion = new JLabel("Puntuacion");
+		GridBagConstraints gbc_lblPuntuacion = new GridBagConstraints();
+		gbc_lblPuntuacion.anchor = GridBagConstraints.EAST;
+		gbc_lblPuntuacion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPuntuacion.gridx = 1;
+		gbc_lblPuntuacion.gridy = 8;
+		contentPane.add(lblPuntuacion, gbc_lblPuntuacion);
+		
+		textPuntuacion = new JTextField();
+		GridBagConstraints gbc_textPuntuacion = new GridBagConstraints();
+		gbc_textPuntuacion.gridwidth = 3;
+		gbc_textPuntuacion.insets = new Insets(0, 0, 5, 5);
+		gbc_textPuntuacion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textPuntuacion.gridx = 2;
+		gbc_textPuntuacion.gridy = 8;
+		contentPane.add(textPuntuacion, gbc_textPuntuacion);
+		textPuntuacion.setColumns(10);
+		
 		JLabel lblPreciohora = new JLabel("Precio/Hora");
 		GridBagConstraints gbc_lblPreciohora = new GridBagConstraints();
 		gbc_lblPreciohora.anchor = GridBagConstraints.EAST;
 		gbc_lblPreciohora.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPreciohora.gridx = 1;
-		gbc_lblPreciohora.gridy = 8;
+		gbc_lblPreciohora.gridy = 9;
 		contentPane.add(lblPreciohora, gbc_lblPreciohora);
 		
 		textPrecio = new JTextField();
@@ -203,7 +209,7 @@ public class Nuevo_Guia extends JFrame {
 		gbc_textPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_textPrecio.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textPrecio.gridx = 2;
-		gbc_textPrecio.gridy = 8;
+		gbc_textPrecio.gridy = 9;
 		contentPane.add(textPrecio, gbc_textPrecio);
 		textPrecio.setColumns(10);
 		
@@ -219,6 +225,7 @@ public class Nuevo_Guia extends JFrame {
 				textHistorial.setText("");
 				textPrecio.setText("");
 				textNif.setText("");
+				textPuntuacion.setText("");
 			}
 		});
 		
@@ -227,7 +234,7 @@ public class Nuevo_Guia extends JFrame {
 		gbc_lblNif.anchor = GridBagConstraints.EAST;
 		gbc_lblNif.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNif.gridx = 1;
-		gbc_lblNif.gridy = 9;
+		gbc_lblNif.gridy = 10;
 		contentPane.add(lblNif, gbc_lblNif);
 		
 		textNif = new JTextField();
@@ -236,19 +243,24 @@ public class Nuevo_Guia extends JFrame {
 		gbc_textNif.insets = new Insets(0, 0, 5, 5);
 		gbc_textNif.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textNif.gridx = 2;
-		gbc_textNif.gridy = 9;
+		gbc_textNif.gridy = 10;
 		contentPane.add(textNif, gbc_textNif);
 		textNif.setColumns(10);
 		
 		GridBagConstraints gbc_btnLimpiar = new GridBagConstraints();
 		gbc_btnLimpiar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLimpiar.gridx = 3;
-		gbc_btnLimpiar.gridy = 11;
+		gbc_btnLimpiar.gridy = 12;
 		contentPane.add(btnLimpiar, gbc_btnLimpiar);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {//revisar este metodo, y preguntar a pepe por problema de numeros y puntos
 			public void actionPerformed(ActionEvent e) {
+				Hardcoded hc=new Hardcoded(null, null, null, null, null, null, null);
+				double precio=0.00;
+				double puntuacion=0.00;
+				//precio=Double.parseDouble(textPrecio.getText());	
+				//puntuacion=Double.parseDouble(textPrecio.getText());
 				Guia_turistico guia=new Guia_turistico(textNombre.getText(),
 						textApellidos.getText(),
 						textNif.getText(),
@@ -257,16 +269,18 @@ public class Nuevo_Guia extends JFrame {
 						textIdioma.getText(),
 						textDisponibilidad.getText(),
 						textHistorial.getText(),
-						12.00,//modificar
-						5.00,//modificar
+						precio,//modificar
+						puntuacion,//modificar
 						"");//la foto
-				//hc.listaturistas.add(guia);
+				guia.toString();
+				hc.setGuia(guia);
+				dispose();
 				}
 		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardar.gridx = 4;
-		gbc_btnGuardar.gridy = 11;
+		gbc_btnGuardar.gridy = 12;
 		contentPane.add(btnGuardar, gbc_btnGuardar);
 		
 		JButton btnAtras = new JButton("Atras");
@@ -278,7 +292,7 @@ public class Nuevo_Guia extends JFrame {
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAtras.gridx = 5;
-		gbc_btnAtras.gridy = 11;
+		gbc_btnAtras.gridy = 12;
 		contentPane.add(btnAtras, gbc_btnAtras);
 	}
 
