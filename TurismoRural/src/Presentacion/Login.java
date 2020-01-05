@@ -157,7 +157,7 @@ public class Login {
 		}
 
 		{
-			lblEncabezado = new JLabel("Interacción Persona-Ordenador I");
+			lblEncabezado = new JLabel("Interacciï¿½n Persona-Ordenador I");
 			lblEncabezado.setFont(new Font("Times New Roman", Font.BOLD, 30));
 			lblEncabezado.setHorizontalAlignment(SwingConstants.CENTER);
 			lblEncabezado.setBounds(96, 11, 553, 47);
@@ -209,7 +209,7 @@ public class Login {
 				pfPassword.setEnabled(true);
 				pfPassword.requestFocus();
 				lblMensaje.setForeground(Color.BLACK);
-				lblMensaje.setText("Por favor, introduzca su contraseña.");
+				lblMensaje.setText("Por favor, introduzca su contraseï¿½a.");
 				txtUsuario.setBorder(bordeVerde);
 			}else{
 				lblPassword.setEnabled(false);
@@ -226,7 +226,7 @@ public class Login {
 	private class PfPasswordActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			/*Realizar una cuenta atras de 3 intentos para entrar*/
-			if(i == 0) {
+			if(i == 1) {
 				JOptionPane.showMessageDialog(frmLogin, "Lo siento, has agotado todos tus intentos.");
 				frmLogin.dispose();
 			}
@@ -260,6 +260,7 @@ public class Login {
 			lblPassword.setEnabled(false);
 			pfPassword.setEnabled(false);
 			txtUsuario.setEditable(true);
+			txtUsuario.requestFocus();
 		}
 	}
 
