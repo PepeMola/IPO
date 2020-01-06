@@ -2,6 +2,7 @@ package Dominio;
 
 public class Historial_circuitos {
 	
+	private String rutas;
 	private int num_personas;
 	private double coste;
 	private String incidencias;
@@ -9,14 +10,23 @@ public class Historial_circuitos {
 	private String sugerencias;
 	
 
-	public Historial_circuitos(int num_personas, double coste, String incidencias, String opiniones,
+	public Historial_circuitos(String rutas, int num_personas, double coste, String incidencias, String opiniones,
 			String sugerencias) {
 		super();
+		this.rutas = rutas;
 		this.num_personas = num_personas;
 		this.coste = coste;
 		this.incidencias = incidencias;
 		this.opiniones = opiniones;
 		this.sugerencias = sugerencias;
+	}
+	
+	public String getRutas() {
+		return rutas;
+	}
+
+	public void setRutas(String rutas) {
+		this.rutas = rutas;
 	}
 
 	public int getNum_personas() {

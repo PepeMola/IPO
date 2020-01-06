@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Toolkit;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTabbedPane;
@@ -31,6 +32,9 @@ import javax.swing.JTextArea;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 
 
@@ -50,7 +54,6 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnInsertarRuta;
 	private JButton btnModificarRuta;
 	private JButton btnEliminarRuta;
-	private JTable table_promociones;
 	private JPanel pnlHistorial;
 	private JPanel pnlUsuario;
 	private JLabel lblFoto;
@@ -59,17 +62,25 @@ public class Vista_Usuario extends JFrame {
 	private JLabel lblUltimoAcceso;
 	private JLabel lblIdentificador;
 	private JButton btnAyuda;
-	private JScrollPane sPRutas;
+	private JScrollPane scPnlRutas;
 	private JTable table_Rutas;
-	private JPanel pnlInfo;
-	private JTextArea taInfo;
-	private JPopupMenu popMenu;
-	private JScrollPane scrollPane;
+	private JPanel pnlInfoRutas;
+	private JTextArea taInfoRutas;
+	private JScrollPane scPnlGuia;
 	private JTextField tfNombre;
 	private JTextField tfApellidos;
 	private JTextField tfIdentificador;
 	private JTextField tfAcceso;
-	private JTable table_rutas;
+	private JTable table_guia;
+	private JPanel pnlInfoGuia;
+	private JTextArea taInfoGuia;
+	private JScrollPane scPnlPromocion;
+	private JTable table_promocion;
+	private JButton btnInsertarPromo;
+	private JButton btnEliminarPromo;
+	private JButton btnModificarPromo;
+	private JScrollPane scPnlTurista;
+	private JTable table_turista;
 
 
 	public Vista_Usuario(String nombre, String apellido, String dni) {
@@ -77,7 +88,7 @@ public class Vista_Usuario extends JFrame {
 		this.nombreUsuario = nombre;
 		this.apellidoUsuario = apellido;
 		this.dniUsuario = dni;
-		setTitle("USUARIO");
+		setTitle("Gestor de Turismo Rural");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista_Usuario.class.getResource("/Presentacion/usuario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		centrarPantalla();
@@ -222,73 +233,80 @@ public class Vista_Usuario extends JFrame {
 			tbpVistaUsuario.addTab("Guias Turisticos", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/networking.png")), pnlGuias, null);
 			GridBagLayout gbl_pnlGuias = new GridBagLayout();
 			gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlGuias.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+			gbl_pnlGuias.rowHeights = new int[]{0, 0, 71, 0, 0, 0};
 			gbl_pnlGuias.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_pnlGuias.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_pnlGuias.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			pnlGuias.setLayout(gbl_pnlGuias);
 			{
-				btnInsertarGuia = new JButton("Insertar Guia");
-				btnInsertarGuia.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								try {
-									Nuevo_Guia frame = new Nuevo_Guia();
-									frame.setVisible(true);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						});
-					}
-				});
 				{
-					scrollPane = new JScrollPane();
-					GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-					gbc_scrollPane.gridwidth = 7;
-					gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-					gbc_scrollPane.fill = GridBagConstraints.BOTH;
-					gbc_scrollPane.gridx = 0;
-					gbc_scrollPane.gridy = 1;
-					pnlGuias.add(scrollPane, gbc_scrollPane);
+					scPnlGuia = new JScrollPane();
+					scPnlGuia.setBorder(new TitledBorder(null, "Nuestros Guias de confianza", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+					GridBagConstraints gbc_scPnlGuia = new GridBagConstraints();
+					gbc_scPnlGuia.gridheight = 3;
+					gbc_scPnlGuia.gridwidth = 7;
+					gbc_scPnlGuia.insets = new Insets(0, 0, 5, 0);
+					gbc_scPnlGuia.fill = GridBagConstraints.BOTH;
+					gbc_scPnlGuia.gridx = 0;
+					gbc_scPnlGuia.gridy = 0;
+					pnlGuias.add(scPnlGuia, gbc_scPnlGuia);
 					{
-						table_rutas = new JTable();
-						table_rutas.setModel(new DefaultTableModel(
-							new Object[][] {
-								{null, null, null, null, null, null, null, null, null, null, null, null},
-							},
-							new String[] {
-								"ID", "Nombre", "Apellidos", "NIF", "e-mail", "Telefono", "Idiomas", "Disponibilidad", "Rutas", "Precio", "Puntuacion", "Foto"
-							}
-						) {
+						table_guia = new JTable();
+						table_guia.setModel(new DefaultTableModel(
+								new Object[][] {
+									{null, null, null, null, null, null, null, null, null, null, null, null},
+									{null, null, null, null, null, null, null, null, null, null, null, null},
+									{null, null, null, null, null, null, null, null, null, null, null, null},
+								},
+								new String[] {
+										"ID", "Nombre", "Apellidos", "NIF", "e-mail", "Telefono", "Idiomas", "Disponibilidad", "Rutas", "Precio", "Puntuacion", "Foto"
+								}
+								) {
 							Class[] columnTypes = new Class[] {
-								Integer.class, String.class, String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, Double.class, Double.class, String.class
+									Integer.class, String.class, String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, Double.class, Double.class, ImageIcon.class
 							};
 							public Class getColumnClass(int columnIndex) {
 								return columnTypes[columnIndex];
 							}
-							boolean[] columnEditables = new boolean[] {
-								true, true, false, false, false, false, false, false, false, false, false, false
-							};
-							public boolean isCellEditable(int row, int column) {
-								return columnEditables[column];
-							}
 						});
-						table_rutas.getColumnModel().getColumn(0).setResizable(false);
-						table_rutas.getColumnModel().getColumn(1).setResizable(false);
-						table_rutas.getColumnModel().getColumn(2).setResizable(false);
-						table_rutas.getColumnModel().getColumn(3).setResizable(false);
-						table_rutas.getColumnModel().getColumn(4).setResizable(false);
-						table_rutas.getColumnModel().getColumn(5).setResizable(false);
-						table_rutas.getColumnModel().getColumn(6).setResizable(false);
-						table_rutas.getColumnModel().getColumn(7).setResizable(false);
-						table_rutas.getColumnModel().getColumn(8).setResizable(false);
-						table_rutas.getColumnModel().getColumn(9).setResizable(false);
-						table_rutas.getColumnModel().getColumn(10).setResizable(false);
-						table_rutas.getColumnModel().getColumn(11).setResizable(false);
-						scrollPane.setViewportView(table_rutas);
+						table_guia.getColumnModel().getColumn(0).setResizable(false);
+						table_guia.getColumnModel().getColumn(0).setPreferredWidth(10);;
+						table_guia.getColumnModel().getColumn(1).setResizable(false);
+						table_guia.getColumnModel().getColumn(2).setResizable(false);
+						table_guia.getColumnModel().getColumn(3).setResizable(false);
+						table_guia.getColumnModel().getColumn(4).setResizable(false);
+						table_guia.getColumnModel().getColumn(5).setResizable(false);
+						table_guia.getColumnModel().getColumn(6).setResizable(false);
+						table_guia.getColumnModel().getColumn(7).setResizable(false);
+						table_guia.getColumnModel().getColumn(8).setResizable(false);
+						table_guia.getColumnModel().getColumn(9).setResizable(false);
+						table_guia.getColumnModel().getColumn(10).setResizable(false);
+						table_guia.getColumnModel().getColumn(11).setResizable(false);
+						table_guia.getColumnModel().getColumn(11).setPreferredWidth(36);
+						table_guia.setRowHeight(51);
+
+						scPnlGuia.setViewportView(table_guia);
+						cargarTablaGuia();
 					}
 				}
+				{
+					pnlInfoGuia = new JPanel();
+					GridBagConstraints gbc_pnlInfoGuia = new GridBagConstraints();
+					gbc_pnlInfoGuia.gridheight = 2;
+					gbc_pnlInfoGuia.gridwidth = 3;
+					gbc_pnlInfoGuia.insets = new Insets(0, 0, 0, 5);
+					gbc_pnlInfoGuia.fill = GridBagConstraints.BOTH;
+					gbc_pnlInfoGuia.gridx = 0;
+					gbc_pnlInfoGuia.gridy = 3;
+					pnlGuias.add(pnlInfoGuia, gbc_pnlInfoGuia);
+					pnlInfoGuia.setLayout(new BorderLayout(0, 0));
+					{
+						taInfoGuia = new JTextArea();
+						pnlInfoGuia.add(taInfoGuia, BorderLayout.CENTER);
+					}
+				}
+			}
+			{
+				btnInsertarGuia = new JButton("Insertar Guia");
 				GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
 				gbc_btnInsertarGuia.insets = new Insets(0, 0, 5, 5);
 				gbc_btnInsertarGuia.gridx = 3;
@@ -304,7 +322,7 @@ public class Vista_Usuario extends JFrame {
 				pnlGuias.add(btnModificarGuia, gbc_btnModificarGuia);
 			}
 			{
-				btnEliminarGuia = new JButton("Dar de Baja");
+				btnEliminarGuia = new JButton("Eliminar Guia");
 				GridBagConstraints gbc_btnEliminarGuia = new GridBagConstraints();
 				gbc_btnEliminarGuia.insets = new Insets(0, 0, 5, 5);
 				gbc_btnEliminarGuia.gridx = 5;
@@ -317,77 +335,82 @@ public class Vista_Usuario extends JFrame {
 		GridBagLayout gbl_pnlRutas = new GridBagLayout();
 		gbl_pnlRutas.columnWidths = new int[]{0, 0, 0, 0, 0, 25, 27, 0, 0, 0};
 		gbl_pnlRutas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlRutas.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlRutas.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_pnlRutas.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlRutas.setLayout(gbl_pnlRutas);
-		
+
 		{
 			{
-				sPRutas = new JScrollPane();
-				GridBagConstraints gbc_sPRutas = new GridBagConstraints();
-				gbc_sPRutas.gridheight = 2;
-				gbc_sPRutas.gridwidth = 7;
-				gbc_sPRutas.insets = new Insets(0, 0, 5, 5);
-				gbc_sPRutas.fill = GridBagConstraints.BOTH;
-				gbc_sPRutas.gridx = 1;
-				gbc_sPRutas.gridy = 1;
-				pnlRutas.add(sPRutas, gbc_sPRutas);
+				scPnlRutas = new JScrollPane();
+				scPnlRutas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Nuestras Rutas Establecidas", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				GridBagConstraints gbc_scPnlRutas = new GridBagConstraints();
+				gbc_scPnlRutas.gridheight = 3;
+				gbc_scPnlRutas.gridwidth = 7;
+				gbc_scPnlRutas.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlRutas.fill = GridBagConstraints.BOTH;
+				gbc_scPnlRutas.gridx = 1;
+				gbc_scPnlRutas.gridy = 0;
+				pnlRutas.add(scPnlRutas, gbc_scPnlRutas);
 				{
 					table_Rutas = new JTable();
 					table_Rutas.setModel(new DefaultTableModel(
-						new Object[][] {
-							{null, null, null, null, null},
-						},
-						new String[] {
-							"ID", "Localidad/es", "Monumento/s", "Restaurante/s", "Tienda/s"
-						}
-					) {
+							new Object[][] {
+								{null, null, null, null, null},
+							},
+							new String[] {
+									"ID", "Localidad/es", "Monumento/s", "Restaurante/s", "Tienda/s"
+							}
+							) {
 						Class[] columnTypes = new Class[] {
-							Integer.class, String.class, String.class, String.class, String.class
+								Integer.class, String.class, String.class, String.class, String.class
 						};
 						public Class getColumnClass(int columnIndex) {
 							return columnTypes[columnIndex];
 						}
 						boolean[] columnEditables = new boolean[] {
-							false, false, false, false, false
+								false, false, false, false, false
 						};
 						public boolean isCellEditable(int row, int column) {
 							return columnEditables[column];
 						}
 					});
 					table_Rutas.getColumnModel().getColumn(0).setResizable(false);
+					table_Rutas.getColumnModel().getColumn(0).setPreferredWidth(10);
 					table_Rutas.getColumnModel().getColumn(1).setResizable(false);
 					table_Rutas.getColumnModel().getColumn(2).setResizable(false);
 					table_Rutas.getColumnModel().getColumn(3).setResizable(false);
 					table_Rutas.getColumnModel().getColumn(4).setResizable(false);
-					sPRutas.setViewportView(table_Rutas);
+					table_Rutas.getColumnModel().getColumn(4).setPreferredWidth(36);
+					table_Rutas.setRowHeight(50);
+
+					scPnlRutas.setViewportView(table_Rutas);
 					cargarTablaRutas();
 				}
 			}
 		}
 		{
-			pnlInfo = new JPanel();
-			GridBagConstraints gbc_pnlInfo = new GridBagConstraints();
-			gbc_pnlInfo.gridheight = 2;
-			gbc_pnlInfo.gridwidth = 3;
-			gbc_pnlInfo.insets = new Insets(0, 0, 5, 5);
-			gbc_pnlInfo.fill = GridBagConstraints.BOTH;
-			gbc_pnlInfo.gridx = 1;
-			gbc_pnlInfo.gridy = 3;
-			pnlRutas.add(pnlInfo, gbc_pnlInfo);
-			pnlInfo.setLayout(new BorderLayout(0, 0));
+			pnlInfoRutas = new JPanel();
+			GridBagConstraints gbc_pnlInfoRutas = new GridBagConstraints();
+			gbc_pnlInfoRutas.gridheight = 2;
+			gbc_pnlInfoRutas.gridwidth = 3;
+			gbc_pnlInfoRutas.insets = new Insets(0, 0, 5, 5);
+			gbc_pnlInfoRutas.fill = GridBagConstraints.BOTH;
+			gbc_pnlInfoRutas.gridx = 1;
+			gbc_pnlInfoRutas.gridy = 3;
+			pnlRutas.add(pnlInfoRutas, gbc_pnlInfoRutas);
+			pnlInfoRutas.setLayout(new BorderLayout(0, 0));
 			{
-				taInfo = new JTextArea();
-				pnlInfo.add(taInfo);
+				taInfoRutas = new JTextArea();
+				pnlInfoRutas.add(taInfoRutas);
 			}
 		}
-		btnInsertarRuta = new JButton("Dar de alta");
-		
-			GridBagConstraints gbc_btnInsertarRuta = new GridBagConstraints();
-			gbc_btnInsertarRuta.insets = new Insets(0, 0, 5, 5);
-			gbc_btnInsertarRuta.gridx = 5;
-			gbc_btnInsertarRuta.gridy = 4;
-			pnlRutas.add(btnInsertarRuta, gbc_btnInsertarRuta);
+		btnInsertarRuta = new JButton("Insertar Ruta");
+
+		GridBagConstraints gbc_btnInsertarRuta = new GridBagConstraints();
+		gbc_btnInsertarRuta.insets = new Insets(0, 0, 5, 5);
+		gbc_btnInsertarRuta.gridx = 5;
+		gbc_btnInsertarRuta.gridy = 4;
+		pnlRutas.add(btnInsertarRuta, gbc_btnInsertarRuta);
 		{
 			btnModificarRuta = new JButton("Modificar Ruta");
 			GridBagConstraints gbc_btnModificarRuta = new GridBagConstraints();
@@ -397,7 +420,7 @@ public class Vista_Usuario extends JFrame {
 			pnlRutas.add(btnModificarRuta, gbc_btnModificarRuta);
 		}
 		{
-			btnEliminarRuta = new JButton("Dar de baja");
+			btnEliminarRuta = new JButton("Eliminar Ruta");
 			GridBagConstraints gbc_btnEliminarRuta = new GridBagConstraints();
 			gbc_btnEliminarRuta.insets = new Insets(0, 0, 5, 5);
 			gbc_btnEliminarRuta.gridx = 7;
@@ -410,36 +433,80 @@ public class Vista_Usuario extends JFrame {
 			GridBagLayout gbl_pnlPromociones = new GridBagLayout();
 			gbl_pnlPromociones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlPromociones.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlPromociones.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_pnlPromociones.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_pnlPromociones.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+			gbl_pnlPromociones.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			pnlPromociones.setLayout(gbl_pnlPromociones);
 			{
-				table_promociones = new JTable();
-				table_promociones.setModel(new DefaultTableModel(
-
-						new Object[][] {
-							{"1", "-50%", "Ciudad Real"},
-							{"2", "2x1", "Puertollano"},
-							{"3", "-20%", "Puertollano"},
-						},
-						new String[] {
-								"ID", "Promocion", "Localidad"
+				scPnlPromocion = new JScrollPane();
+				scPnlPromocion.setBorder(new TitledBorder(null, "Nuestras Promociones", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+				GridBagConstraints gbc_scPnlPromocion = new GridBagConstraints();
+				gbc_scPnlPromocion.gridheight = 4;
+				gbc_scPnlPromocion.gridwidth = 7;
+				gbc_scPnlPromocion.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlPromocion.fill = GridBagConstraints.BOTH;
+				gbc_scPnlPromocion.gridx = 0;
+				gbc_scPnlPromocion.gridy = 0;
+				pnlPromociones.add(scPnlPromocion, gbc_scPnlPromocion);
+				{
+					table_promocion = new JTable();
+					table_promocion.setModel(new DefaultTableModel(
+							new Object[][] {
+								{null, null, null, null, null},
+							},
+							new String[] {
+									"ID", "Descuento", "Ruta/s", "Descripcion", "Duracion Promo."
+							}
+							) {
+						Class[] columnTypes = new Class[] {
+								Integer.class, String.class, String.class, String.class, String.class
+						};
+						public Class getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
 						}
-						));
+						boolean[] columnEditables = new boolean[] {
+								false, true, false, false, false
+						};
+						public boolean isCellEditable(int row, int column) {
+							return columnEditables[column];
+						}
+					});
+					table_promocion.getColumnModel().getColumn(0).setResizable(false);
+					table_promocion.getColumnModel().getColumn(0).setPreferredWidth(10);
+					table_promocion.getColumnModel().getColumn(1).setResizable(false);
+					table_promocion.getColumnModel().getColumn(2).setResizable(false);
+					table_promocion.getColumnModel().getColumn(3).setResizable(false);
+					table_promocion.getColumnModel().getColumn(4).setResizable(false);
+					table_promocion.getColumnModel().getColumn(4).setPreferredWidth(36);
+					table_promocion.setRowHeight(50);
 
-				table_promociones.getColumnModel().getColumn(0).setPreferredWidth(21);
-				table_promociones.getColumnModel().getColumn(0).setMinWidth(21);
-				table_promociones.getColumnModel().getColumn(1).setPreferredWidth(59);
-				table_promociones.getColumnModel().getColumn(1).setMinWidth(59);
-				table_promociones.getColumnModel().getColumn(2).setPreferredWidth(66);
-				table_promociones.getColumnModel().getColumn(2).setMinWidth(65);
-				GridBagConstraints gbc_table_promociones = new GridBagConstraints();
-				gbc_table_promociones.gridheight = 3;
-				gbc_table_promociones.insets = new Insets(0, 0, 5, 5);
-				gbc_table_promociones.fill = GridBagConstraints.BOTH;
-				gbc_table_promociones.gridx = 1;
-				gbc_table_promociones.gridy = 1;
-				pnlPromociones.add(table_promociones, gbc_table_promociones);
+					table_promocion.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+					scPnlPromocion.setViewportView(table_promocion);
+					cargarTablaPromo();
+					{
+						btnInsertarPromo = new JButton("Insertar Promo");
+						GridBagConstraints gbc_btnInsertarPromo = new GridBagConstraints();
+						gbc_btnInsertarPromo.insets = new Insets(0, 0, 5, 5);
+						gbc_btnInsertarPromo.gridx = 5;
+						gbc_btnInsertarPromo.gridy = 4;
+						pnlPromociones.add(btnInsertarPromo, gbc_btnInsertarPromo);
+					}
+					{
+						btnModificarPromo = new JButton("Modificar Promo");
+						GridBagConstraints gbc_btnModificarPromo = new GridBagConstraints();
+						gbc_btnModificarPromo.insets = new Insets(0, 0, 5, 5);
+						gbc_btnModificarPromo.gridx = 6;
+						gbc_btnModificarPromo.gridy = 4;
+						pnlPromociones.add(btnModificarPromo, gbc_btnModificarPromo);
+					}
+					{
+						btnEliminarPromo = new JButton("Eliminar Promo");
+						GridBagConstraints gbc_btnEliminarPromo = new GridBagConstraints();
+						gbc_btnEliminarPromo.insets = new Insets(0, 0, 5, 5);
+						gbc_btnEliminarPromo.gridx = 7;
+						gbc_btnEliminarPromo.gridy = 4;
+						pnlPromociones.add(btnEliminarPromo, gbc_btnEliminarPromo);
+					}
+				}
 			}
 		}
 		{
@@ -448,8 +515,8 @@ public class Vista_Usuario extends JFrame {
 			GridBagLayout gbl_pnlHistorial = new GridBagLayout();
 			gbl_pnlHistorial.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlHistorial.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlHistorial.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_pnlHistorial.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_pnlHistorial.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_pnlHistorial.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			pnlHistorial.setLayout(gbl_pnlHistorial);
 		}
 
@@ -458,15 +525,146 @@ public class Vista_Usuario extends JFrame {
 		GridBagLayout gbl_pnlTuristas = new GridBagLayout();
 		gbl_pnlTuristas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_pnlTuristas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlTuristas.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlTuristas.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlTuristas.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_pnlTuristas.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		pnlTuristas.setLayout(gbl_pnlTuristas);
-		
+		{
+			scPnlTurista = new JScrollPane();
+			scPnlTurista.setBorder(new TitledBorder(null, "Nuestros Turistas", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			GridBagConstraints gbc_scPnlTurista = new GridBagConstraints();
+			gbc_scPnlTurista.gridheight = 4;
+			gbc_scPnlTurista.gridwidth = 7;
+			gbc_scPnlTurista.insets = new Insets(0, 0, 5, 5);
+			gbc_scPnlTurista.fill = GridBagConstraints.BOTH;
+			gbc_scPnlTurista.gridx = 0;
+			gbc_scPnlTurista.gridy = 0;
+			pnlTuristas.add(scPnlTurista, gbc_scPnlTurista);
+			{
+				table_turista = new JTable();
+				table_turista.setModel(new DefaultTableModel(
+						new Object[][] {
+							{null, null, null, null, null, null, null},
+						},
+						new String[] {
+								"ID", "DNI", "Nombre", "Apellidos", "Telefono", "email", "Foto"
+						}
+						) {
+					Class[] columnTypes = new Class[] {
+							Integer.class, String.class, String.class, String.class, String.class, String.class, Object.class
+					};
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+					boolean[] columnEditables = new boolean[] {
+							false, false, false, false, false, false, false
+					};
+					public boolean isCellEditable(int row, int column) {
+						return columnEditables[column];
+					}
+				});
+				table_turista.getColumnModel().getColumn(0).setResizable(false);
+				table_turista.getColumnModel().getColumn(0).setPreferredWidth(10);
+				table_turista.getColumnModel().getColumn(1).setResizable(false);
+				table_turista.getColumnModel().getColumn(2).setResizable(false);
+				table_turista.getColumnModel().getColumn(3).setResizable(false);
+				table_turista.getColumnModel().getColumn(4).setResizable(false);
+				table_turista.getColumnModel().getColumn(5).setResizable(false);
+				table_turista.getColumnModel().getColumn(6).setResizable(false);
+				table_turista.getColumnModel().getColumn(4).setPreferredWidth(36);
+				table_turista.setRowHeight(50);
+				
+				scPnlTurista.setViewportView(table_turista);
+				cargarTablaTurista();
+			}
+		}
+
 	}	
+
+	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
+	private void cargarTablaHistorial() {
+
+	}
+
+	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
+	private void cargarTablaTurista() {
+		Hardcoded t = new Hardcoded();
+		ArrayList<Turista> turista = new ArrayList<Turista>();
+
+		turista = t.getTuristas();
+		Object[][] datos = new Object[turista.size()][7];
+
+		for (int i = 0; i < turista.size(); i++) {
+			datos[i][0] = i + 1;
+			datos[i][1] = String.valueOf(turista.get(i).getDni());
+			datos[i][2] = String.valueOf(turista.get(i).getNombre());
+			datos[i][3] = String.valueOf(turista.get(i).getApellido());
+			datos[i][4] = String.valueOf(turista.get(i).getTelefono());
+			datos[i][5] = String.valueOf(turista.get(i).getEmail());
+			datos[i][6] = String.valueOf(turista.get(i).getFoto());
+		}
+		table_turista.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"ID", "DNI", "Nombre", "Apellidos", "Telefono", "email", "Foto"
+				}
+				) {
+			Class[] columnTypes = new Class[] {
+					Integer.class, String.class, String.class, String.class, String.class, String.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+
+	}
+
+	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
+	private void cargarTablaPromo() {
+		Hardcoded promo = new Hardcoded();
+		ArrayList<Promocion> promocion = new ArrayList<Promocion>();
+
+		promocion = promo.getPromocion();
+		Object[][] datos = new Object[promocion.size()][5];
+
+		for(int i = 0;i<promocion.size();i++) {
+			datos[i][0] = i + 1;
+			datos[i][1] = String.valueOf(promocion.get(i).getDto());
+			datos[i][2] = String.valueOf(promocion.get(i).getRuta());
+			datos[i][3] = String.valueOf(promocion.get(i).getDescripcion());
+			datos[i][4] = String.valueOf(promocion.get(i).getDuracion());
+		}
+		table_promocion.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"ID", "Descuento", "Ruta/s", "Descripcion", "Duracion Promo."
+				}
+				) {
+			Class[] columnTypes = new Class[] {
+					Integer.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					false, true, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+	}
+
+	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaRutas() {
 		Hardcoded rutas = new Hardcoded();
 		ArrayList<Rutas_turisticas> rutasTuristicas = new ArrayList<Rutas_turisticas>();
-		
+
 		rutasTuristicas = rutas.getRuta();
 		Object [][] datos = new Object[rutasTuristicas.size()][5];
 
@@ -492,17 +690,52 @@ public class Vista_Usuario extends JFrame {
 		});
 	}
 
+	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaGuia() {
 		Hardcoded guia = new Hardcoded();
 		ArrayList<Guia_turistico> guiaTuristico = new ArrayList<Guia_turistico>();
-		
+
 		guiaTuristico = guia.getGuia();
 		Object [][] datos = new Object[guiaTuristico.size()][12];
+
+		for (int i = 0; i < guiaTuristico.size(); i++) {
+			datos[i][0] = i + 1;
+			datos[i][1] = String.valueOf(guiaTuristico.get(i).getNombre());
+			datos[i][2] = String.valueOf(guiaTuristico.get(i).getApellidos());
+			datos[i][3] = String.valueOf(guiaTuristico.get(i).getNif());
+			datos[i][4] = String.valueOf(guiaTuristico.get(i).getEmail());
+			datos[i][5] = String.valueOf(guiaTuristico.get(i).getTelf());
+			datos[i][6] = String.valueOf(guiaTuristico.get(i).getIdiomas());
+			datos[i][7] = guiaTuristico.get(i).getDisponibilidad();
+			datos[i][8] = String.valueOf(guiaTuristico.get(i).getHistorial_rutas());
+			datos[i][9] = guiaTuristico.get(i).getPrecio();
+			datos[i][10] = guiaTuristico.get(i).getPuntuacion();
+			datos[i][11] = new ImageIcon(Vista_Usuario.class.getClassLoader().getResource("Presentacion/Yo.png"));
+
+		}
+
+		table_guia.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"ID", "Nombre", "Apellidos", "NIF", "e-mail", "Telefono", "Idiomas", "Disponibilidad", "Rutas", "Precio", "Puntuacion", "Foto"
+				}
+				) {
+			Class[] columnTypes = new Class[] {
+					Integer.class, String.class, String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, Double.class, Double.class, ImageIcon.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+					true, true, false, false, false, false, false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 	}
-	
-	
-	
-	
+
+	/*Metodo para centrar la aplicacion en cualquier pantalla que se ejecute*/
 	private void centrarPantalla() {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 

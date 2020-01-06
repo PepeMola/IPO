@@ -109,6 +109,14 @@ public class Guia_turistico {
 	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
+	
+	public String getFoto() {
+		return foto;
+	}
+	
+	public void setFoto() {
+		this.foto = foto;
+	}
 	public String toString() {
 		return "Guia_turistico [nombre=" + nombre + ", apellidos=" + apellidos + ", nif=" + nif + ", email=" + email
 				+ ", telf=" + telf + ", idiomas=" + idiomas + ", disponibilidad=" + disponibilidad
