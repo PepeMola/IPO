@@ -81,6 +81,8 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnModificarPromo;
 	private JScrollPane scPnlTurista;
 	private JTable table_turista;
+	private JScrollPane scPnlHistorial;
+	private JTable table_historial;
 
 
 	public Vista_Usuario(String nombre, String apellido, String dni) {
@@ -518,6 +520,47 @@ public class Vista_Usuario extends JFrame {
 			gbl_pnlHistorial.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_pnlHistorial.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			pnlHistorial.setLayout(gbl_pnlHistorial);
+			{
+				scPnlHistorial = new JScrollPane();
+				scPnlHistorial.setBorder(new TitledBorder(null, "Historial de nuestras ultimas Rutas", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+				GridBagConstraints gbc_scPnlHistorial = new GridBagConstraints();
+				gbc_scPnlHistorial.gridheight = 4;
+				gbc_scPnlHistorial.gridwidth = 7;
+				gbc_scPnlHistorial.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlHistorial.fill = GridBagConstraints.BOTH;
+				gbc_scPnlHistorial.gridx = 0;
+				gbc_scPnlHistorial.gridy = 0;
+				pnlHistorial.add(scPnlHistorial, gbc_scPnlHistorial);
+				{
+					table_historial = new JTable();
+					table_historial.setModel(new DefaultTableModel(
+							new Object[][] {
+								{null, null, null, null, null, null, null},
+							},
+							new String[] {
+									"ID", "Rutas", "Num. Personas", "Coste", "Incidencias", "Opiniones", "Sugerencias"
+							}
+							) {
+						Class[] columnTypes = new Class[] {
+								Integer.class, String.class, Integer.class, Double.class, String.class, String.class, String.class
+						};
+						public Class getColumnClass(int columnIndex) {
+							return columnTypes[columnIndex];
+						}
+					});
+					table_historial.getColumnModel().getColumn(0).setResizable(false);
+					table_historial.getColumnModel().getColumn(1).setResizable(false);
+					table_historial.getColumnModel().getColumn(2).setResizable(false);
+					table_historial.getColumnModel().getColumn(3).setResizable(false);
+					table_historial.getColumnModel().getColumn(4).setResizable(false);
+					table_historial.getColumnModel().getColumn(5).setResizable(false);
+					table_historial.getColumnModel().getColumn(1).setPreferredWidth(10);
+					table_historial.setRowHeight(50);
+
+					scPnlHistorial.setViewportView(table_historial);
+					cargarTablaHistorial();
+				}
+			}
 		}
 
 		JPanel pnlTuristas = new JPanel();
@@ -550,7 +593,7 @@ public class Vista_Usuario extends JFrame {
 						}
 						) {
 					Class[] columnTypes = new Class[] {
-							Integer.class, String.class, String.class, String.class, String.class, String.class, Object.class
+							Integer.class, String.class, String.class, String.class, String.class, String.class, ImageIcon.class
 					};
 					public Class getColumnClass(int columnIndex) {
 						return columnTypes[columnIndex];
@@ -572,7 +615,7 @@ public class Vista_Usuario extends JFrame {
 				table_turista.getColumnModel().getColumn(6).setResizable(false);
 				table_turista.getColumnModel().getColumn(4).setPreferredWidth(36);
 				table_turista.setRowHeight(50);
-				
+
 				scPnlTurista.setViewportView(table_turista);
 				cargarTablaTurista();
 			}
@@ -582,7 +625,34 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaHistorial() {
+		Hardcoded h = new Hardcoded();
+		ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
 
+		historial = h.getHistorial();
+		Object[][] datos = new Object[historial.size()][7];
+
+		for (int i = 0; i < historial.size(); i++) {
+			datos[i][0] = i + 1;
+			datos[i][1] = String.valueOf(historial.get(i).getRutas());
+			datos[i][2] = historial.get(i).getNum_personas();
+			datos[i][3] = historial.get(i).getCoste();
+			datos[i][4] = String.valueOf(historial.get(i).getIncidencias());
+			datos[i][5] = String.valueOf(historial.get(i).getOpiniones());
+			datos[i][6] = String.valueOf(historial.get(i).getSugerencias());
+		}
+		table_historial.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"ID", "Rutas", "Num. Personas", "Coste", "Incidencias", "Opiniones", "Sugerencias"
+				}
+				) {
+			Class[] columnTypes = new Class[] {
+					Integer.class, String.class, Integer.class, Double.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
 	}
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
@@ -710,8 +780,7 @@ public class Vista_Usuario extends JFrame {
 			datos[i][8] = String.valueOf(guiaTuristico.get(i).getHistorial_rutas());
 			datos[i][9] = guiaTuristico.get(i).getPrecio();
 			datos[i][10] = guiaTuristico.get(i).getPuntuacion();
-			datos[i][11] = new ImageIcon(Vista_Usuario.class.getClassLoader().getResource("Presentacion/Yo.png"));
-
+			datos[i][11] = new ImageIcon(Vista_Usuario.class.getClassLoader().getResource(guiaTuristico.get(i).getFoto()));
 		}
 
 		table_guia.setModel(new DefaultTableModel(

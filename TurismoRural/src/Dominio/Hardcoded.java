@@ -66,9 +66,9 @@ public class Hardcoded {
 
 	public ArrayList<Guia_turistico> getGuia() {
 		Guia_turistico g1 = new Guia_turistico("Pepe", "Arias Ramos", "00000001A", "pepe@gmail.com", "666555444", "<html>Castellano<br/>Ingles<br/>Frances</html>",
-				true, "1,2,3,4", 17.50, 8.6, "/Presentacion/Yo.png");
+				true, "1,2,3,4", 17.50, 8.6, "Presentacion/Yo.png");
 		Guia_turistico g2 = new Guia_turistico("David", "Utrilla Patón", "00000002A", "david@gmail.com", "666555446", "<html>Castellano<br/>Frances</html>", 
-				true, "3,4", 19.95, 9.3, "");
+				true, "3,4", 19.95, 9.3, "Presentacion/utrilla.png");
 		Guia_turistico g3 = new Guia_turistico("Diego", "Arche Claudio", "00000003A", "diego@gmail.com", "666555449", "<html>Castellano<br/>Portugues</html>",
 				false, "1,2,4", 15.50, 6.7, "");
 
@@ -86,14 +86,14 @@ public class Hardcoded {
 	public ArrayList<Historial_circuitos> getHistorial() {
 		Historial_circuitos h1 = new Historial_circuitos("1, 2", 15, 500, "Ninguna",
 				"Todo perfecto", "Aprobar a Pepe");
-		Historial_circuitos h2 = new Historial_circuitos("3", 6, 150, "David mintió, no sabe Francés",
+		Historial_circuitos h2 = new Historial_circuitos("3", 6, 150, "<html>David mintió.<br/>No sabe Francés</html>",
 				"Bonita ciudad", "Suspender a David");
 		Historial_circuitos h3 = new Historial_circuitos("2, 4", 12, 340, "Murió un señor",
-				"Quitando al muerto, todo bien", "Incluir pack Funerario");
+				"<html>Quitando al muerto,<br/>todo bien</html>", "Incluir pack Funerario");
 
 		historial.add(h1);
-		historial.add(h1);
-		historial.add(h1);
+		historial.add(h2);
+		historial.add(h3);
 
 		return historial;
 	}
@@ -156,8 +156,8 @@ public class Hardcoded {
 
 	public ArrayList<Usuario> getUsuario() {
 		Usuario u1 = new Usuario("Profesora","Informatica","01237894Q","ipo1","");
-		Usuario u2 = new Usuario("Pepe","Arias","00000001A","hola","");
-		Usuario u3 = new Usuario("David","Utrilla","00000001B","adios","");
+		Usuario u2 = new Usuario("Pepe","Arias","00000001A","hola","/Presentacion/Yo.png");
+		Usuario u3 = new Usuario("David","Utrilla","00000001B","adios","/Presentacion/utrilla.png");
 
 		usuario.add(u1);
 		usuario.add(u2);
