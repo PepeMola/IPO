@@ -88,6 +88,7 @@ public class Nuevo_guia extends JFrame {
 	 * Create the frame.
 	 */
 	public Nuevo_guia() {
+		setVisible(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_guia.class.getResource("/Presentacion/grupo_usuarios.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 609, 460);

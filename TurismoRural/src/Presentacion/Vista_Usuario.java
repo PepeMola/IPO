@@ -54,7 +54,7 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnInsertarRuta;
 	private JButton btnModificarRuta;
 	private JButton btnEliminarRuta;
-	private JPanel pnlHistorial;
+	private JPanel pnlHistorial_1;
 	private JPanel pnlUsuario;
 	private JLabel lblFoto;
 	private JLabel lblNombre;
@@ -83,6 +83,7 @@ public class Vista_Usuario extends JFrame {
 	private JTable table_turista;
 	private JScrollPane scPnlHistorial;
 	private JTable table_historial;
+	private JButton btnDisearRuta;
 
 
 	public Vista_Usuario(String nombre, String apellido, String dni) {
@@ -228,6 +229,15 @@ public class Vista_Usuario extends JFrame {
 				gbc_btnAyuda.gridx = 0;
 				gbc_btnAyuda.gridy = 6;
 				pnlUsuario.add(btnAyuda, gbc_btnAyuda);
+			}
+			{
+				btnDisearRuta = new JButton("Diseñar Ruta");
+				GridBagConstraints gbc_btnDisearRuta = new GridBagConstraints();
+				gbc_btnDisearRuta.fill = GridBagConstraints.BOTH;
+				gbc_btnDisearRuta.insets = new Insets(0, 0, 0, 5);
+				gbc_btnDisearRuta.gridx = 4;
+				gbc_btnDisearRuta.gridy = 6;
+				pnlUsuario.add(btnDisearRuta, gbc_btnDisearRuta);
 			}
 		}
 		{
@@ -512,14 +522,14 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 		{
-			pnlHistorial = new JPanel();
-			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial, null);
-			GridBagLayout gbl_pnlHistorial = new GridBagLayout();
-			gbl_pnlHistorial.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlHistorial.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlHistorial.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_pnlHistorial.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			pnlHistorial.setLayout(gbl_pnlHistorial);
+			pnlHistorial_1 = new JPanel();
+			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial_1, null);
+			GridBagLayout gbl_pnlHistorial_1 = new GridBagLayout();
+			gbl_pnlHistorial_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlHistorial_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlHistorial_1.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_pnlHistorial_1.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			pnlHistorial_1.setLayout(gbl_pnlHistorial_1);
 			{
 				scPnlHistorial = new JScrollPane();
 				scPnlHistorial.setBorder(new TitledBorder(null, "Historial de nuestras ultimas Rutas", TitledBorder.CENTER, TitledBorder.TOP, null, null));
@@ -530,7 +540,7 @@ public class Vista_Usuario extends JFrame {
 				gbc_scPnlHistorial.fill = GridBagConstraints.BOTH;
 				gbc_scPnlHistorial.gridx = 0;
 				gbc_scPnlHistorial.gridy = 0;
-				pnlHistorial.add(scPnlHistorial, gbc_scPnlHistorial);
+				pnlHistorial_1.add(scPnlHistorial, gbc_scPnlHistorial);
 				{
 					table_historial = new JTable();
 					table_historial.setModel(new DefaultTableModel(
