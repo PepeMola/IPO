@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
@@ -33,7 +35,6 @@ public class Nuevo_Circuito extends JFrame {
 	 * Create the frame.
 	 */
 	public Nuevo_Circuito() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -156,10 +157,14 @@ public class Nuevo_Circuito extends JFrame {
 		JButton btnGuardarCircuito = new JButton("Guardar Circuito");
 		btnGuardarCircuito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {// este metodo crea una nueva ruta turistica
+				int a=JOptionPane.showConfirmDialog(contentPane, "¿Esta seguro que desea guardar este circuito nuevo?");
+				if(a==0) {
 				Rutas_turisticas cliente = new Rutas_turisticas
 						(textLocalidades.getText(),textMonumentos.getText(),textRestaurantes.getText()
 						,textTiendas.getText());
+				
 				dispose();
+				}
 			}
 		});
 		

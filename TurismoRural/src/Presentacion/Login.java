@@ -96,6 +96,7 @@ public class Login {
 		pnlinicio.add(lblIcono);
 
 		txtUsuario = new JTextField();
+		txtUsuario.setToolTipText("Escriba el usuario");
 		txtUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		txtUsuario.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		txtUsuario.addActionListener(new TxtUsuarioActionListener());
@@ -113,6 +114,7 @@ public class Login {
 		pnlinicio.add(lblPassword);
 
 		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setToolTipText("Elimina el usuario y la contrase\u00F1a");
 		btnLimpiar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		btnLimpiar.setBorderPainted(false);
@@ -131,6 +133,7 @@ public class Login {
 		pnlinicio.add(btnAcceder);
 
 		btnAyuda = new JButton("");
+		btnAyuda.setToolTipText("Ayuda");
 		btnAyuda.addActionListener(new BtnAyudaActionListener());
 		btnAyuda.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		btnAyuda.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -277,7 +280,7 @@ public class Login {
 					}
 				}
 			});
-			frmLogin.dispose();
+			//frmLogin.dispose();
 		}
 	}
 
