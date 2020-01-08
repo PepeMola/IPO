@@ -84,6 +84,9 @@ public class Vista_Usuario extends JFrame {
 	private JScrollPane scPnlHistorial;
 	private JTable table_historial;
 	private JButton btnDisearRuta;
+	private JButton btnEliminarTurista;
+	private JButton btnModificarTurista;
+	private JButton btnAgregarTurista;
 
 
 	public Vista_Usuario(String nombre, String apellido, String dni) {
@@ -114,6 +117,7 @@ public class Vista_Usuario extends JFrame {
 		contentPane.add(tbpVistaUsuario, gbc_tbpVistaUsuario);
 		{
 			pnlUsuario = new JPanel();
+			pnlUsuario.setToolTipText("Informacion del usuario");
 			tbpVistaUsuario.addTab("Usuario", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/grupo_usuarios.png")), pnlUsuario, null);
 			tbpVistaUsuario.setEnabledAt(0, true);
 			GridBagLayout gbl_pnlUsuario = new GridBagLayout();
@@ -222,6 +226,20 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnAyuda = new JButton("");
+				btnAyuda.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Ayuda_Usuario frame = new Ayuda_Usuario();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
 				btnAyuda.setMargin(new Insets(2, 2, 2, 2));
 				btnAyuda.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/help.png")));
 				GridBagConstraints gbc_btnAyuda = new GridBagConstraints();
@@ -231,8 +249,13 @@ public class Vista_Usuario extends JFrame {
 				pnlUsuario.add(btnAyuda, gbc_btnAyuda);
 			}
 			{
+<<<<<<< HEAD
 				btnDisearRuta = new JButton("Diseñar Ruta");
 				//btnDisearRuta.addActionListener(new BtnDisearRutaActionListener());
+=======
+				btnDisearRuta = new JButton("Dise\u00F1ar Ruta");
+				btnDisearRuta.setToolTipText("Dise\u00F1a ruta manualmente");
+>>>>>>> branch 'master' of https://github.com/PepeMola/IPO.git
 				GridBagConstraints gbc_btnDisearRuta = new GridBagConstraints();
 				gbc_btnDisearRuta.fill = GridBagConstraints.BOTH;
 				gbc_btnDisearRuta.insets = new Insets(0, 0, 0, 5);
@@ -243,6 +266,7 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlGuias = new JPanel();
+			pnlGuias.setToolTipText("Gestor de Guias");
 			tbpVistaUsuario.addTab("Guias Turisticos", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/networking.png")), pnlGuias, null);
 			GridBagLayout gbl_pnlGuias = new GridBagLayout();
 			gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -320,6 +344,21 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnInsertarGuia = new JButton("Insertar Guia");
+				btnInsertarGuia.setToolTipText("Agrega un nuevo guia");
+				btnInsertarGuia.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Nuevo_guia frame = new Nuevo_guia();
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
 				GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
 				gbc_btnInsertarGuia.insets = new Insets(0, 0, 5, 5);
 				gbc_btnInsertarGuia.gridx = 3;
@@ -328,6 +367,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnModificarGuia = new JButton("Modificar Guia");
+				btnModificarGuia.setToolTipText("Modifica un guia existente");
 				GridBagConstraints gbc_btnModificarGuia = new GridBagConstraints();
 				gbc_btnModificarGuia.insets = new Insets(0, 0, 5, 5);
 				gbc_btnModificarGuia.gridx = 4;
@@ -336,6 +376,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnEliminarGuia = new JButton("Eliminar Guia");
+				btnEliminarGuia.setToolTipText("Elimina un guia existente");
 				GridBagConstraints gbc_btnEliminarGuia = new GridBagConstraints();
 				gbc_btnEliminarGuia.insets = new Insets(0, 0, 5, 5);
 				gbc_btnEliminarGuia.gridx = 5;
@@ -344,6 +385,7 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 		pnlRutas = new JPanel();
+		pnlRutas.setToolTipText("Gestor de rutas");
 		tbpVistaUsuario.addTab("Rutas Turisticas", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/cargarMapa.png")), pnlRutas, null);
 		GridBagLayout gbl_pnlRutas = new GridBagLayout();
 		gbl_pnlRutas.columnWidths = new int[]{0, 0, 0, 0, 0, 25, 27, 0, 0, 0};
@@ -418,6 +460,21 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 		btnInsertarRuta = new JButton("Insertar Ruta");
+		btnInsertarRuta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Nuevo_Circuito frame = new Nuevo_Circuito();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnInsertarRuta.setToolTipText("Agrega una ruta nueva");
 
 		GridBagConstraints gbc_btnInsertarRuta = new GridBagConstraints();
 		gbc_btnInsertarRuta.insets = new Insets(0, 0, 5, 5);
@@ -426,6 +483,7 @@ public class Vista_Usuario extends JFrame {
 		pnlRutas.add(btnInsertarRuta, gbc_btnInsertarRuta);
 		{
 			btnModificarRuta = new JButton("Modificar Ruta");
+			btnModificarRuta.setToolTipText("Modifica una ruta existente");
 			GridBagConstraints gbc_btnModificarRuta = new GridBagConstraints();
 			gbc_btnModificarRuta.insets = new Insets(0, 0, 5, 5);
 			gbc_btnModificarRuta.gridx = 6;
@@ -434,6 +492,7 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			btnEliminarRuta = new JButton("Eliminar Ruta");
+			btnEliminarRuta.setToolTipText("Elimina una ruta existente");
 			GridBagConstraints gbc_btnEliminarRuta = new GridBagConstraints();
 			gbc_btnEliminarRuta.insets = new Insets(0, 0, 5, 5);
 			gbc_btnEliminarRuta.gridx = 7;
@@ -442,6 +501,7 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlPromociones = new JPanel();
+			pnlPromociones.setToolTipText("Gestor de promociones");
 			tbpVistaUsuario.addTab("Promociones", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/dinero.png")), pnlPromociones, null);
 			GridBagLayout gbl_pnlPromociones = new GridBagLayout();
 			gbl_pnlPromociones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -497,6 +557,7 @@ public class Vista_Usuario extends JFrame {
 					cargarTablaPromo();
 					{
 						btnInsertarPromo = new JButton("Insertar Promo");
+						btnInsertarPromo.setToolTipText("Agrega promocion nueva");
 						GridBagConstraints gbc_btnInsertarPromo = new GridBagConstraints();
 						gbc_btnInsertarPromo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnInsertarPromo.gridx = 5;
@@ -505,6 +566,7 @@ public class Vista_Usuario extends JFrame {
 					}
 					{
 						btnModificarPromo = new JButton("Modificar Promo");
+						btnModificarPromo.setToolTipText("Modifica promocion existente");
 						GridBagConstraints gbc_btnModificarPromo = new GridBagConstraints();
 						gbc_btnModificarPromo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnModificarPromo.gridx = 6;
@@ -513,6 +575,7 @@ public class Vista_Usuario extends JFrame {
 					}
 					{
 						btnEliminarPromo = new JButton("Eliminar Promo");
+						btnEliminarPromo.setToolTipText("Elimina promocion existente");
 						GridBagConstraints gbc_btnEliminarPromo = new GridBagConstraints();
 						gbc_btnEliminarPromo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnEliminarPromo.gridx = 7;
@@ -524,6 +587,7 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlHistorial_1 = new JPanel();
+			pnlHistorial_1.setToolTipText("Panel de incidencias");
 			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial_1, null);
 			GridBagLayout gbl_pnlHistorial_1 = new GridBagLayout();
 			gbl_pnlHistorial_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -575,6 +639,7 @@ public class Vista_Usuario extends JFrame {
 		}
 
 		JPanel pnlTuristas = new JPanel();
+		pnlTuristas.setToolTipText("Panel de turistas");
 		tbpVistaUsuario.addTab("Turistas", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/usuario.png")), pnlTuristas, null);
 		GridBagLayout gbl_pnlTuristas = new GridBagLayout();
 		gbl_pnlTuristas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -628,6 +693,48 @@ public class Vista_Usuario extends JFrame {
 				table_turista.setRowHeight(50);
 
 				scPnlTurista.setViewportView(table_turista);
+				{
+					btnAgregarTurista = new JButton("Agregar Turista");
+					btnAgregarTurista.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							EventQueue.invokeLater(new Runnable() {
+								public void run() {
+									try {
+										Nuevo_Cliente frame = new Nuevo_Cliente();
+										frame.setVisible(true);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
+							});
+						}
+					});
+
+					btnAgregarTurista.setToolTipText("A\u00F1ade un turista nuevo");
+					GridBagConstraints gbc_btnAgregarTurista = new GridBagConstraints();
+					gbc_btnAgregarTurista.insets = new Insets(0, 0, 5, 5);
+					gbc_btnAgregarTurista.gridx = 5;
+					gbc_btnAgregarTurista.gridy = 4;
+					pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
+				}
+				{
+					btnModificarTurista = new JButton("Modificar Turista");
+					btnModificarTurista.setToolTipText("Modifica un turista existente");
+					GridBagConstraints gbc_btnModificarTurista = new GridBagConstraints();
+					gbc_btnModificarTurista.insets = new Insets(0, 0, 5, 5);
+					gbc_btnModificarTurista.gridx = 6;
+					gbc_btnModificarTurista.gridy = 4;
+					pnlTuristas.add(btnModificarTurista, gbc_btnModificarTurista);
+				}
+				{
+					btnEliminarTurista = new JButton("Eliminar Turista");
+					btnEliminarTurista.setToolTipText("Elimina un turista existente");
+					GridBagConstraints gbc_btnEliminarTurista = new GridBagConstraints();
+					gbc_btnEliminarTurista.insets = new Insets(0, 0, 5, 5);
+					gbc_btnEliminarTurista.gridx = 7;
+					gbc_btnEliminarTurista.gridy = 4;
+					pnlTuristas.add(btnEliminarTurista, gbc_btnEliminarTurista);
+				}
 				cargarTablaTurista();
 			}
 		}

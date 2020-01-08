@@ -12,6 +12,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
@@ -68,21 +70,7 @@ public class Nuevo_guia extends JFrame {
 	private JCheckBox cbIngles;
 	private JCheckBox cbPortugues;
 	private JCheckBox cbFrances;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Nuevo_guia frame = new Nuevo_guia();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -90,7 +78,6 @@ public class Nuevo_guia extends JFrame {
 	public Nuevo_guia() {
 		setVisible(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_guia.class.getResource("/Presentacion/grupo_usuarios.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 609, 460);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Nuevo Guia Turistico", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -297,7 +284,15 @@ public class Nuevo_guia extends JFrame {
 				pnlBotones.add(btnLimpiar);
 			}
 			{
-				btnAadirGuia = new JButton("AÃ±adir Guia");
+				btnAadirGuia = new JButton("Añadir Guia");
+				btnAadirGuia.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						int a=JOptionPane.showConfirmDialog(contentPane, "¿Esta seguro que desea guardar este nuevo Guia?");
+						if(a==0) {
+							dispose();
+						}
+					}
+				});
 				pnlBotones.add(btnAadirGuia);
 			}
 		}
@@ -305,6 +300,7 @@ public class Nuevo_guia extends JFrame {
 
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+
 			tfNombre.setText("");
 			tfNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 			tfNombre.requestFocus();
@@ -320,7 +316,7 @@ public class Nuevo_guia extends JFrame {
 			cbCastellano.setSelected(false);
 			cbPortugues.setSelected(false);
 			cbFrances.setSelected(false);
-			
+
 
 		}
 	}
@@ -401,8 +397,8 @@ public class Nuevo_guia extends JFrame {
 			}
 		}
 	}
-	
-	
-	
+
+
+
 }
 
