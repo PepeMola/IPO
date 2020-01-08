@@ -232,6 +232,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnDisearRuta = new JButton("Diseñar Ruta");
+				//btnDisearRuta.addActionListener(new BtnDisearRutaActionListener());
 				GridBagConstraints gbc_btnDisearRuta = new GridBagConstraints();
 				gbc_btnDisearRuta.fill = GridBagConstraints.BOTH;
 				gbc_btnDisearRuta.insets = new Insets(0, 0, 0, 5);
@@ -826,4 +827,16 @@ public class Vista_Usuario extends JFrame {
 		setBounds(anchoPantalla/4, alturaPantalla/4, anchoPantalla/2, alturaPantalla/2);
 	}
 
+	/*private class BtnDisearRutaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Ruta_Grafica ruta = new Ruta_Grafica();
+				ruta.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			}
+	}*/
+
 }
+

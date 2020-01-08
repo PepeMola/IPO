@@ -2,6 +2,7 @@ package Presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,11 +10,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Rectangle;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
 
 public class Ruta_Grafica extends JFrame {
 
+	private Ruta_Grafica ruta;
 	private JPanel contentPane;
 	private JToolBar tbBarraIconos;
 	private JButton btnCargarMapa;
@@ -25,6 +31,9 @@ public class Ruta_Grafica extends JFrame {
 	private JButton btnFarmacia;
 	private JScrollPane scPnlGrafico;
 
+	private MiMapaDibujo miMapaDibujo;
+	private ImageIcon mapa;
+
 	/**
 	 * Launch the application.
 	 */
@@ -32,8 +41,8 @@ public class Ruta_Grafica extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ruta_Grafica frame = new Ruta_Grafica();
-					frame.setVisible(true);
+					Ruta_Grafica ruta = new Ruta_Grafica();
+					ruta.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,9 +54,15 @@ public class Ruta_Grafica extends JFrame {
 	 * Create the frame.
 	 */
 	public Ruta_Grafica() {
+		ruta = new Ruta_Grafica();
 		setBounds(new Rectangle(0, 0, 700, 700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 450, 300);
+
+		miMapaDibujo = new MiMapaDibujo();
+		miMapaDibujo.setIcon(null);
+		scPnlGrafico.setViewportView(miMapaDibujo);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -57,6 +72,7 @@ public class Ruta_Grafica extends JFrame {
 			contentPane.add(tbBarraIconos, BorderLayout.NORTH);
 			{
 				btnCargarMapa = new JButton("");
+				btnCargarMapa.addActionListener(new BtnCargarMapaActionListener());
 				btnCargarMapa.setIcon(new ImageIcon(Ruta_Grafica.class.getResource("/Presentacion/cargarMapa.png")));
 				tbBarraIconos.add(btnCargarMapa);
 			}
@@ -94,7 +110,19 @@ public class Ruta_Grafica extends JFrame {
 		{
 			scPnlGrafico = new JScrollPane();
 			contentPane.add(scPnlGrafico, BorderLayout.CENTER);
+
 		}
 	}
 
+	private class BtnCargarMapaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			JFileChooser fcAbrir = new JFileChooser();
+			int valorDevuelto = fcAbrir.showOpenDialog(ruta);
+			if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
+				File file = fcAbrir.getSelectedFile();
+				mapa = new ImageIcon(file.getAbsolutePath());
+				miMapaDibujo.setIcon(mapa);
+			}
+		}
+	}
 }
