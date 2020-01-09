@@ -84,6 +84,7 @@ public class Vista_Usuario extends JFrame {
 	private JScrollPane scPnlHistorial;
 	private JTable table_historial;
 	private JButton btnDisearRuta;
+	private JButton btnDisearRuta_1;
 	private JButton btnEliminarTurista;
 	private JButton btnModificarTurista;
 	private JButton btnAgregarTurista;
@@ -249,19 +250,17 @@ public class Vista_Usuario extends JFrame {
 				pnlUsuario.add(btnAyuda, gbc_btnAyuda);
 			}
 			{
-<<<<<<< HEAD
 				btnDisearRuta = new JButton("Diseñar Ruta");
 				//btnDisearRuta.addActionListener(new BtnDisearRutaActionListener());
-=======
-				btnDisearRuta = new JButton("Dise\u00F1ar Ruta");
-				btnDisearRuta.setToolTipText("Dise\u00F1a ruta manualmente");
->>>>>>> branch 'master' of https://github.com/PepeMola/IPO.git
+				btnDisearRuta_1 = new JButton("Dise\u00F1ar Ruta");
+				//btnDisearRuta_1.addActionListener(new BtnDisearRutaActionListener());
+				btnDisearRuta_1.setToolTipText("Dise\u00F1a ruta manualmente");
 				GridBagConstraints gbc_btnDisearRuta = new GridBagConstraints();
 				gbc_btnDisearRuta.fill = GridBagConstraints.BOTH;
 				gbc_btnDisearRuta.insets = new Insets(0, 0, 0, 5);
 				gbc_btnDisearRuta.gridx = 4;
 				gbc_btnDisearRuta.gridy = 6;
-				pnlUsuario.add(btnDisearRuta, gbc_btnDisearRuta);
+				pnlUsuario.add(btnDisearRuta_1, gbc_btnDisearRuta);
 			}
 		}
 		{
@@ -945,5 +944,11 @@ public class Vista_Usuario extends JFrame {
 			}
 	}*/
 
+/*	private class BtnDisearRutaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Ruta_Grafica ruta = new Ruta_Grafica();
+			ruta.setVisible(true);
+		}
+	}*/
 }
 
