@@ -105,6 +105,7 @@ public class Vista_Usuario extends JFrame {
 	private JLabel lblIntereses;
 	private JTextField txtTipo;
 	private JTextPane tpIntereses;
+	private JButton btnRefrescarPromociones;
 
 	public Vista_Usuario(Usuario u) {
 		setFont(new Font("Dialog", Font.BOLD, 12));
@@ -367,9 +368,9 @@ public class Vista_Usuario extends JFrame {
 									e.printStackTrace();
 								}
 							}
-							
+
 						});
-						
+
 					}
 				});
 				GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
@@ -580,6 +581,8 @@ public class Vista_Usuario extends JFrame {
 					cargarTablaPromo();
 					{
 						btnInsertarPromo = new JButton("Insertar Promo");
+						btnInsertarPromo.addActionListener(new BtnInsertarPromoActionListener());
+
 						btnInsertarPromo.setToolTipText("Agrega promocion nueva");
 						GridBagConstraints gbc_btnInsertarPromo = new GridBagConstraints();
 						gbc_btnInsertarPromo.insets = new Insets(0, 0, 5, 5);
@@ -606,6 +609,15 @@ public class Vista_Usuario extends JFrame {
 						pnlPromociones.add(btnEliminarPromo, gbc_btnEliminarPromo);
 					}
 				}
+			}
+			{
+				btnRefrescarPromociones = new JButton("Refrescar Promociones");
+				btnRefrescarPromociones.addActionListener(new BtnRefrescarPromocionesActionListener());
+				GridBagConstraints gbc_btnRefrescarPromociones = new GridBagConstraints();
+				gbc_btnRefrescarPromociones.insets = new Insets(0, 0, 0, 5);
+				gbc_btnRefrescarPromociones.gridx = 6;
+				gbc_btnRefrescarPromociones.gridy = 5;
+				pnlPromociones.add(btnRefrescarPromociones, gbc_btnRefrescarPromociones);
 			}
 		}
 		{
@@ -817,13 +829,13 @@ public class Vista_Usuario extends JFrame {
 						});
 					}
 				});
-				
-									btnAgregarTurista.setToolTipText("A\u00F1ade un turista nuevo");
-									GridBagConstraints gbc_btnAgregarTurista = new GridBagConstraints();
-									gbc_btnAgregarTurista.insets = new Insets(0, 0, 5, 5);
-									gbc_btnAgregarTurista.gridx = 3;
-									gbc_btnAgregarTurista.gridy = 4;
-									pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
+
+				btnAgregarTurista.setToolTipText("A\u00F1ade un turista nuevo");
+				GridBagConstraints gbc_btnAgregarTurista = new GridBagConstraints();
+				gbc_btnAgregarTurista.insets = new Insets(0, 0, 5, 5);
+				gbc_btnAgregarTurista.gridx = 3;
+				gbc_btnAgregarTurista.gridy = 4;
+				pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
 				{
 					btnModificarTurista = new JButton("Modificar Turista");
 					btnModificarTurista.setToolTipText("Modifica un turista existente");
@@ -850,7 +862,7 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaHistorial() {
-		
+
 		ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
 
 		historial = h.getHistorial();
@@ -881,7 +893,7 @@ public class Vista_Usuario extends JFrame {
 	}
 
 	private void cargarHistorialPendiente() {
-		
+
 		ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
 		int pendientes = 0;
 		int pos = 0;
@@ -891,7 +903,7 @@ public class Vista_Usuario extends JFrame {
 				pendientes++;
 			}
 		}
-		
+
 		Object[][] datos = new Object[pendientes][7];
 		for (int i = 0; i < historial.size(); i++) {
 			if(historial.get(i).isPendiente()) {
@@ -922,7 +934,7 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaTurista() {
-		
+
 		ArrayList<Turista> turista = new ArrayList<Turista>();
 
 		turista = h.getTuristas();
@@ -961,7 +973,7 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaPromo() {
-	
+
 		ArrayList<Promocion> promocion = new ArrayList<Promocion>();
 
 		promocion = h.getPromocion();
@@ -1108,7 +1120,6 @@ public class Vista_Usuario extends JFrame {
 	}
 	private class BtnRefrescarTablaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-		
 			cargarTablaGuia();
 		}
 	}
@@ -1123,5 +1134,26 @@ public class Vista_Usuario extends JFrame {
 			txtTipo.setText(g.getTipo());
 		}
 	}
+	private class BtnInsertarPromoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Nueva_Promocion promo = new Nueva_Promocion(h);
+						promo.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+	}
+	private class BtnRefrescarPromocionesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			cargarTablaPromo();
+		}
+	}
 }
+
+
 

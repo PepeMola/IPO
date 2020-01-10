@@ -56,8 +56,8 @@ public class Hardcoded {
 		return promocion;
 	}
 
-	public void setPromocion(ArrayList<Promocion> promocion) {
-		this.promocion = promocion;
+	public void setPromocion(Promocion promocion) {
+		this.promocion.add(promocion);
 	}
 
 	public ArrayList<Grupo_turistas> rellenarGrupoTuristas() {
