@@ -51,7 +51,6 @@ public class Nuevo_Cliente extends JFrame {
 	public Nuevo_Cliente(Hardcoded h) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_Cliente.class.getResource("/Presentacion/grupo_usuarios.png")));
 		setTitle("Introducir Turistas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 362);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -162,8 +161,10 @@ public class Nuevo_Cliente extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 
 		txtNumturistas = new JTextField();
+		txtNumturistas.setEditable(false);
 		txtNumturistas.addKeyListener(new TxtNumturistasKeyListener());
 		GridBagConstraints gbc_txtNumturistas = new GridBagConstraints();
+		gbc_txtNumturistas.anchor = GridBagConstraints.WEST;
 		gbc_txtNumturistas.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNumturistas.gridx = 2;
 		gbc_txtNumturistas.gridy = 5;
@@ -225,7 +226,6 @@ public class Nuevo_Cliente extends JFrame {
 		txtDescripcion.setColumns(10);
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setSelectedIcon(null);
-		btnAgregar.setEnabled(false);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Turista t = new Turista();

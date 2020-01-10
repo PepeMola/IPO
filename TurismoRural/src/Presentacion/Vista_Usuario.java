@@ -114,6 +114,7 @@ public class Vista_Usuario extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		centrarPantalla();
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(152, 251, 152));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -132,8 +133,11 @@ public class Vista_Usuario extends JFrame {
 		contentPane.add(tbpVistaUsuario, gbc_tbpVistaUsuario);
 		{
 			pnlUsuario = new JPanel();
+			pnlUsuario.setBackground(new Color(152, 251, 152));
+			pnlUsuario.setForeground(new Color(0, 0, 0));
 			pnlUsuario.setToolTipText("Informacion del usuario");
 			tbpVistaUsuario.addTab("Usuario", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/grupo_usuarios.png")), pnlUsuario, null);
+			tbpVistaUsuario.setBackgroundAt(0, new Color(233, 150, 122));
 			tbpVistaUsuario.setEnabledAt(0, true);
 			GridBagLayout gbl_pnlUsuario = new GridBagLayout();
 			gbl_pnlUsuario.columnWidths = new int[]{44, 56, 0, 133, 0, 0, 0, 0, 0, 0};
@@ -165,6 +169,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfNombre = new JTextField();
+				tfNombre.setBackground(new Color(152, 251, 152));
 				tfNombre.setEditable(false);
 				tfNombre.setText(u.getNombre());
 				GridBagConstraints gbc_tfNombre = new GridBagConstraints();
@@ -189,6 +194,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfApellidos = new JTextField();
+				tfApellidos.setBackground(new Color(152, 251, 152));
 				tfApellidos.setEditable(false);
 				tfApellidos.setText(u.getApellidos());
 				GridBagConstraints gbc_tfApellidos = new GridBagConstraints();
@@ -213,6 +219,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfAcceso = new JTextField();
+				tfAcceso.setBackground(new Color(152, 251, 152));
 				tfAcceso.setEditable(false);
 				Date date = new Date();
 				tfAcceso.setText(date.toString());
@@ -238,6 +245,7 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfIdentificador = new JTextField();
+				tfIdentificador.setBackground(new Color(152, 251, 152));
 				tfIdentificador.setEditable(false);
 				tfIdentificador.setText(u.getNif());
 				GridBagConstraints gbc_tfIdentificador = new GridBagConstraints();
@@ -278,8 +286,10 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlGuias = new JPanel();
+			pnlGuias.setBackground(new Color(152, 251, 152));
 			pnlGuias.setToolTipText("Gestor de Guias");
 			tbpVistaUsuario.addTab("Guias Turisticos", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/networking.png")), pnlGuias, null);
+			tbpVistaUsuario.setBackgroundAt(1, new Color(233, 150, 122));
 			GridBagLayout gbl_pnlGuias = new GridBagLayout();
 			gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlGuias.rowHeights = new int[]{0, 0, 71, 0, 0, 0};
@@ -408,8 +418,10 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 		pnlRutas = new JPanel();
+		pnlRutas.setBackground(new Color(152, 251, 152));
 		pnlRutas.setToolTipText("Gestor de rutas");
 		tbpVistaUsuario.addTab("Rutas Turisticas", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/cargarMapa.png")), pnlRutas, null);
+		tbpVistaUsuario.setBackgroundAt(2, new Color(233, 150, 122));
 		GridBagLayout gbl_pnlRutas = new GridBagLayout();
 		gbl_pnlRutas.columnWidths = new int[]{0, 0, 0, 0, 0, 25, 27, 0, 0, 0};
 		gbl_pnlRutas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -524,8 +536,10 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlPromociones = new JPanel();
+			pnlPromociones.setBackground(new Color(152, 251, 152));
 			pnlPromociones.setToolTipText("Gestor de promociones");
 			tbpVistaUsuario.addTab("Promociones", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/dinero.png")), pnlPromociones, null);
+			tbpVistaUsuario.setBackgroundAt(3, new Color(233, 150, 122));
 			GridBagLayout gbl_pnlPromociones = new GridBagLayout();
 			gbl_pnlPromociones.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlPromociones.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -622,8 +636,10 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			pnlHistorial = new JPanel();
+			pnlHistorial.setBackground(new Color(152, 251, 152));
 			pnlHistorial.setToolTipText("Panel de incidencias");
 			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial, null);
+			tbpVistaUsuario.setBackgroundAt(4, new Color(233, 150, 122));
 			GridBagLayout gbl_pnlHistorial = new GridBagLayout();
 			gbl_pnlHistorial.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlHistorial.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -693,8 +709,10 @@ public class Vista_Usuario extends JFrame {
 		}
 
 		JPanel pnlTuristas = new JPanel();
+		pnlTuristas.setBackground(new Color(152, 251, 152));
 		pnlTuristas.setToolTipText("Panel de turistas");
 		tbpVistaUsuario.addTab("Turistas", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/usuario.png")), pnlTuristas, null);
+		tbpVistaUsuario.setBackgroundAt(5, new Color(233, 150, 122));
 		GridBagLayout gbl_pnlTuristas = new GridBagLayout();
 		gbl_pnlTuristas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_pnlTuristas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
