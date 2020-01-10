@@ -45,10 +45,13 @@ public class Nuevo_Cliente extends JFrame {
 	private JPanel pnlInfo;
 	private JLabel lblInfo;
 	private JButton btnAgregar;
+	private JFrame f;
 	/**
 	 * Create the frame.
+	 * @param t 
 	 */
-	public Nuevo_Cliente(Hardcoded h) {
+	public Nuevo_Cliente(Hardcoded h, Turista t) {
+		f = this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_Cliente.class.getResource("/Presentacion/grupo_usuarios.png")));
 		setTitle("Introducir Turistas");
 		setBounds(100, 100, 452, 362);
@@ -161,7 +164,6 @@ public class Nuevo_Cliente extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 
 		txtNumturistas = new JTextField();
-		txtNumturistas.setEditable(false);
 		txtNumturistas.addKeyListener(new TxtNumturistasKeyListener());
 		GridBagConstraints gbc_txtNumturistas = new GridBagConstraints();
 		gbc_txtNumturistas.anchor = GridBagConstraints.WEST;
@@ -276,6 +278,29 @@ public class Nuevo_Cliente extends JFrame {
 		gbc_btnAtras.gridx = 3;
 		gbc_btnAtras.gridy = 9;
 		contentPane.add(btnAtras, gbc_btnAtras);
+		if (t != null) {
+			rellenarTuristas(h, t);
+		}
+	}
+
+	private void rellenarTuristas(Hardcoded h, Turista t) {
+		Grupo_turistas g = new Grupo_turistas();
+		for (int i = 0; i < h.getGrupoTuristas().size(); i++) {
+			if (h.getGrupoTuristas().get(i).getId() == t.getId_grupo()) {
+				g = h.getGrupoTuristas().get(i);
+			}
+		}
+		textNombre.setText(t.getNombre());
+		textApellido.setText(t.getApellido());
+		textEmail.setText(t.getEmail());
+		textDNI.setText(t.getDni());
+		textTelefono.setText(t.getTelefono());
+	
+		txtNumturistas.setText(g.getNum());
+		txtDescripcion.setText(g.getDescripcion());
+		textTipo.setText(g.getTipo());
+		textIntereses.setText(g.getIntereses());
+		
 	}
 
 	private class TxtNumturistasKeyListener extends KeyAdapter {
@@ -284,7 +309,8 @@ public class Nuevo_Cliente extends JFrame {
 			if (Integer.parseInt(txtNumturistas.getText())>=4 || Integer.parseInt(txtNumturistas.getText())<21) {
 				btnAgregar.setVisible(true);
 			}else {
-				lblInfo.setText("Por favor, introduzca un numero entre 4 y 20.");
+				JOptionPane.showMessageDialog(f, "Los grupos son de 4 a 20 personas,"
+						+ "introduzca numero valido, por favor.","Error message", JOptionPane.ERROR_MESSAGE);
 				txtNumturistas.requestFocus();
 			}
 

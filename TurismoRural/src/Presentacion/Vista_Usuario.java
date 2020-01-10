@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -68,16 +70,12 @@ public class Vista_Usuario extends JFrame {
 	private JButton btnAyuda;
 	private JScrollPane scPnlRutas;
 	private JTable table_Rutas;
-	private JPanel pnlInfoRutas;
-	private JTextArea taInfoRutas;
 	private JScrollPane scPnlGuia;
 	private JTextField tfNombre;
 	private JTextField tfApellidos;
 	private JTextField tfIdentificador;
 	private JTextField tfAcceso;
 	private JTable table_guia;
-	private JPanel pnlInfoGuia;
-	private JTextArea taInfoGuia;
 	private JScrollPane scPnlPromocion;
 	private JTable table_promocion;
 	private JButton btnInsertarPromo;
@@ -106,8 +104,11 @@ public class Vista_Usuario extends JFrame {
 	private JTextField txtTipo;
 	private JTextPane tpIntereses;
 	private JButton btnRefrescarPromociones;
+	private JButton btnRefrescarTuristas;
+	private JFrame f;
 
 	public Vista_Usuario(Usuario u) {
+		f = this;
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setTitle("Gestor de Turismo Rural");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista_Usuario.class.getResource("/Presentacion/usuario.png")));
@@ -293,7 +294,7 @@ public class Vista_Usuario extends JFrame {
 			GridBagLayout gbl_pnlGuias = new GridBagLayout();
 			gbl_pnlGuias.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_pnlGuias.rowHeights = new int[]{0, 0, 71, 0, 0, 0};
-			gbl_pnlGuias.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_pnlGuias.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 			gbl_pnlGuias.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 			pnlGuias.setLayout(gbl_pnlGuias);
 			{
@@ -347,22 +348,6 @@ public class Vista_Usuario extends JFrame {
 						cargarTablaGuia();
 					}
 				}
-				{
-					pnlInfoGuia = new JPanel();
-					GridBagConstraints gbc_pnlInfoGuia = new GridBagConstraints();
-					gbc_pnlInfoGuia.gridheight = 2;
-					gbc_pnlInfoGuia.gridwidth = 3;
-					gbc_pnlInfoGuia.insets = new Insets(0, 0, 0, 5);
-					gbc_pnlInfoGuia.fill = GridBagConstraints.BOTH;
-					gbc_pnlInfoGuia.gridx = 0;
-					gbc_pnlInfoGuia.gridy = 3;
-					pnlGuias.add(pnlInfoGuia, gbc_pnlInfoGuia);
-					pnlInfoGuia.setLayout(new BorderLayout(0, 0));
-					{
-						taInfoGuia = new JTextArea();
-						pnlInfoGuia.add(taInfoGuia, BorderLayout.CENTER);
-					}
-				}
 			}
 			{
 				btnInsertarGuia = new JButton("Insertar Guia");
@@ -385,34 +370,35 @@ public class Vista_Usuario extends JFrame {
 				});
 				GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
 				gbc_btnInsertarGuia.insets = new Insets(0, 0, 5, 5);
-				gbc_btnInsertarGuia.gridx = 3;
+				gbc_btnInsertarGuia.gridx = 2;
 				gbc_btnInsertarGuia.gridy = 3;
 				pnlGuias.add(btnInsertarGuia, gbc_btnInsertarGuia);
 			}
 			{
-				btnModificarGuia = new JButton("Modificar Guia");
-				btnModificarGuia.setToolTipText("Modifica un guia existente");
-				GridBagConstraints gbc_btnModificarGuia = new GridBagConstraints();
-				gbc_btnModificarGuia.insets = new Insets(0, 0, 5, 5);
-				gbc_btnModificarGuia.gridx = 4;
-				gbc_btnModificarGuia.gridy = 3;
-				pnlGuias.add(btnModificarGuia, gbc_btnModificarGuia);
-			}
-			{
-				btnEliminarGuia = new JButton("Eliminar Guia");
-				btnEliminarGuia.setToolTipText("Elimina un guia existente");
-				GridBagConstraints gbc_btnEliminarGuia = new GridBagConstraints();
-				gbc_btnEliminarGuia.insets = new Insets(0, 0, 5, 5);
-				gbc_btnEliminarGuia.gridx = 5;
-				gbc_btnEliminarGuia.gridy = 3;
-				pnlGuias.add(btnEliminarGuia, gbc_btnEliminarGuia);
+				{
+					btnModificarGuia = new JButton("Modificar Guia");
+					btnModificarGuia.setToolTipText("Modifica un guia existente");
+					GridBagConstraints gbc_btnModificarGuia = new GridBagConstraints();
+					gbc_btnModificarGuia.insets = new Insets(0, 0, 5, 5);
+					gbc_btnModificarGuia.gridx = 3;
+					gbc_btnModificarGuia.gridy = 3;
+					pnlGuias.add(btnModificarGuia, gbc_btnModificarGuia);
+				}
 			}
 			{
 				btnRefrescarTabla = new JButton("Refrescar Tabla");
 				btnRefrescarTabla.addActionListener(new BtnRefrescarTablaActionListener());
+				btnEliminarGuia = new JButton("Eliminar Guia");
+				btnEliminarGuia.addActionListener(new BtnEliminarGuiaActionListener());
+				btnEliminarGuia.setToolTipText("Elimina un guia existente");
+				GridBagConstraints gbc_btnEliminarGuia = new GridBagConstraints();
+				gbc_btnEliminarGuia.insets = new Insets(0, 0, 5, 5);
+				gbc_btnEliminarGuia.gridx = 4;
+				gbc_btnEliminarGuia.gridy = 3;
+				pnlGuias.add(btnEliminarGuia, gbc_btnEliminarGuia);
 				GridBagConstraints gbc_btnRefrescarTabla = new GridBagConstraints();
 				gbc_btnRefrescarTabla.insets = new Insets(0, 0, 0, 5);
-				gbc_btnRefrescarTabla.gridx = 4;
+				gbc_btnRefrescarTabla.gridx = 3;
 				gbc_btnRefrescarTabla.gridy = 4;
 				pnlGuias.add(btnRefrescarTabla, gbc_btnRefrescarTabla);
 			}
@@ -425,7 +411,7 @@ public class Vista_Usuario extends JFrame {
 		GridBagLayout gbl_pnlRutas = new GridBagLayout();
 		gbl_pnlRutas.columnWidths = new int[]{0, 0, 0, 0, 0, 25, 27, 0, 0, 0};
 		gbl_pnlRutas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlRutas.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlRutas.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_pnlRutas.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlRutas.setLayout(gbl_pnlRutas);
 
@@ -435,10 +421,10 @@ public class Vista_Usuario extends JFrame {
 				scPnlRutas.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Nuestras Rutas Establecidas", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				GridBagConstraints gbc_scPnlRutas = new GridBagConstraints();
 				gbc_scPnlRutas.gridheight = 3;
-				gbc_scPnlRutas.gridwidth = 7;
-				gbc_scPnlRutas.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlRutas.gridwidth = 9;
+				gbc_scPnlRutas.insets = new Insets(0, 0, 5, 0);
 				gbc_scPnlRutas.fill = GridBagConstraints.BOTH;
-				gbc_scPnlRutas.gridx = 1;
+				gbc_scPnlRutas.gridx = 0;
 				gbc_scPnlRutas.gridy = 0;
 				pnlRutas.add(scPnlRutas, gbc_scPnlRutas);
 				{
@@ -478,22 +464,6 @@ public class Vista_Usuario extends JFrame {
 				}
 			}
 		}
-		{
-			pnlInfoRutas = new JPanel();
-			GridBagConstraints gbc_pnlInfoRutas = new GridBagConstraints();
-			gbc_pnlInfoRutas.gridheight = 2;
-			gbc_pnlInfoRutas.gridwidth = 3;
-			gbc_pnlInfoRutas.insets = new Insets(0, 0, 5, 5);
-			gbc_pnlInfoRutas.fill = GridBagConstraints.BOTH;
-			gbc_pnlInfoRutas.gridx = 1;
-			gbc_pnlInfoRutas.gridy = 3;
-			pnlRutas.add(pnlInfoRutas, gbc_pnlInfoRutas);
-			pnlInfoRutas.setLayout(new BorderLayout(0, 0));
-			{
-				taInfoRutas = new JTextArea();
-				pnlInfoRutas.add(taInfoRutas);
-			}
-		}
 		btnInsertarRuta = new JButton("Insertar Ruta");
 		btnInsertarRuta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -527,6 +497,7 @@ public class Vista_Usuario extends JFrame {
 		}
 		{
 			btnEliminarRuta = new JButton("Eliminar Ruta");
+			btnEliminarRuta.addActionListener(new BtnEliminarRutaActionListener());
 			btnEliminarRuta.setToolTipText("Elimina una ruta existente");
 			GridBagConstraints gbc_btnEliminarRuta = new GridBagConstraints();
 			gbc_btnEliminarRuta.insets = new Insets(0, 0, 5, 5);
@@ -551,8 +522,8 @@ public class Vista_Usuario extends JFrame {
 				scPnlPromocion.setBorder(new TitledBorder(null, "Nuestras Promociones", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_scPnlPromocion = new GridBagConstraints();
 				gbc_scPnlPromocion.gridheight = 4;
-				gbc_scPnlPromocion.gridwidth = 7;
-				gbc_scPnlPromocion.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlPromocion.gridwidth = 9;
+				gbc_scPnlPromocion.insets = new Insets(0, 0, 5, 0);
 				gbc_scPnlPromocion.fill = GridBagConstraints.BOTH;
 				gbc_scPnlPromocion.gridx = 0;
 				gbc_scPnlPromocion.gridy = 0;
@@ -600,39 +571,41 @@ public class Vista_Usuario extends JFrame {
 						btnInsertarPromo.setToolTipText("Agrega promocion nueva");
 						GridBagConstraints gbc_btnInsertarPromo = new GridBagConstraints();
 						gbc_btnInsertarPromo.insets = new Insets(0, 0, 5, 5);
-						gbc_btnInsertarPromo.gridx = 5;
+						gbc_btnInsertarPromo.gridx = 4;
 						gbc_btnInsertarPromo.gridy = 4;
 						pnlPromociones.add(btnInsertarPromo, gbc_btnInsertarPromo);
 					}
 					{
 						btnModificarPromo = new JButton("Modificar Promo");
+						btnModificarPromo.addActionListener(new BtnModificarPromoActionListener());
 						btnModificarPromo.setToolTipText("Modifica promocion existente");
 						GridBagConstraints gbc_btnModificarPromo = new GridBagConstraints();
 						gbc_btnModificarPromo.insets = new Insets(0, 0, 5, 5);
-						gbc_btnModificarPromo.gridx = 6;
+						gbc_btnModificarPromo.gridx = 5;
 						gbc_btnModificarPromo.gridy = 4;
 						pnlPromociones.add(btnModificarPromo, gbc_btnModificarPromo);
-					}
-					{
-						btnEliminarPromo = new JButton("Eliminar Promo");
-						btnEliminarPromo.setToolTipText("Elimina promocion existente");
-						GridBagConstraints gbc_btnEliminarPromo = new GridBagConstraints();
-						gbc_btnEliminarPromo.insets = new Insets(0, 0, 5, 5);
-						gbc_btnEliminarPromo.gridx = 7;
-						gbc_btnEliminarPromo.gridy = 4;
-						pnlPromociones.add(btnEliminarPromo, gbc_btnEliminarPromo);
 					}
 				}
 			}
 			{
-				btnRefrescarPromociones = new JButton("Refrescar Promociones");
-				btnRefrescarPromociones.addActionListener(new BtnRefrescarPromocionesActionListener());
-				GridBagConstraints gbc_btnRefrescarPromociones = new GridBagConstraints();
-				gbc_btnRefrescarPromociones.insets = new Insets(0, 0, 0, 5);
-				gbc_btnRefrescarPromociones.gridx = 6;
-				gbc_btnRefrescarPromociones.gridy = 5;
-				pnlPromociones.add(btnRefrescarPromociones, gbc_btnRefrescarPromociones);
+				{
+					btnEliminarPromo = new JButton("Eliminar Promo");
+					btnEliminarPromo.addActionListener(new BtnEliminarPromoActionListener());
+					btnEliminarPromo.setToolTipText("Elimina promocion existente");
+					GridBagConstraints gbc_btnEliminarPromo = new GridBagConstraints();
+					gbc_btnEliminarPromo.insets = new Insets(0, 0, 5, 5);
+					gbc_btnEliminarPromo.gridx = 6;
+					gbc_btnEliminarPromo.gridy = 4;
+					pnlPromociones.add(btnEliminarPromo, gbc_btnEliminarPromo);
+				}
 			}
+			btnRefrescarPromociones = new JButton("Refrescar Promociones");
+			btnRefrescarPromociones.addActionListener(new BtnRefrescarPromocionesActionListener());
+			GridBagConstraints gbc_btnRefrescarPromociones = new GridBagConstraints();
+			gbc_btnRefrescarPromociones.insets = new Insets(0, 0, 0, 5);
+			gbc_btnRefrescarPromociones.gridx = 5;
+			gbc_btnRefrescarPromociones.gridy = 5;
+			pnlPromociones.add(btnRefrescarPromociones, gbc_btnRefrescarPromociones);
 		}
 		{
 			pnlHistorial = new JPanel();
@@ -686,23 +659,23 @@ public class Vista_Usuario extends JFrame {
 
 					scPnlHistorial.setViewportView(table_historial);
 					{
-						btnHistorialesPendientes = new JButton("Historiales Pendientes");
-						btnHistorialesPendientes.addActionListener(new BtnHistorialesPendientesActionListener());
 						{
 							btnHistorialFinalizados = new JButton("Historial Finalizados");
 							btnHistorialFinalizados.addActionListener(new BtnHistorialFinalizadosActionListener());
 							GridBagConstraints gbc_btnHistorialFinalizados = new GridBagConstraints();
 							gbc_btnHistorialFinalizados.insets = new Insets(0, 0, 5, 5);
-							gbc_btnHistorialFinalizados.gridx = 6;
+							gbc_btnHistorialFinalizados.gridx = 4;
 							gbc_btnHistorialFinalizados.gridy = 4;
 							pnlHistorial.add(btnHistorialFinalizados, gbc_btnHistorialFinalizados);
 						}
-						GridBagConstraints gbc_btnHistorialesPendientes = new GridBagConstraints();
-						gbc_btnHistorialesPendientes.insets = new Insets(0, 0, 5, 5);
-						gbc_btnHistorialesPendientes.gridx = 7;
-						gbc_btnHistorialesPendientes.gridy = 4;
-						pnlHistorial.add(btnHistorialesPendientes, gbc_btnHistorialesPendientes);
 					}
+					btnHistorialesPendientes = new JButton("Historiales Pendientes");
+					btnHistorialesPendientes.addActionListener(new BtnHistorialesPendientesActionListener());
+					GridBagConstraints gbc_btnHistorialesPendientes = new GridBagConstraints();
+					gbc_btnHistorialesPendientes.insets = new Insets(0, 0, 5, 5);
+					gbc_btnHistorialesPendientes.gridx = 6;
+					gbc_btnHistorialesPendientes.gridy = 4;
+					pnlHistorial.add(btnHistorialesPendientes, gbc_btnHistorialesPendientes);
 					cargarTablaHistorial();
 				}
 			}
@@ -772,7 +745,7 @@ public class Vista_Usuario extends JFrame {
 						scPaneGrupos = new JScrollPane();
 						scPaneGrupos.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion de Grupo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 						GridBagConstraints gbc_scPaneGrupos = new GridBagConstraints();
-						gbc_scPaneGrupos.gridheight = 5;
+						gbc_scPaneGrupos.gridheight = 4;
 						gbc_scPaneGrupos.gridwidth = 5;
 						gbc_scPaneGrupos.insets = new Insets(0, 0, 5, 0);
 						gbc_scPaneGrupos.fill = GridBagConstraints.BOTH;
@@ -840,12 +813,12 @@ public class Vista_Usuario extends JFrame {
 							}
 							{
 								txtTipo = new JTextField();
+								txtTipo.setHorizontalAlignment(SwingConstants.LEFT);
 								txtTipo.setEditable(false);
 								GridBagConstraints gbc_txtTipo = new GridBagConstraints();
-								gbc_txtTipo.anchor = GridBagConstraints.NORTHEAST;
+								gbc_txtTipo.anchor = GridBagConstraints.NORTHWEST;
 								gbc_txtTipo.insets = new Insets(0, 0, 5, 0);
-								gbc_txtTipo.gridwidth = 2;
-								gbc_txtTipo.gridx = 0;
+								gbc_txtTipo.gridx = 1;
 								gbc_txtTipo.gridy = 3;
 								pnlInfoGrupo.add(txtTipo, gbc_txtTipo);
 								txtTipo.setColumns(10);
@@ -879,7 +852,7 @@ public class Vista_Usuario extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									Nuevo_Cliente frame = new Nuevo_Cliente(h);
+									Nuevo_Cliente frame = new Nuevo_Cliente(h, null);
 									frame.setVisible(true);
 								} catch (Exception e) {
 									e.printStackTrace();
@@ -897,6 +870,7 @@ public class Vista_Usuario extends JFrame {
 				pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
 				{
 					btnModificarTurista = new JButton("Modificar Turista");
+					btnModificarTurista.addActionListener(new BtnModificarTuristaActionListener());
 					btnModificarTurista.setToolTipText("Modifica un turista existente");
 					GridBagConstraints gbc_btnModificarTurista = new GridBagConstraints();
 					gbc_btnModificarTurista.insets = new Insets(0, 0, 5, 5);
@@ -906,12 +880,23 @@ public class Vista_Usuario extends JFrame {
 				}
 				{
 					btnEliminarTurista = new JButton("Eliminar Turista");
+					btnEliminarTurista.addActionListener(new BtnEliminarTuristaActionListener());
+
 					btnEliminarTurista.setToolTipText("Elimina un turista existente");
 					GridBagConstraints gbc_btnEliminarTurista = new GridBagConstraints();
 					gbc_btnEliminarTurista.insets = new Insets(0, 0, 5, 5);
 					gbc_btnEliminarTurista.gridx = 5;
 					gbc_btnEliminarTurista.gridy = 4;
 					pnlTuristas.add(btnEliminarTurista, gbc_btnEliminarTurista);
+				}
+				{
+					btnRefrescarTuristas = new JButton("Refrescar Turistas");
+					btnRefrescarTuristas.addActionListener(new BtnRefrescarTuristasActionListener());
+					GridBagConstraints gbc_btnRefrescarTuristas = new GridBagConstraints();
+					gbc_btnRefrescarTuristas.insets = new Insets(0, 0, 0, 5);
+					gbc_btnRefrescarTuristas.gridx = 4;
+					gbc_btnRefrescarTuristas.gridy = 5;
+					pnlTuristas.add(btnRefrescarTuristas, gbc_btnRefrescarTuristas);
 				}
 				cargarTablaTurista();
 			}
@@ -1198,7 +1183,7 @@ public class Vista_Usuario extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Nueva_Promocion promo = new Nueva_Promocion(h);
+						Nueva_Promocion promo = new Nueva_Promocion(h, null);
 						promo.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -1210,6 +1195,100 @@ public class Vista_Usuario extends JFrame {
 	private class BtnRefrescarPromocionesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			cargarTablaPromo();
+		}
+	}
+	private class BtnRefrescarTuristasActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			cargarTablaTurista();
+		}
+	}
+	private class BtnEliminarTuristaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_turista.getSelectedRow();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				h.removeTurista(selected);
+				cargarTablaTurista();
+			}
+		}
+	}
+	private class BtnEliminarGuiaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_guia.getSelectedRow();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				h.removeGuia(selected);
+				cargarTablaGuia();
+			}
+		}
+	}
+	private class BtnEliminarRutaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_Rutas.getSelectedRow();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				h.removeRuta(selected);
+				cargarTablaRutas();
+			}
+		}
+	}
+	private class BtnEliminarPromoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_promocion.getSelectedRow();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				h.removePromo(selected);
+				cargarTablaPromo();
+			}
+		}
+	}
+	private class BtnModificarPromoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_promocion.getSelectedRow();
+			Promocion p = new Promocion();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				p = h.getPromocion().get(selected);
+				try {
+					h.removePromo(selected);
+					cargarTablaPromo();
+					Nueva_Promocion promo = new Nueva_Promocion(h, p);
+					promo.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+			}
+		}
+	}
+	private class BtnModificarTuristaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int selected = table_turista.getSelectedRow();
+			Turista t = new Turista();
+			if(selected == -1) {
+				JOptionPane.showMessageDialog(f, "Seleccione alguna fila.","Error message", JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+
+				try {
+					t = h.getTuristas().get(selected);
+					h.removeTurista(selected);
+					cargarTablaTurista();
+					Nuevo_Cliente frame = new Nuevo_Cliente(h,t);
+					frame.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+			}
 		}
 	}
 }

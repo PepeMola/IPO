@@ -216,4 +216,22 @@ public class Hardcoded {
 		this.usuario.add(usuario);
 	}
 
+	public void removeTurista(int selected) {
+		this.turistas.remove(selected);
+		
+	}
+
+	public void removeGuia(int selected) {
+		this.guia.remove(selected);
+		
+	}
+
+	public void removeRuta(int selected) {
+		this.ruta.remove(selected);
+	}
+
+	public void removePromo(int selected) {
+		this.promocion.remove(selected);
+	}
+
 }

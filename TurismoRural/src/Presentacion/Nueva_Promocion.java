@@ -51,7 +51,9 @@ public class Nueva_Promocion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Nueva_Promocion(Hardcoded h) {
+	public Nueva_Promocion(Hardcoded h, Promocion p) {
+
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nueva_Promocion.class.getResource("/Presentacion/ok.png")));
 		setTitle("Nueva Promocion");
 		setBounds(100, 100, 450, 300);
@@ -208,13 +210,27 @@ public class Nueva_Promocion extends JFrame {
 				gbc_btnLimpiar.gridy = 7;
 				contentPane.add(btnLimpiar, gbc_btnLimpiar);
 			}
-			
+
 			GridBagConstraints gbc_btnInsertarPromocion = new GridBagConstraints();
 			gbc_btnInsertarPromocion.gridwidth = 2;
 			gbc_btnInsertarPromocion.gridx = 4;
 			gbc_btnInsertarPromocion.gridy = 7;
 			contentPane.add(btnInsertarPromocion, gbc_btnInsertarPromocion);
 		}
+		if(p != null) {
+			btnLimpiar.setEnabled(false);
+			rellenarCampos(p);
+		}
+	}
+
+	private void rellenarCampos(Promocion p) {
+		System.out.println(p.getDto());
+		tfDescuento.setText(p.getDto());
+		tfDuracion.setText(p.getDuracion());
+		tfRuta.setText(p.getRuta());
+		tpDescripcion.setText(p.getDescripcion());
+		
+		
 	}
 
 	private class MiFocusListener extends FocusAdapter {
@@ -227,8 +243,8 @@ public class Nueva_Promocion extends JFrame {
 			e.getComponent().setBackground(new Color(250,250,250));
 		}
 	}
-	
-	
+
+
 	private class BtnInsertarPromocionActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Promocion p = new Promocion();
@@ -253,7 +269,7 @@ public class Nueva_Promocion extends JFrame {
 				tfDescuento.setBorder(bordeVerde);
 				tfRuta.requestFocus();
 			}
-			
+
 		}
 	}
 	private class TfRutaActionListener implements ActionListener {
@@ -265,7 +281,7 @@ public class Nueva_Promocion extends JFrame {
 				tfRuta.setBorder(bordeVerde);
 				tfDuracion.requestFocus();
 			}
-			
+
 		}
 	}
 	private class TfDuracionActionListener implements ActionListener {
@@ -279,5 +295,5 @@ public class Nueva_Promocion extends JFrame {
 			}
 		}
 	}
-	
+
 }
