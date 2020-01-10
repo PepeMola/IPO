@@ -16,6 +16,14 @@ public class Hardcoded {
 
 	public Hardcoded() {
 
+		rellenarGuias();
+		rellenarPromocion();
+		rellenarGrupoTuristas();
+		rellenarHistorial();
+		rellenarMonumento();
+		rellenarTuristas();
+		rellenarUsuario();
+		rellenarRuta();
 	}
 
 	public Hardcoded(ArrayList<Grupo_turistas> grupoTuristas, ArrayList<Guia_turistico> guia,
@@ -32,7 +40,7 @@ public class Hardcoded {
 		this.promocion = promocion;
 	}
 
-	public ArrayList<Promocion> getPromocion() {
+	public ArrayList<Promocion> rellenarPromocion() {
 		Promocion p1 = new Promocion("25%","1","<html>Este descuento es aplicado con<br/>motivo de nuestro 25 aniversario.</html>","<html>Inicio: 01/01/20.<br/>Fin: 30/12/20</html>");
 		Promocion p2 = new Promocion("50%","3","Descuento navideño.","<html>Inicio: 24/12/19<br/>Fin: 07/01/20</html>");
 		Promocion p3 = new Promocion("10%","2","<html>Descuento extra si son mas<br/>de 10 personas por grupo.</html>","<html>Inicio: 01/01/20.<br/>Fin: 01/04/20</html>");
@@ -44,14 +52,18 @@ public class Hardcoded {
 		return promocion;
 	}
 
+	public ArrayList<Promocion> getPromocion(){
+		return promocion;
+	}
+
 	public void setPromocion(ArrayList<Promocion> promocion) {
 		this.promocion = promocion;
 	}
 
-	public ArrayList<Grupo_turistas> getGrupoTuristas() {
-		Grupo_turistas gt1 = new Grupo_turistas(5,"Grupo de amigos","Trabajo","Comer bien");
-		Grupo_turistas gt2 = new Grupo_turistas(6,"Viaje de matrimonios","Viaje Swinger","Conocer gente nueva");
-		Grupo_turistas gt3 = new Grupo_turistas(20,"Niños de colegio","Colegio","Aprender muchas cosas");
+	public ArrayList<Grupo_turistas> rellenarGrupoTuristas() {
+		Grupo_turistas gt1 = new Grupo_turistas(1, "5" ,"Grupo de amigos","Trabajo","Comer bien");
+		Grupo_turistas gt2 = new Grupo_turistas(2, "6" ,"Viaje de matrimonios","Viaje Swinger","Conocer gente nueva");
+		Grupo_turistas gt3 = new Grupo_turistas(3, "20" ,"Niños de colegio","Colegio","Aprender muchas cosas");
 
 		grupoTuristas.add(gt1);
 		grupoTuristas.add(gt2);
@@ -60,11 +72,15 @@ public class Hardcoded {
 		return grupoTuristas;
 	}
 
+	public ArrayList<Grupo_turistas> getGrupoTuristas() {
+		return grupoTuristas;
+	}
+
 	public void setGrupoTuristas(Grupo_turistas grupoTuristas) {
 		this.grupoTuristas.add(grupoTuristas);
 	}
 
-	public ArrayList<Guia_turistico> getGuia() {
+	public ArrayList<Guia_turistico> rellenarGuias() {
 		Guia_turistico g1 = new Guia_turistico("Pepe", "Arias Ramos", "00000001A", "pepe@gmail.com", "666555444", "<html>Castellano<br/>Ingles<br/>Frances</html>",
 				true, "1,2,3,4", 17.50, 8.6, "Presentacion/Yo.png");
 		Guia_turistico g2 = new Guia_turistico("David", "Utrilla Patón", "00000002A", "david@gmail.com", "666555446", "<html>Castellano<br/>Frances</html>", 
@@ -78,31 +94,45 @@ public class Hardcoded {
 
 		return guia;
 	}
-
-	public void setGuia(Guia_turistico guia) {
-		this.guia.add(guia);
+	public ArrayList<Guia_turistico> getGuia() {
+		return guia;
+	}
+	public void setGuia(Guia_turistico nuevo) {
+		this.guia.add(nuevo);
 	}
 
-	public ArrayList<Historial_circuitos> getHistorial() {
-		Historial_circuitos h1 = new Historial_circuitos("1, 2", 15, 500, "Ninguna",
-				"Todo perfecto", "Aprobar a Pepe");
-		Historial_circuitos h2 = new Historial_circuitos("3", 6, 150, "<html>David mintió.<br/>No sabe Francés</html>",
-				"Bonita ciudad", "Suspender a David");
-		Historial_circuitos h3 = new Historial_circuitos("2, 4", 12, 340, "Murió un señor",
-				"<html>Quitando al muerto,<br/>todo bien</html>", "Incluir pack Funerario");
+	public ArrayList<Historial_circuitos> rellenarHistorial() {
+		Historial_circuitos h1 = new Historial_circuitos("1, 2", 15, 1500, "Ninguna",
+				"Todo perfecto", "Aprobar a Pepe", false);
+		Historial_circuitos h2 = new Historial_circuitos("3", 6, 450, "<html>David mintió.<br/>No sabe Francés</html>",
+				"Bonita ciudad", "Suspender a David", false);
+		Historial_circuitos h3 = new Historial_circuitos("2, 4", 12, 1340, "Murió un señor",
+				"<html>Quitando al muerto,<br/>todo bien</html>", "Incluir pack Funerario", false);
+		Historial_circuitos h4 = new Historial_circuitos("2, 3", 10, 420, "<html>Aun no se ha realizado<br/>el circuito</html>",
+				"<html>Aun no se ha realizado<br/>el circuito</html>", "Conocer toda la ciudad.", true);
+		Historial_circuitos h5 = new Historial_circuitos("2", 4, 230, "<html>Aun no se ha realizado<br/>el circuito</html>",
+				"<html>Aun no se ha realizado<br/>el circuito</html>", "<html>Probar todas las tapas<br/>de las ciudades.</html>", true);
+		Historial_circuitos h6 = new Historial_circuitos("1, 3", 8, 420, "<html>Aun no se ha realizado<br/>el circuito</html>",
+				"<html>Aun no se ha realizado<br/>el circuito</html>", "<html>Visitar las calles<br/>mas antiguas.</html>", true);
 
 		historial.add(h1);
 		historial.add(h2);
 		historial.add(h3);
+		historial.add(h4);
+		historial.add(h5);
+		historial.add(h6);
 
 		return historial;
 	}
-	
+	public ArrayList<Historial_circuitos> getHistorial(){
+		return historial;
+	}
+
 	public void setHistorial(Historial_circuitos historial) {
 		this.historial.add(historial);
 	}
 
-	public ArrayList<Monumento> getMonumento() {
+	public ArrayList<Monumento> rellenarMonumento() {
 		Monumento m1 = new Monumento(0.0,"09.00-14.00","1 hora","Icono de la ciudad","","Iglesia");
 		Monumento m2 = new Monumento(10.0,"10.00-14.00","2 horas","Lleno de cultura","","Museo");
 		Monumento m3 = new Monumento(5.0,"08.00-14.00","1 hora","Patrimonio Provincial","","Estatua");
@@ -113,12 +143,16 @@ public class Hardcoded {
 
 		return monumento;
 	}
+	
+	public ArrayList<Monumento> getMonumento() {
+		return monumento;
+	}
 
 	public void setMonumento(Monumento monumento) {
 		this.monumento.add(monumento);
 	}
 
-	public ArrayList<Rutas_turisticas> getRuta() {
+	public ArrayList<Rutas_turisticas> rellenarRuta() {
 		Rutas_turisticas r1 = new Rutas_turisticas("Puertollano","<html>Minero<br/>Plaza Villarreal<br/>Fuente Agria</html>",
 				"El Rubio","Confecciones la Abuela");
 		Rutas_turisticas r2 = new Rutas_turisticas("Ciudad Real","<html>Parque Gasset<br/>Plaza Ayuntamiento<br/>Plaza Correos</html>",
@@ -133,19 +167,27 @@ public class Hardcoded {
 		return ruta;
 	}
 
+	public ArrayList<Rutas_turisticas> getRuta() {
+		return ruta;
+	}
+
 	public void setRuta(Rutas_turisticas ruta) {
 		this.ruta.add(ruta);
 	}
 
-	public ArrayList<Turista> getTuristas() {
-		Turista t1 = new Turista("01234567W","Maria","Galvez Perez","654321987","maria@gmail.com","");
-		Turista t2 = new Turista("01234567P","Andres","Rodriguez Sanz","645321987","andres@gmail.com","");
-		Turista t3 = new Turista("01234567M","Juan Manuel","Duque Santana","654231987","rojaco@gmail.com","");
+	public ArrayList<Turista> rellenarTuristas() {
+		Turista t1 = new Turista(1, "01234567W","Maria","Galvez Perez","654321987","maria@gmail.com","");
+		Turista t2 = new Turista(2, "01234567P","Andres","Rodriguez Sanz","645321987","andres@gmail.com","");
+		Turista t3 = new Turista(3, "01234567M","Juan Manuel","Duque Santana","654231987","rojaco@gmail.com","");
 
 		turistas.add(t1);
 		turistas.add(t2);
 		turistas.add(t3);
 
+		return turistas;
+	}
+	
+	public ArrayList<Turista> getTuristas() {
 		return turistas;
 	}
 
@@ -154,7 +196,7 @@ public class Hardcoded {
 
 	}
 
-	public ArrayList<Usuario> getUsuario() {
+	public ArrayList<Usuario> rellenarUsuario() {
 		Usuario u1 = new Usuario("Profesora","Informatica","01237894Q","ipo1","");
 		Usuario u2 = new Usuario("Pepe","Arias","00000001A","hola","/Presentacion/Yo.png");
 		Usuario u3 = new Usuario("David","Utrilla","00000001B","adios","/Presentacion/utrilla.png");
@@ -163,6 +205,10 @@ public class Hardcoded {
 		usuario.add(u2);
 		usuario.add(u3);
 
+		return usuario;
+	}
+	
+	public ArrayList<Usuario> getUsuario() {
 		return usuario;
 	}
 

@@ -289,15 +289,28 @@ public class Login {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						Vista_Usuario usuario = new Vista_Usuario("Alumno","Informatica","0000001A");
+						Usuario u = getUsuario(txtUsuario.getText());
+						Vista_Usuario usuario = new Vista_Usuario(u);
 						usuario.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
+
+				private Usuario getUsuario(String nombre) {
+					Usuario u = new Usuario();
+					
+					for (int i = 0; i < listaUsuario.size(); i++) {
+						if(listaUsuario.get(i).getNombre().equals(nombre)) {
+							u = listaUsuario.get(i);
+						}
+					}
+					return u;
+				}
 			});
 			frmLogin.dispose();
-
+			
+			
 		}
 	}
 

@@ -26,6 +26,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -35,6 +36,11 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
+import java.awt.event.MouseEvent;
 
 
 
@@ -45,16 +51,14 @@ public class Vista_Usuario extends JFrame {
 	private JPanel pnlGuias;
 	private JPanel pnlRutas;
 	private JPanel pnlPromociones;
-	private String nombreUsuario;
-	private String apellidoUsuario;
-	private String dniUsuario;
+
 	private JButton btnInsertarGuia;
 	private JButton btnModificarGuia;
 	private JButton btnEliminarGuia;
 	private JButton btnInsertarRuta;
 	private JButton btnModificarRuta;
 	private JButton btnEliminarRuta;
-	private JPanel pnlHistorial_1;
+	private JPanel pnlHistorial;
 	private JPanel pnlUsuario;
 	private JLabel lblFoto;
 	private JLabel lblNombre;
@@ -84,17 +88,26 @@ public class Vista_Usuario extends JFrame {
 	private JScrollPane scPnlHistorial;
 	private JTable table_historial;
 	private JButton btnDisearRuta;
-	private JButton btnDisearRuta_1;
 	private JButton btnEliminarTurista;
 	private JButton btnModificarTurista;
 	private JButton btnAgregarTurista;
+	private JButton btnHistorialesPendientes;
+	private JButton btnHistorialFinalizados;
+	private JButton btnRefrescarTabla;
+	Hardcoded h = new Hardcoded();
+	private JScrollPane scPaneGrupos;
+	private JPanel pnlInfoGrupo;
+	private JLabel lblNmeroDeTuristas;
+	private JTextField txtNumTuristas;
+	private JLabel lblDescripcin;
+	private JTextPane tpDescripcion;
+	private JLabel lblTipo;
+	private JLabel lblIntereses;
+	private JTextField txtTipo;
+	private JTextPane tpIntereses;
 
-
-	public Vista_Usuario(String nombre, String apellido, String dni) {
+	public Vista_Usuario(Usuario u) {
 		setFont(new Font("Dialog", Font.BOLD, 12));
-		this.nombreUsuario = nombre;
-		this.apellidoUsuario = apellido;
-		this.dniUsuario = dni;
 		setTitle("Gestor de Turismo Rural");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Vista_Usuario.class.getResource("/Presentacion/usuario.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,7 +142,7 @@ public class Vista_Usuario extends JFrame {
 			pnlUsuario.setLayout(gbl_pnlUsuario);
 			{
 				lblFoto = new JLabel("");
-				lblFoto.setIcon(new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/grupo_usuarios.png")));
+				lblFoto.setIcon(new ImageIcon(Vista_Usuario.class.getResource(u.getFoto())));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.gridheight = 3;
 				gbc_lblFoto.insets = new Insets(0, 0, 5, 5);
@@ -151,6 +164,8 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfNombre = new JTextField();
+				tfNombre.setEditable(false);
+				tfNombre.setText(u.getNombre());
 				GridBagConstraints gbc_tfNombre = new GridBagConstraints();
 				gbc_tfNombre.insets = new Insets(0, 0, 5, 5);
 				gbc_tfNombre.fill = GridBagConstraints.HORIZONTAL;
@@ -173,6 +188,8 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfApellidos = new JTextField();
+				tfApellidos.setEditable(false);
+				tfApellidos.setText(u.getApellidos());
 				GridBagConstraints gbc_tfApellidos = new GridBagConstraints();
 				gbc_tfApellidos.fill = GridBagConstraints.HORIZONTAL;
 				gbc_tfApellidos.insets = new Insets(0, 0, 5, 5);
@@ -195,6 +212,9 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfAcceso = new JTextField();
+				tfAcceso.setEditable(false);
+				Date date = new Date();
+				tfAcceso.setText(date.toString());
 				GridBagConstraints gbc_tfAcceso = new GridBagConstraints();
 				gbc_tfAcceso.insets = new Insets(0, 0, 5, 5);
 				gbc_tfAcceso.fill = GridBagConstraints.HORIZONTAL;
@@ -217,6 +237,8 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				tfIdentificador = new JTextField();
+				tfIdentificador.setEditable(false);
+				tfIdentificador.setText(u.getNif());
 				GridBagConstraints gbc_tfIdentificador = new GridBagConstraints();
 				gbc_tfIdentificador.insets = new Insets(0, 0, 5, 5);
 				gbc_tfIdentificador.fill = GridBagConstraints.HORIZONTAL;
@@ -251,16 +273,6 @@ public class Vista_Usuario extends JFrame {
 			}
 			{
 				btnDisearRuta = new JButton("Diseñar Ruta");
-				//btnDisearRuta.addActionListener(new BtnDisearRutaActionListener());
-				btnDisearRuta_1 = new JButton("Dise\u00F1ar Ruta");
-				//btnDisearRuta_1.addActionListener(new BtnDisearRutaActionListener());
-				btnDisearRuta_1.setToolTipText("Dise\u00F1a ruta manualmente");
-				GridBagConstraints gbc_btnDisearRuta = new GridBagConstraints();
-				gbc_btnDisearRuta.fill = GridBagConstraints.BOTH;
-				gbc_btnDisearRuta.insets = new Insets(0, 0, 0, 5);
-				gbc_btnDisearRuta.gridx = 4;
-				gbc_btnDisearRuta.gridy = 6;
-				pnlUsuario.add(btnDisearRuta_1, gbc_btnDisearRuta);
 			}
 		}
 		{
@@ -349,13 +361,15 @@ public class Vista_Usuario extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									Nuevo_guia frame = new Nuevo_guia();
+									Nuevo_guia frame = new Nuevo_guia(h);
 									frame.setVisible(true);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
 							}
+							
 						});
+						
 					}
 				});
 				GridBagConstraints gbc_btnInsertarGuia = new GridBagConstraints();
@@ -381,6 +395,15 @@ public class Vista_Usuario extends JFrame {
 				gbc_btnEliminarGuia.gridx = 5;
 				gbc_btnEliminarGuia.gridy = 3;
 				pnlGuias.add(btnEliminarGuia, gbc_btnEliminarGuia);
+			}
+			{
+				btnRefrescarTabla = new JButton("Refrescar Tabla");
+				btnRefrescarTabla.addActionListener(new BtnRefrescarTablaActionListener());
+				GridBagConstraints gbc_btnRefrescarTabla = new GridBagConstraints();
+				gbc_btnRefrescarTabla.insets = new Insets(0, 0, 0, 5);
+				gbc_btnRefrescarTabla.gridx = 4;
+				gbc_btnRefrescarTabla.gridy = 4;
+				pnlGuias.add(btnRefrescarTabla, gbc_btnRefrescarTabla);
 			}
 		}
 		pnlRutas = new JPanel();
@@ -521,6 +544,7 @@ public class Vista_Usuario extends JFrame {
 				pnlPromociones.add(scPnlPromocion, gbc_scPnlPromocion);
 				{
 					table_promocion = new JTable();
+					table_promocion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table_promocion.setModel(new DefaultTableModel(
 							new Object[][] {
 								{null, null, null, null, null},
@@ -585,28 +609,29 @@ public class Vista_Usuario extends JFrame {
 			}
 		}
 		{
-			pnlHistorial_1 = new JPanel();
-			pnlHistorial_1.setToolTipText("Panel de incidencias");
-			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial_1, null);
-			GridBagLayout gbl_pnlHistorial_1 = new GridBagLayout();
-			gbl_pnlHistorial_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlHistorial_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_pnlHistorial_1.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			gbl_pnlHistorial_1.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-			pnlHistorial_1.setLayout(gbl_pnlHistorial_1);
+			pnlHistorial = new JPanel();
+			pnlHistorial.setToolTipText("Panel de incidencias");
+			tbpVistaUsuario.addTab("Historial", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/libro.png")), pnlHistorial, null);
+			GridBagLayout gbl_pnlHistorial = new GridBagLayout();
+			gbl_pnlHistorial.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlHistorial.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+			gbl_pnlHistorial.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			gbl_pnlHistorial.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+			pnlHistorial.setLayout(gbl_pnlHistorial);
 			{
 				scPnlHistorial = new JScrollPane();
 				scPnlHistorial.setBorder(new TitledBorder(null, "Historial de nuestras ultimas Rutas", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_scPnlHistorial = new GridBagConstraints();
 				gbc_scPnlHistorial.gridheight = 4;
-				gbc_scPnlHistorial.gridwidth = 7;
-				gbc_scPnlHistorial.insets = new Insets(0, 0, 5, 5);
+				gbc_scPnlHistorial.gridwidth = 9;
+				gbc_scPnlHistorial.insets = new Insets(0, 0, 5, 0);
 				gbc_scPnlHistorial.fill = GridBagConstraints.BOTH;
 				gbc_scPnlHistorial.gridx = 0;
 				gbc_scPnlHistorial.gridy = 0;
-				pnlHistorial_1.add(scPnlHistorial, gbc_scPnlHistorial);
+				pnlHistorial.add(scPnlHistorial, gbc_scPnlHistorial);
 				{
 					table_historial = new JTable();
+					table_historial.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table_historial.setModel(new DefaultTableModel(
 							new Object[][] {
 								{null, null, null, null, null, null, null},
@@ -632,6 +657,24 @@ public class Vista_Usuario extends JFrame {
 					table_historial.setRowHeight(50);
 
 					scPnlHistorial.setViewportView(table_historial);
+					{
+						btnHistorialesPendientes = new JButton("Historiales Pendientes");
+						btnHistorialesPendientes.addActionListener(new BtnHistorialesPendientesActionListener());
+						{
+							btnHistorialFinalizados = new JButton("Historial Finalizados");
+							btnHistorialFinalizados.addActionListener(new BtnHistorialFinalizadosActionListener());
+							GridBagConstraints gbc_btnHistorialFinalizados = new GridBagConstraints();
+							gbc_btnHistorialFinalizados.insets = new Insets(0, 0, 5, 5);
+							gbc_btnHistorialFinalizados.gridx = 6;
+							gbc_btnHistorialFinalizados.gridy = 4;
+							pnlHistorial.add(btnHistorialFinalizados, gbc_btnHistorialFinalizados);
+						}
+						GridBagConstraints gbc_btnHistorialesPendientes = new GridBagConstraints();
+						gbc_btnHistorialesPendientes.insets = new Insets(0, 0, 5, 5);
+						gbc_btnHistorialesPendientes.gridx = 7;
+						gbc_btnHistorialesPendientes.gridy = 4;
+						pnlHistorial.add(btnHistorialesPendientes, gbc_btnHistorialesPendientes);
+					}
 					cargarTablaHistorial();
 				}
 			}
@@ -641,9 +684,9 @@ public class Vista_Usuario extends JFrame {
 		pnlTuristas.setToolTipText("Panel de turistas");
 		tbpVistaUsuario.addTab("Turistas", new ImageIcon(Vista_Usuario.class.getResource("/Presentacion/usuario.png")), pnlTuristas, null);
 		GridBagLayout gbl_pnlTuristas = new GridBagLayout();
-		gbl_pnlTuristas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_pnlTuristas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_pnlTuristas.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlTuristas.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_pnlTuristas.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gbl_pnlTuristas.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		pnlTuristas.setLayout(gbl_pnlTuristas);
 		{
@@ -651,7 +694,7 @@ public class Vista_Usuario extends JFrame {
 			scPnlTurista.setBorder(new TitledBorder(null, "Nuestros Turistas", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 			GridBagConstraints gbc_scPnlTurista = new GridBagConstraints();
 			gbc_scPnlTurista.gridheight = 4;
-			gbc_scPnlTurista.gridwidth = 7;
+			gbc_scPnlTurista.gridwidth = 6;
 			gbc_scPnlTurista.insets = new Insets(0, 0, 5, 5);
 			gbc_scPnlTurista.fill = GridBagConstraints.BOTH;
 			gbc_scPnlTurista.gridx = 0;
@@ -659,6 +702,8 @@ public class Vista_Usuario extends JFrame {
 			pnlTuristas.add(scPnlTurista, gbc_scPnlTurista);
 			{
 				table_turista = new JTable();
+				table_turista.addMouseListener(new Table_turistaMouseListener());
+				table_turista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				table_turista.setModel(new DefaultTableModel(
 						new Object[][] {
 							{null, null, null, null, null, null, null},
@@ -693,35 +738,98 @@ public class Vista_Usuario extends JFrame {
 
 				scPnlTurista.setViewportView(table_turista);
 				{
-					btnAgregarTurista = new JButton("Agregar Turista");
-					btnAgregarTurista.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							EventQueue.invokeLater(new Runnable() {
-								public void run() {
-									try {
-										Nuevo_Cliente frame = new Nuevo_Cliente();
-										frame.setVisible(true);
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-							});
+					{
+						scPaneGrupos = new JScrollPane();
+						scPaneGrupos.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion de Grupo", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+						GridBagConstraints gbc_scPaneGrupos = new GridBagConstraints();
+						gbc_scPaneGrupos.gridheight = 5;
+						gbc_scPaneGrupos.gridwidth = 5;
+						gbc_scPaneGrupos.insets = new Insets(0, 0, 5, 0);
+						gbc_scPaneGrupos.fill = GridBagConstraints.BOTH;
+						gbc_scPaneGrupos.gridx = 6;
+						gbc_scPaneGrupos.gridy = 0;
+						pnlTuristas.add(scPaneGrupos, gbc_scPaneGrupos);
+						{
+							pnlInfoGrupo = new JPanel();
+							scPaneGrupos.setViewportView(pnlInfoGrupo);
+							pnlInfoGrupo.setLayout(null);
+							{
+								lblNmeroDeTuristas = new JLabel("Número de Turistas:");
+								lblNmeroDeTuristas.setBounds(10, 11, 104, 14);
+								pnlInfoGrupo.add(lblNmeroDeTuristas);
+							}
+							{
+								txtNumTuristas = new JTextField();
+								txtNumTuristas.setEditable(false);
+								txtNumTuristas.setBounds(126, 8, 37, 20);
+								pnlInfoGrupo.add(txtNumTuristas);
+								txtNumTuristas.setColumns(10);
+							}
+							{
+								lblDescripcin = new JLabel("Descripción:");
+								lblDescripcin.setBounds(10, 36, 77, 14);
+								pnlInfoGrupo.add(lblDescripcin);
+							}
+							{
+								tpDescripcion = new JTextPane();
+								tpDescripcion.setEditable(false);
+								tpDescripcion.setBounds(10, 53, 153, 46);
+								pnlInfoGrupo.add(tpDescripcion);
+							}
+							{
+								lblTipo = new JLabel("Tipo: ");
+								lblTipo.setBounds(10, 106, 46, 14);
+								pnlInfoGrupo.add(lblTipo);
+							}
+							{
+								lblIntereses = new JLabel("Intereses:");
+								lblIntereses.setBounds(10, 128, 62, 14);
+								pnlInfoGrupo.add(lblIntereses);
+							}
+							{
+								txtTipo = new JTextField();
+								txtTipo.setEditable(false);
+								txtTipo.setBounds(47, 103, 116, 20);
+								pnlInfoGrupo.add(txtTipo);
+								txtTipo.setColumns(10);
+							}
+							{
+								tpIntereses = new JTextPane();
+								tpIntereses.setEditable(false);
+								tpIntereses.setBounds(10, 153, 153, 49);
+								pnlInfoGrupo.add(tpIntereses);
+							}
 						}
-					});
-
-					btnAgregarTurista.setToolTipText("A\u00F1ade un turista nuevo");
-					GridBagConstraints gbc_btnAgregarTurista = new GridBagConstraints();
-					gbc_btnAgregarTurista.insets = new Insets(0, 0, 5, 5);
-					gbc_btnAgregarTurista.gridx = 5;
-					gbc_btnAgregarTurista.gridy = 4;
-					pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
+					}
 				}
+				btnAgregarTurista = new JButton("Agregar Turista");
+				btnAgregarTurista.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									Nuevo_Cliente frame = new Nuevo_Cliente(h);
+									frame.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
+				
+									btnAgregarTurista.setToolTipText("A\u00F1ade un turista nuevo");
+									GridBagConstraints gbc_btnAgregarTurista = new GridBagConstraints();
+									gbc_btnAgregarTurista.insets = new Insets(0, 0, 5, 5);
+									gbc_btnAgregarTurista.gridx = 3;
+									gbc_btnAgregarTurista.gridy = 4;
+									pnlTuristas.add(btnAgregarTurista, gbc_btnAgregarTurista);
 				{
 					btnModificarTurista = new JButton("Modificar Turista");
 					btnModificarTurista.setToolTipText("Modifica un turista existente");
 					GridBagConstraints gbc_btnModificarTurista = new GridBagConstraints();
 					gbc_btnModificarTurista.insets = new Insets(0, 0, 5, 5);
-					gbc_btnModificarTurista.gridx = 6;
+					gbc_btnModificarTurista.gridx = 4;
 					gbc_btnModificarTurista.gridy = 4;
 					pnlTuristas.add(btnModificarTurista, gbc_btnModificarTurista);
 				}
@@ -730,7 +838,7 @@ public class Vista_Usuario extends JFrame {
 					btnEliminarTurista.setToolTipText("Elimina un turista existente");
 					GridBagConstraints gbc_btnEliminarTurista = new GridBagConstraints();
 					gbc_btnEliminarTurista.insets = new Insets(0, 0, 5, 5);
-					gbc_btnEliminarTurista.gridx = 7;
+					gbc_btnEliminarTurista.gridx = 5;
 					gbc_btnEliminarTurista.gridy = 4;
 					pnlTuristas.add(btnEliminarTurista, gbc_btnEliminarTurista);
 				}
@@ -742,7 +850,7 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaHistorial() {
-		Hardcoded h = new Hardcoded();
+		
 		ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
 
 		historial = h.getHistorial();
@@ -772,16 +880,56 @@ public class Vista_Usuario extends JFrame {
 		});
 	}
 
+	private void cargarHistorialPendiente() {
+		
+		ArrayList<Historial_circuitos> historial = new ArrayList<Historial_circuitos>();
+		int pendientes = 0;
+		int pos = 0;
+		historial = h.getHistorial();
+		for (int i = 0; i < historial.size(); i++) {
+			if(historial.get(i).isPendiente()) {
+				pendientes++;
+			}
+		}
+		
+		Object[][] datos = new Object[pendientes][7];
+		for (int i = 0; i < historial.size(); i++) {
+			if(historial.get(i).isPendiente()) {
+				datos[pos][0] = i + 1;
+				datos[pos][1] = String.valueOf(historial.get(i).getRutas());
+				datos[pos][2] = historial.get(i).getNum_personas();
+				datos[pos][3] = historial.get(i).getCoste();
+				datos[pos][4] = String.valueOf(historial.get(i).getIncidencias());
+				datos[pos][5] = String.valueOf(historial.get(i).getOpiniones());
+				datos[pos][6] = String.valueOf(historial.get(i).getSugerencias());
+				pos++;
+			}
+		}
+		table_historial.setModel(new DefaultTableModel(
+				datos,
+				new String[] {
+						"ID", "Rutas", "Num. Personas", "Coste", "Incidencias", "Opiniones", "Sugerencias"
+				}
+				) {
+			Class[] columnTypes = new Class[] {
+					Integer.class, String.class, Integer.class, Double.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+	}
+
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaTurista() {
-		Hardcoded t = new Hardcoded();
+		
 		ArrayList<Turista> turista = new ArrayList<Turista>();
 
-		turista = t.getTuristas();
+		turista = h.getTuristas();
 		Object[][] datos = new Object[turista.size()][7];
 
 		for (int i = 0; i < turista.size(); i++) {
-			datos[i][0] = i + 1;
+			datos[i][0] = turista.get(i).getId_grupo();
 			datos[i][1] = String.valueOf(turista.get(i).getDni());
 			datos[i][2] = String.valueOf(turista.get(i).getNombre());
 			datos[i][3] = String.valueOf(turista.get(i).getApellido());
@@ -813,10 +961,10 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaPromo() {
-		Hardcoded promo = new Hardcoded();
+	
 		ArrayList<Promocion> promocion = new ArrayList<Promocion>();
 
-		promocion = promo.getPromocion();
+		promocion = h.getPromocion();
 		Object[][] datos = new Object[promocion.size()][5];
 
 		for(int i = 0;i<promocion.size();i++) {
@@ -849,10 +997,9 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaRutas() {
-		Hardcoded rutas = new Hardcoded();
 		ArrayList<Rutas_turisticas> rutasTuristicas = new ArrayList<Rutas_turisticas>();
 
-		rutasTuristicas = rutas.getRuta();
+		rutasTuristicas = h.getRuta();
 		Object [][] datos = new Object[rutasTuristicas.size()][5];
 
 		for (int i = 0; i < rutasTuristicas.size(); i++) {
@@ -879,10 +1026,9 @@ public class Vista_Usuario extends JFrame {
 
 	/*Metodo para rellenar la tabla automaticamente con el ArrayList correspondiente*/
 	private void cargarTablaGuia() {
-		Hardcoded guia = new Hardcoded();
 		ArrayList<Guia_turistico> guiaTuristico = new ArrayList<Guia_turistico>();
 
-		guiaTuristico = guia.getGuia();
+		guiaTuristico = h.getGuia();
 		Object [][] datos = new Object[guiaTuristico.size()][12];
 
 		for (int i = 0; i < guiaTuristico.size(); i++) {
@@ -944,11 +1090,38 @@ public class Vista_Usuario extends JFrame {
 			}
 	}*/
 
-/*	private class BtnDisearRutaActionListener implements ActionListener {
+	/*	private class BtnDisearRutaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Ruta_Grafica ruta = new Ruta_Grafica();
 			ruta.setVisible(true);
 		}
 	}*/
+	private class BtnHistorialesPendientesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			cargarHistorialPendiente();
+		}
+	}
+	private class BtnHistorialFinalizadosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			cargarTablaHistorial();
+		}
+	}
+	private class BtnRefrescarTablaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+		
+			cargarTablaGuia();
+		}
+	}
+	private class Table_turistaMouseListener extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			int selected = table_turista.getSelectedRow();
+			Grupo_turistas g = h.getGrupoTuristas().get(selected);
+			txtNumTuristas.setText(g.getNum());
+			tpDescripcion.setText(g.getDescripcion());
+			tpIntereses.setText(g.getIntereses());
+			txtTipo.setText(g.getTipo());
+		}
+	}
 }
 

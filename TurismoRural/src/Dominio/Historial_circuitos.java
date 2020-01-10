@@ -5,13 +5,14 @@ public class Historial_circuitos {
 	private String rutas;
 	private int num_personas;
 	private double coste;
-	private String incidencias;
-	private String opiniones;
-	private String sugerencias;
+	private String incidencias;//En el caso de circuitos pendientes estará vacio
+	private String opiniones;//En el caso de circuitos pendientes estara vacio
+	private String sugerencias;//En el caso de circuitos pendientes sera sugerencia de cara al circuito
+	private boolean pendiente;
 	
 
 	public Historial_circuitos(String rutas, int num_personas, double coste, String incidencias, String opiniones,
-			String sugerencias) {
+			String sugerencias, boolean pendiente) {
 		super();
 		this.rutas = rutas;
 		this.num_personas = num_personas;
@@ -19,8 +20,17 @@ public class Historial_circuitos {
 		this.incidencias = incidencias;
 		this.opiniones = opiniones;
 		this.sugerencias = sugerencias;
+		this.pendiente = pendiente;
 	}
 	
+	public boolean isPendiente() {
+		return pendiente;
+	}
+
+	public void setPendiente(boolean pendiente) {
+		this.pendiente = pendiente;
+	}
+
 	public String getRutas() {
 		return rutas;
 	}

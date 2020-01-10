@@ -1,7 +1,7 @@
 package Dominio;
 
 public class Turista {
-
+	private int id_grupo;
 	private String dni;
 	private String nombre;
 	private String apellido;
@@ -9,7 +9,8 @@ public class Turista {
 	private String email;
 	private String foto;
 	
-	public Turista(String dni, String nombre, String apellido, String telefono, String email, String foto) {
+	public Turista(int id_grupo, String dni, String nombre, String apellido, String telefono, String email, String foto) {
+		this.id_grupo = id_grupo;
 		this.dni=dni;
 		this.nombre=nombre;
 		this.apellido=apellido;
@@ -18,6 +19,14 @@ public class Turista {
 		this.foto=foto;
 	}
 	
+	public int getId_grupo() {
+		return id_grupo;
+	}
+
+	public void setId_grupo(int id_grupo) {
+		this.id_grupo = id_grupo;
+	}
+
 	public String getDni() {
 		return dni;
 	}

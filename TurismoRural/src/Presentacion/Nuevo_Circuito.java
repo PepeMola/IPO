@@ -35,15 +35,15 @@ public class Nuevo_Circuito extends JFrame {
 	 * Create the frame.
 	 */
 	public Nuevo_Circuito() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 482, 344);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 29, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblId = new JLabel("ID");
@@ -157,7 +157,7 @@ public class Nuevo_Circuito extends JFrame {
 		JButton btnGuardarCircuito = new JButton("Guardar Circuito");
 		btnGuardarCircuito.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {// este metodo crea una nueva ruta turistica
-				int a=JOptionPane.showConfirmDialog(contentPane, "�Esta seguro que desea guardar este circuito nuevo?");
+				int a=JOptionPane.showConfirmDialog(contentPane, "�Esta seguro que desea guardar este circuito nuevo?");
 				if(a==0) {
 				Rutas_turisticas cliente = new Rutas_turisticas
 						(textLocalidades.getText(),textMonumentos.getText(),textRestaurantes.getText()
@@ -167,6 +167,14 @@ public class Nuevo_Circuito extends JFrame {
 				}
 			}
 		});
+		
+		JButton button = new JButton("Diseñar Ruta");
+		button.setToolTipText("Diseña ruta manualmente");
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 1;
+		gbc_button.gridy = 8;
+		contentPane.add(button, gbc_button);
 		
 		GridBagConstraints gbc_btnGuardarCircuito = new GridBagConstraints();
 		gbc_btnGuardarCircuito.insets = new Insets(0, 0, 5, 5);
@@ -203,4 +211,5 @@ public class Nuevo_Circuito extends JFrame {
 		contentPane.add(btnAtras, gbc_btnAtras);
 	}
 
+	
 }

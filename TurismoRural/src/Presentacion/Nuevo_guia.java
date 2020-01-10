@@ -9,6 +9,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
+
+import Dominio.Guia_turistico;
+import Dominio.Hardcoded;
+
 import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -33,6 +37,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
 import java.awt.Dimension;
@@ -59,7 +65,7 @@ public class Nuevo_guia extends JFrame {
 	private JRadioButton rbSi;
 	private JRadioButton rbNo;
 	private JPanel pnlBotones;
-	private JButton btnAadirGuia;
+	private JButton btnInsertarGuia;
 	private JButton btnLimpiar;
 
 
@@ -70,12 +76,15 @@ public class Nuevo_guia extends JFrame {
 	private JCheckBox cbIngles;
 	private JCheckBox cbPortugues;
 	private JCheckBox cbFrances;
-
-
+	private Hardcoded hd;
+	
 	/**
 	 * Create the frame.
+	 * @param h 
 	 */
-	public Nuevo_guia() {
+	public Nuevo_guia(Hardcoded h) {
+		//hd =  h;
+		setTitle("Registro de Nuevo Guia Turistico");
 		setVisible(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_guia.class.getResource("/Presentacion/grupo_usuarios.png")));
 		setBounds(100, 100, 609, 460);
@@ -284,19 +293,50 @@ public class Nuevo_guia extends JFrame {
 				pnlBotones.add(btnLimpiar);
 			}
 			{
-				btnAadirGuia = new JButton("Añadir Guia");
-				btnAadirGuia.addActionListener(new ActionListener() {
+				btnInsertarGuia = new JButton("Insertar Guia");
+				btnInsertarGuia.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						int a=JOptionPane.showConfirmDialog(contentPane, "¿Esta seguro que desea guardar este nuevo Guia?");
-						if(a==0) {
+						Guia_turistico guia = new Guia_turistico();
+						String idiomas = "<html>";
+						//hd = new Hardcoded();
+						int codigo=JOptionPane.showConfirmDialog(contentPane, "Â¿Esta seguro de que quiere aÃ±adir el nuevo guia?", "Alerta", JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE);
+						if (codigo==JOptionPane.YES_OPTION){
+							System.out.println("Has pulsado en Si");
+							guia.setNombre(tfNombre.getText());
+							guia.setApellidos(tfApellidos.getText());
+							guia.setEmail(tfEmail.getText());
+							guia.setNif(tfNif.getText());
+							guia.setTelf(tfTelefono.getText());
+							if(cbCastellano.isSelected()) {
+								idiomas = idiomas + "Castellano";
+							}if(cbFrances.isSelected()) {
+								idiomas = idiomas + "<br/>Frances";
+							}if(cbIngles.isSelected()) {
+								idiomas = idiomas + "<br/>Ingles";
+							}if(cbPortugues.isSelected()) {
+								idiomas = idiomas + "<br/>Portugues";
+							}
+							if(rbSi.isSelected()) {
+								guia.setDisponibilidad(true);
+							}else {
+								guia.setDisponibilidad(false);
+							}
+							idiomas = idiomas + "</html>";
+							guia.setIdiomas(idiomas);
+							guia.setFoto("");
+							h.setGuia(guia);
+						
 							dispose();
+						}else if(codigo==JOptionPane.NO_OPTION){
+							System.out.println("Has pulsado en No");
 						}
 					}
 				});
-				pnlBotones.add(btnAadirGuia);
+				pnlBotones.add(btnInsertarGuia);
 			}
 		}
 	}
+
 
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {

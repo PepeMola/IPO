@@ -1,6 +1,5 @@
 package Presentacion;
 
-import Dominio.ObjetoGrafico;
 import Dominio.ImagenGrafico;
 import Dominio.MiMapaDibujo;
 import Dominio.RectanguloGrafico;
@@ -10,7 +9,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Point;
 
@@ -38,7 +36,7 @@ import java.awt.event.MouseMotionAdapter;
 
 public class Ruta_Grafica extends JFrame {
 
-//	private Ruta_Grafica ruta;
+	//	private Ruta_Grafica ruta;
 	private JPanel contentPane;
 	private JToolBar tbBarraIconos;
 	private JButton btnCargarMapa;
@@ -88,16 +86,14 @@ public class Ruta_Grafica extends JFrame {
 	private Cursor cursorTexto;
 
 	private int x, y;
-	private static Ruta_Grafica ruta;
+	private Ruta_Grafica ruta;
+	private JButton btnAtras;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void main (String args []) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ruta = new Ruta_Grafica();
+				Ruta_Grafica ruta = new Ruta_Grafica();
 					ruta.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -105,16 +101,17 @@ public class Ruta_Grafica extends JFrame {
 			}
 		});
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public Ruta_Grafica() {
+		//ruta = new Ruta_Grafica();
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ruta_Grafica.class.getResource("/Presentacion/usuario.png")));
+		setTitle("Diseño de Ruta");
+		setResizable(false);
 		setBounds(new Rectangle(0, 0, 700, 700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		
-
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -190,16 +187,21 @@ public class Ruta_Grafica extends JFrame {
 			}
 
 		}
+		{
+			btnAtras = new JButton("Atras");
+			btnAtras.addActionListener(new BtnAtrasActionListener());
+			contentPane.add(btnAtras, BorderLayout.SOUTH);
+		}
 		//Creación de imágenes
 		toolkit = Toolkit.getDefaultToolkit();
-		imagMonumento = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/monumento.png"));
-		imagRestaurante = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/restaurante.png"));
-		imagIglesia = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/iglesia.png"));
-		imagTienda = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/tienda.png"));
-		imagPlaza = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/plaza.png"));
-		imagFarmacia = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/farmacia.png"));
-		imagRectangulo = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/rectangulo.png"));
-		imagTexto = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/aniadirAnotacion.png"));
+		imagMonumento = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/monumento.png"));
+		imagRestaurante = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/restaurante.png"));
+		imagIglesia = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/iglesia.png"));
+		imagTienda = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/tienda.png"));
+		imagPlaza = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/plaza.png"));
+		imagFarmacia = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/farmacia.png"));
+		imagRectangulo = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/rectangulo.png"));
+		imagTexto = toolkit.getImage(getClass().getClassLoader().getResource("Presentacion/aniadirAnotacion.png"));
 
 		//Creación de cursores
 		cursorMonumento = toolkit.createCustomCursor(imagMonumento,new Point(0,0),"MONUMENTO");
@@ -215,7 +217,7 @@ public class Ruta_Grafica extends JFrame {
 	private class BtnCargarMapaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			JFileChooser fcAbrir = new JFileChooser();
-			
+
 			int valorDevuelto = fcAbrir.showOpenDialog(ruta);
 			if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
 				System.out.println("Ruta correcta");
@@ -352,5 +354,11 @@ public class Ruta_Grafica extends JFrame {
 			}
 		}
 	}
+	private class BtnAtrasActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			dispose();
+		}
+	}
+
 
 }

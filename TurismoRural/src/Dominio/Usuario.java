@@ -8,14 +8,20 @@ public class Usuario {
 	private String password;
 	private String foto;
 	
-	
-
 	public Usuario(String nombre, String apellidos, String nif, String password, String foto) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nif = nif;
 		this.password = password;
+		this.foto = foto;
+	}
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 

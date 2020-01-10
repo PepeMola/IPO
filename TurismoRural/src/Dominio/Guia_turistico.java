@@ -13,6 +13,10 @@ public class Guia_turistico {
 	private double precio;
 	private double puntuacion;
 	private String foto;
+	
+	public Guia_turistico() {
+		
+	}
 
 	public Guia_turistico(String nombre, String apellidos, String nif, String email, String telf, String idiomas,
 			boolean disponibilidad, String historial_rutas, double precio, double puntuacion, String foto) {
@@ -114,7 +118,7 @@ public class Guia_turistico {
 		return foto;
 	}
 	
-	public void setFoto() {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 	public String toString() {
