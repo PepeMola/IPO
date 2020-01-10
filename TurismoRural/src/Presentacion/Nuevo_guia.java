@@ -89,6 +89,7 @@ public class Nuevo_guia extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nuevo_guia.class.getResource("/Presentacion/grupo_usuarios.png")));
 		setBounds(100, 100, 609, 460);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(152, 251, 152));
 		contentPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Nuevo Guia Turistico", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();

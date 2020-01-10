@@ -54,9 +54,9 @@ public class Nueva_Promocion extends JFrame {
 	public Nueva_Promocion(Hardcoded h) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Nueva_Promocion.class.getResource("/Presentacion/ok.png")));
 		setTitle("Nueva Promocion");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(152, 251, 152));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();

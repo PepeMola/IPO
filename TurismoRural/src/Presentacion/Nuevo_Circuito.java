@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import Dominio.Rutas_turisticas;
+import java.awt.Color;
 
 public class Nuevo_Circuito extends JFrame {
 
@@ -37,6 +38,7 @@ public class Nuevo_Circuito extends JFrame {
 	public Nuevo_Circuito() {
 		setBounds(100, 100, 482, 344);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(152, 251, 152));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
