@@ -782,52 +782,93 @@ public class Vista_Usuario extends JFrame {
 						{
 							pnlInfoGrupo = new JPanel();
 							scPaneGrupos.setViewportView(pnlInfoGrupo);
-							pnlInfoGrupo.setLayout(null);
+							GridBagLayout gbl_pnlInfoGrupo = new GridBagLayout();
+							gbl_pnlInfoGrupo.columnWidths = new int[]{105, 37, 0};
+							gbl_pnlInfoGrupo.rowHeights = new int[]{20, 14, 46, 20, 14, 0, 49, 0};
+							gbl_pnlInfoGrupo.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+							gbl_pnlInfoGrupo.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+							pnlInfoGrupo.setLayout(gbl_pnlInfoGrupo);
 							{
 								lblNmeroDeTuristas = new JLabel("Número de Turistas:");
-								lblNmeroDeTuristas.setBounds(10, 11, 104, 14);
-								pnlInfoGrupo.add(lblNmeroDeTuristas);
+								GridBagConstraints gbc_lblNmeroDeTuristas = new GridBagConstraints();
+								gbc_lblNmeroDeTuristas.fill = GridBagConstraints.HORIZONTAL;
+								gbc_lblNmeroDeTuristas.insets = new Insets(0, 0, 5, 5);
+								gbc_lblNmeroDeTuristas.gridx = 0;
+								gbc_lblNmeroDeTuristas.gridy = 0;
+								pnlInfoGrupo.add(lblNmeroDeTuristas, gbc_lblNmeroDeTuristas);
 							}
 							{
 								txtNumTuristas = new JTextField();
 								txtNumTuristas.setEditable(false);
-								txtNumTuristas.setBounds(126, 8, 37, 20);
-								pnlInfoGrupo.add(txtNumTuristas);
+								GridBagConstraints gbc_txtNumTuristas = new GridBagConstraints();
+								gbc_txtNumTuristas.anchor = GridBagConstraints.NORTH;
+								gbc_txtNumTuristas.fill = GridBagConstraints.HORIZONTAL;
+								gbc_txtNumTuristas.insets = new Insets(0, 0, 5, 0);
+								gbc_txtNumTuristas.gridx = 1;
+								gbc_txtNumTuristas.gridy = 0;
+								pnlInfoGrupo.add(txtNumTuristas, gbc_txtNumTuristas);
 								txtNumTuristas.setColumns(10);
 							}
 							{
 								lblDescripcin = new JLabel("Descripción:");
-								lblDescripcin.setBounds(10, 36, 77, 14);
-								pnlInfoGrupo.add(lblDescripcin);
+								GridBagConstraints gbc_lblDescripcin = new GridBagConstraints();
+								gbc_lblDescripcin.anchor = GridBagConstraints.NORTHWEST;
+								gbc_lblDescripcin.insets = new Insets(0, 0, 5, 5);
+								gbc_lblDescripcin.gridx = 0;
+								gbc_lblDescripcin.gridy = 1;
+								pnlInfoGrupo.add(lblDescripcin, gbc_lblDescripcin);
 							}
 							{
 								tpDescripcion = new JTextPane();
 								tpDescripcion.setEditable(false);
-								tpDescripcion.setBounds(10, 53, 153, 46);
-								pnlInfoGrupo.add(tpDescripcion);
+								GridBagConstraints gbc_tpDescripcion = new GridBagConstraints();
+								gbc_tpDescripcion.fill = GridBagConstraints.BOTH;
+								gbc_tpDescripcion.insets = new Insets(0, 0, 5, 0);
+								gbc_tpDescripcion.gridwidth = 2;
+								gbc_tpDescripcion.gridx = 0;
+								gbc_tpDescripcion.gridy = 2;
+								pnlInfoGrupo.add(tpDescripcion, gbc_tpDescripcion);
 							}
 							{
 								lblTipo = new JLabel("Tipo: ");
-								lblTipo.setBounds(10, 106, 46, 14);
-								pnlInfoGrupo.add(lblTipo);
-							}
-							{
-								lblIntereses = new JLabel("Intereses:");
-								lblIntereses.setBounds(10, 128, 62, 14);
-								pnlInfoGrupo.add(lblIntereses);
+								GridBagConstraints gbc_lblTipo = new GridBagConstraints();
+								gbc_lblTipo.anchor = GridBagConstraints.WEST;
+								gbc_lblTipo.insets = new Insets(0, 0, 5, 5);
+								gbc_lblTipo.gridx = 0;
+								gbc_lblTipo.gridy = 3;
+								pnlInfoGrupo.add(lblTipo, gbc_lblTipo);
 							}
 							{
 								txtTipo = new JTextField();
 								txtTipo.setEditable(false);
-								txtTipo.setBounds(47, 103, 116, 20);
-								pnlInfoGrupo.add(txtTipo);
+								GridBagConstraints gbc_txtTipo = new GridBagConstraints();
+								gbc_txtTipo.anchor = GridBagConstraints.NORTHEAST;
+								gbc_txtTipo.insets = new Insets(0, 0, 5, 0);
+								gbc_txtTipo.gridwidth = 2;
+								gbc_txtTipo.gridx = 0;
+								gbc_txtTipo.gridy = 3;
+								pnlInfoGrupo.add(txtTipo, gbc_txtTipo);
 								txtTipo.setColumns(10);
+							}
+							{
+								lblIntereses = new JLabel("Intereses:");
+								GridBagConstraints gbc_lblIntereses = new GridBagConstraints();
+								gbc_lblIntereses.anchor = GridBagConstraints.NORTHWEST;
+								gbc_lblIntereses.insets = new Insets(0, 0, 5, 5);
+								gbc_lblIntereses.gridx = 0;
+								gbc_lblIntereses.gridy = 4;
+								pnlInfoGrupo.add(lblIntereses, gbc_lblIntereses);
 							}
 							{
 								tpIntereses = new JTextPane();
 								tpIntereses.setEditable(false);
-								tpIntereses.setBounds(10, 153, 153, 49);
-								pnlInfoGrupo.add(tpIntereses);
+								GridBagConstraints gbc_tpIntereses = new GridBagConstraints();
+								gbc_tpIntereses.gridheight = 2;
+								gbc_tpIntereses.fill = GridBagConstraints.BOTH;
+								gbc_tpIntereses.gridwidth = 2;
+								gbc_tpIntereses.gridx = 0;
+								gbc_tpIntereses.gridy = 5;
+								pnlInfoGrupo.add(tpIntereses, gbc_tpIntereses);
 							}
 						}
 					}
